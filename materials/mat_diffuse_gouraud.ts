@@ -1,9 +1,8 @@
 import {link, Material} from "../common/material.js";
 import {GL_TRIANGLES} from "../common/webgl.js";
-import {DiffuseLayout} from "./layout_diffuse.js";
+import {DiffuseLayout} from "../materials/layout_diffuse.js";
 
-let vertex = `#version 300 es\n
-
+let vertex = `
     // See Game.LightPositions and Game.LightDetails.
     const int MAX_LIGHTS = 8;
 
@@ -14,9 +13,9 @@ let vertex = `#version 300 es\n
     uniform vec4 light_positions[MAX_LIGHTS];
     uniform vec4 light_details[MAX_LIGHTS];
 
-    in vec3 position;
-    in vec3 normal;
-    out vec4 vert_color;
+    attribute vec3 position;
+    attribute vec3 normal;
+    varying vec4 vert_color;
 
     void main() {
         vec4 vert_pos = world * vec4(position, 1.0);
@@ -57,18 +56,17 @@ let vertex = `#version 300 es\n
     }
 `;
 
-let fragment = `#version 300 es\n
+let fragment = `
     precision mediump float;
 
-    in vec4 vert_color;
-    out vec4 frag_color;
+    varying vec4 vert_color;
 
     void main() {
-        frag_color = vert_color;
+        gl_FragColor = vert_color;
     }
 `;
 
-export function mat_diffuse_gouraud(gl: WebGL2RenderingContext): Material<DiffuseLayout> {
+export function mat_diffuse_gouraud(gl: WebGLRenderingContext): Material<DiffuseLayout> {
     let program = link(gl, vertex, fragment);
     return {
         Mode: GL_TRIANGLES,

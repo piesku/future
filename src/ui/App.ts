@@ -1,6 +1,7 @@
 import {GameState} from "../actions.js";
 import {html} from "./html.js";
-import {TimeActionButton} from "./TimeActionButton.js";
+import {Timer} from "./Timer.js";
+import {UpdateButton} from "./UpdateButton.js";
 
 export function App(state: GameState) {
     return html`
@@ -12,7 +13,8 @@ export function App(state: GameState) {
                 color: #fff;
             "
         >
-            ${TimeActionButton()}
+            ${UpdateButton(state.Seconds)}
         </div>
+        ${Timer(state.Seconds)}
     `;
 }

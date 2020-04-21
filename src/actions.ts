@@ -5,12 +5,12 @@ export interface GameState {
 }
 
 export const enum Action {
-    ToggleClearColor,
+    BuyUpdate,
 }
 
 export function dispatch(game: Game, action: Action, args: Array<unknown>) {
     switch (action) {
-        case Action.ToggleClearColor: {
+        case Action.BuyUpdate: {
             break;
         }
     }

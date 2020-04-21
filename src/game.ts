@@ -16,6 +16,7 @@ export type Entity = number;
 
 export class Game implements GameState {
     Seconds = 0;
+    UpdatePrice = 10;
 
     World = new World();
 

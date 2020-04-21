@@ -2,6 +2,7 @@ import {Game} from "./game.js";
 
 export interface GameState {
     Seconds: number;
+    UpdatePrice: number;
 }
 
 export const enum Action {

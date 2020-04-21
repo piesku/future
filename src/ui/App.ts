@@ -13,8 +13,8 @@ export function App(state: GameState) {
                 color: #fff;
             "
         >
-            ${UpdateButton(state.Seconds)}
+            ${UpdateButton(state)}
         </div>
-        ${Timer(state.Seconds)}
+        ${Timer(state)}
     `;
 }

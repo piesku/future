@@ -1,9 +1,8 @@
-type Interpolation = string | number | false | Interpolations;
-interface Interpolations extends Array<Interpolation> {}
+type Interpolation = string | number | boolean | undefined | null | Array<Interpolation>;
 
-function shift(values: Interpolations) {
+function shift(values: Array<Interpolation>) {
     let value = values.shift();
-    if (value === false || value === undefined) {
+    if (typeof value === "boolean" || value == undefined) {
         return "";
     } else if (Array.isArray(value)) {
         return value.join("");
@@ -12,6 +11,6 @@ function shift(values: Interpolations) {
     }
 }
 
-export function html(strings: TemplateStringsArray, ...values: Interpolations) {
+export function html(strings: TemplateStringsArray, ...values: Array<Interpolation>) {
     return strings.reduce((out, cur) => out + shift(values) + cur);
 }

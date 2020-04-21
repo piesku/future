@@ -14,7 +14,7 @@ export const enum Action {
 
 let rewind_keyframes = 10;
 let current_keyframes = 0;
-export function dispatch(game: Game, action: Action, args: Array<unknown>) {
+export function dispatch(game: Game, action: Action, payload: unknown) {
     switch (action) {
         case Action.BuyUpdate: {
             current_keyframes = 0;

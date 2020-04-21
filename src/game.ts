@@ -17,7 +17,7 @@ export type Entity = number;
 
 export class Game implements GameState {
     Seconds = 0;
-    UpdatePrice = 10;
+    UpdatePrice = 30;
     SecondsPerClick = 1;
 
     World = new World();
@@ -30,6 +30,7 @@ export class Game implements GameState {
     InputDelta: Record<string, number> = {};
 
     UI = document.querySelector("main")!;
+
     Canvas = document.querySelector("canvas")!;
     GL = this.Canvas.getContext("webgl")!;
 

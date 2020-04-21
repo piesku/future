@@ -14,10 +14,17 @@ export const enum Action {
 export function dispatch(game: Game, action: Action, args: Array<unknown>) {
     switch (action) {
         case Action.BuyUpdate: {
+            game.Seconds -= game.UpdatePrice - game.SecondsPerClick;
+            game.SecondsPerClick *= 2;
+            game.UpdatePrice *= 10;
             break;
         }
         case Action.Click: {
-            game.Seconds += game.SecondsPerClick;
+            // XXX: Overlay is redrawn before the button click is registered.
+            // @michalbe: @stamy, HALP!1!
+            setTimeout(() => {
+                game.Seconds += game.SecondsPerClick;
+            }, 100);
             break;
         }
     }

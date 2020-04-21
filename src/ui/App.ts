@@ -1,5 +1,5 @@
+import {html} from "../../common/html.js";
 import {GameState} from "../actions.js";
-import {html} from "./html.js";
 import {Timer} from "./Timer.js";
 import {UpdateButton} from "./UpdateButton.js";
 

@@ -1,3 +1,4 @@
+import {set_seed} from "../common/random.js";
 import {Game} from "./game.js";
 
 export interface GameState {
@@ -24,6 +25,7 @@ export function dispatch(game: Game, action: Action, args: Array<unknown>) {
             // @michalbe: @stamy, HALP!1!
             setTimeout(() => {
                 game.Seconds += game.SecondsPerClick;
+                set_seed(game.Seconds);
             }, 100);
             break;
         }

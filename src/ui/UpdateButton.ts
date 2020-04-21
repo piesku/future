@@ -3,7 +3,7 @@ import {Action, GameState} from "../actions.js";
 import {html} from "./html.js";
 
 export function UpdateButton({Seconds, UpdatePrice}: GameState) {
-    const id_disabled = Seconds < UpdatePrice;
+    let id_disabled = Seconds < UpdatePrice;
 
     return html`
         <button

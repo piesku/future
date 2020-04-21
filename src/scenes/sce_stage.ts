@@ -1,3 +1,5 @@
+import {integer} from "../../common/random.js";
+import {blueprint_building} from "../blueprints/blu_building.js";
 import {blueprint_camera} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
 import {light_directional} from "../components/com_light.js";
@@ -28,4 +30,7 @@ export function scene_stage(game: Game) {
         Translation: [0, -3, 0],
         ...blueprint_ground(game, 8, 8),
     });
+
+    // Props
+    instantiate(game, blueprint_building(game, integer(-4, 3), integer(-4, 3), 0, 600));
 }

@@ -24,5 +24,8 @@ export function scene_stage(game: Game) {
     });
 
     // Ground.
-    instantiate(game, blueprint_ground(game, 8, 8));
+    instantiate(game, {
+        Translation: [0, -2, 0],
+        ...blueprint_ground(game, 8, 8),
+    });
 }

@@ -31,16 +31,14 @@ export function blueprint_building(
                     1,
                 ]),
                 time_control(
-                    start + segment_time * i,
+                    start,
+                    // start + segment_time * i,
                     start + segment_time * i + segment_time,
                     [0, -1, 0],
                     [0, i, 0]
                 ),
             ],
         });
-
-        console.log("start time:", start + segment_time * i);
-        console.log("finish time:", start + segment_time * i + segment_time);
     }
 
     return <Blueprint>{

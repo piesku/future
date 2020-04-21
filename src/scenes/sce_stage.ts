@@ -32,5 +32,19 @@ export function scene_stage(game: Game) {
     });
 
     // Props
-    instantiate(game, blueprint_building(game, integer(-4, 3), integer(-4, 3), 0, 600));
+    let buildings = integer(5, 10);
+
+    for (let i = 0; i < buildings; i++) {
+        let start_time = i * integer(5, 25);
+        instantiate(
+            game,
+            blueprint_building(
+                game,
+                integer(-4, 3),
+                integer(-4, 3),
+                start_time,
+                start_time + integer(30, 120)
+            )
+        );
+    }
 }

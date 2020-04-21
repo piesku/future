@@ -19,15 +19,29 @@ function update(game: Game, entity: Entity) {
     let current_time = game.Seconds;
 
     if (current_time >= time_control.FinishTime) {
-        console.log("building ready");
+        transform.Dirty = true;
+        transform.Translation = time_control.TargetPosition;
+        transform.Scale = [1, 1, 1];
         return;
-    } else {
-        // console.log("elo");
+    } else if (current_time < time_control.StartTime) {
+        transform.Dirty = true;
+        transform.Translation = time_control.StartPosition;
+        transform.Scale = [0.9, 0.9, 0.9];
+        return;
     }
 
     transform.Dirty = true;
 
     // let progress = Math.min(1, current_time / (time_control.FinishTime - time_control.StartTime));
-    let progress = current_time / (time_control.FinishTime - time_control.StartTime);
-    lerp(transform.Translation, time_control.StartPosition, time_control.TargetPosition, progress);
+    let progress =
+        (current_time - time_control.StartTime) /
+        (time_control.FinishTime - time_control.StartTime);
+
+    transform.Translation = lerp(
+        [0, 0, 0],
+        time_control.StartPosition,
+        time_control.TargetPosition,
+        progress
+    );
+    lerp(transform.Scale, [0.9, 0.9, 0.9], [1, 1, 1], progress);
 }

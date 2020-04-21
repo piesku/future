@@ -67,7 +67,6 @@ export class Game {
             this.InputDelta.WheelY = evt.deltaY;
         });
         this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
-        this.UI.addEventListener("click", () => this.UI.requestPointerLock());
 
         this.GL.enable(GL_DEPTH_TEST);
         this.GL.enable(GL_CULL_FACE);

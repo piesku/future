@@ -5,6 +5,7 @@ import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
 import {loop_start, loop_stop} from "./core.js";
 import {sys_camera} from "./systems/sys_camera.js";
+import {sys_click} from "./systems/sys_click.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
@@ -17,6 +18,7 @@ export type Entity = number;
 export class Game implements GameState {
     Seconds = 0;
     UpdatePrice = 10;
+    SecondsPerClick = 1;
 
     World = new World();
 
@@ -91,7 +93,7 @@ export class Game implements GameState {
         sys_camera(this, delta);
         sys_light(this, delta);
         sys_render(this, delta);
-
+        sys_click(this, delta);
         sys_ui(this, delta);
 
         sys_framerate(this, delta, performance.now() - now);

@@ -33,13 +33,8 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             break;
         }
         case Action.Click: {
-            console.log("CLICK!");
-            // XXX: Overlay is redrawn before the button click is registered.
-            // @michalbe: @stamy, HALP!1!
-            setTimeout(() => {
-                game.Seconds += game.SecondsPerClick;
-                set_seed(game.Seconds);
-            }, 100);
+            game.Seconds += game.SecondsPerClick;
+            set_seed(game.Seconds);
             break;
         }
     }

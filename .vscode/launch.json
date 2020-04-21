@@ -11,7 +11,8 @@
             "runtimeArgs": [
                 "--window-size=1280,720",
                 "--app=http://localhost:1234/src"
-            ]
+            ],
+            "webRoot": "${workspaceFolder}"
         },
         {
             "type": "chrome",
@@ -20,13 +21,15 @@
             "runtimeArgs": [
                 "--window-size=854,480",
                 "--app=http://localhost:1234/src"
-            ]
+            ],
+            "webRoot": "${workspaceFolder}"
         },
         {
             "type": "chrome",
             "request": "launch",
             "name": "Chrome",
             "url": "http://localhost:1234/src",
+            "webRoot": "${workspaceFolder}"
         },
     ]
 }

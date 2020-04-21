@@ -18,8 +18,8 @@ export type Entity = number;
 
 export class Game implements GameState {
     Seconds = 0;
-    UpdatePrice = 30;
-    SecondsPerClick = 1;
+    UpdatePrice = 10;
+    SecondsPerClick = 2;
 
     World = new World();
 

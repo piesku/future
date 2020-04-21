@@ -32,7 +32,7 @@ export function scene_stage(game: Game) {
     });
 
     // Props
-    let buildings = integer(5, 10);
+    let buildings = integer(20, 30);
 
     for (let i = 0; i < buildings; i++) {
         let start_time = i * integer(5, 25);

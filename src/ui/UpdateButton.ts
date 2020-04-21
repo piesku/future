@@ -1,3 +1,4 @@
+import {seconds_to_short_time} from "../../common/time.js";
 import {Action, GameState} from "../actions.js";
 import {html} from "./html.js";
 
@@ -10,7 +11,7 @@ export function UpdateButton({Seconds, UpdatePrice}: GameState) {
             class="buy_btn"
             ${id_disabled ? 'disabled="disabled"' : ""}
         >
-            Buy Update (${UpdatePrice}s)
+            Buy Update (${seconds_to_short_time(UpdatePrice)})
         </button>
     `;
 }

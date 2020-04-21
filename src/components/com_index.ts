@@ -3,6 +3,7 @@ const enum Component {
     Light,
     Render,
     Transform,
+    TimeControl,
 }
 
 export const enum Has {
@@ -10,4 +11,5 @@ export const enum Has {
     Light = 1 << Component.Light,
     Render = 1 << Component.Render,
     Transform = 1 << Component.Transform,
+    TimeControl = 1 << Component.TimeControl,
 }

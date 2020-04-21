@@ -1,18 +1,26 @@
 import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
 import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
+import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
 import {loop_start, loop_stop} from "./core.js";
 import {sys_camera} from "./systems/sys_camera.js";
+import {sys_click} from "./systems/sys_click.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
+import {sys_time_control} from "./systems/sys_time_control.js";
 import {sys_transform} from "./systems/sys_transform.js";
+import {sys_ui} from "./systems/sys_ui.js";
 import {World} from "./world.js";
 
 export type Entity = number;
 
-export class Game {
+export class Game implements GameState {
+    Seconds = 0;
+    UpdatePrice = 10;
+    SecondsPerClick = 2;
+
     World = new World();
 
     ViewportWidth = 0;
@@ -23,6 +31,7 @@ export class Game {
     InputDelta: Record<string, number> = {};
 
     UI = document.querySelector("main")!;
+
     Canvas = document.querySelector("canvas")!;
     GL = this.Canvas.getContext("webgl")!;
 
@@ -67,7 +76,6 @@ export class Game {
             this.InputDelta.WheelY = evt.deltaY;
         });
         this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
-        this.UI.addEventListener("click", () => this.UI.requestPointerLock());
 
         this.GL.enable(GL_DEPTH_TEST);
         this.GL.enable(GL_CULL_FACE);
@@ -83,10 +91,14 @@ export class Game {
 
     FrameUpdate(delta: number) {
         let now = performance.now();
+        sys_time_control(this, delta);
         sys_transform(this, delta);
         sys_camera(this, delta);
         sys_light(this, delta);
         sys_render(this, delta);
+        sys_click(this, delta);
+        sys_ui(this, delta);
+
         sys_framerate(this, delta, performance.now() - now);
     }
 }

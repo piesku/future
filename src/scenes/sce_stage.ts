@@ -1,6 +1,8 @@
+import {integer} from "../../common/random.js";
+import {blueprint_building} from "../blueprints/blu_building.js";
 import {blueprint_camera} from "../blueprints/blu_camera.js";
+import {blueprint_ground} from "../blueprints/blu_ground.js";
 import {light_directional} from "../components/com_light.js";
-import {render_diffuse} from "../components/com_render_diffuse.js";
 import {instantiate} from "../core.js";
 import {Game} from "../game.js";
 import {World} from "../world.js";
@@ -9,11 +11,11 @@ export function scene_stage(game: Game) {
     game.World = new World();
     game.Camera = undefined;
     game.ViewportResized = true;
-    game.GL.clearColor(1, 0.3, 0.3, 1);
+    game.GL.clearColor(0, 0.5, 0.8, 1);
 
     // Camera.
     instantiate(game, {
-        Translation: [1, 2, 5],
+        Translation: [7, 5, 7],
         ...blueprint_camera(game),
     });
 
@@ -25,14 +27,24 @@ export function scene_stage(game: Game) {
 
     // Ground.
     instantiate(game, {
-        Translation: [0, 0, 0],
-        Scale: [10, 1, 10],
-        Using: [render_diffuse(game.MaterialDiffuseGouraud, game.MeshCube, [1, 1, 0.3, 1])],
+        Translation: [0, -3, 0],
+        ...blueprint_ground(game, 8, 8),
     });
 
-    // Box.
-    instantiate(game, {
-        Translation: [0, 1, 0],
-        Using: [render_diffuse(game.MaterialDiffuseGouraud, game.MeshCube, [1, 1, 0.3, 1])],
-    });
+    // Props
+    let buildings = integer(20, 30);
+
+    for (let i = 0; i < buildings; i++) {
+        let start_time = i * integer(5, 25);
+        instantiate(
+            game,
+            blueprint_building(
+                game,
+                integer(-4, 3),
+                integer(-4, 3),
+                start_time,
+                start_time + integer(30, 120)
+            )
+        );
+    }
 }

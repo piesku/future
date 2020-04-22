@@ -1,28 +1,21 @@
 import {html} from "../../common/html.js";
-import {Action, GameState} from "../actions.js";
+import {Action, GameState, GeneratorState} from "../actions.js";
 
 export function Idle(state: GameState) {
     return html`
-        <h1></h1>
+        <h1>${state.TimeEarned.toFixed(2)}</h1>
         <div>
-            <button onclick="$(${Action.PurchaseClickGenerator}, 0)">Upgrade click</button>
+            ${state.Generators.map((gen, idx) => Generator(state.TimeEarned, gen, idx))}
         </div>
-        <div>
-            <button onclick="$(${Action.PurchaseAutoGenerator}, 0)">
-                Minute ${state.AutoGenerators[0].Count} ($${state.AutoGenerators[0].Cost})
-            </button>
-            <button onclick="$(${Action.PurchaseAutoGenerator}, 1)">
-                Minute ${state.AutoGenerators[1].Count} ($${state.AutoGenerators[1].Cost})
-            </button>
-            <button onclick="$(${Action.PurchaseAutoGenerator}, 2)">
-                Minute ${state.AutoGenerators[2].Count} ($${state.AutoGenerators[2].Cost})
-            </button>
-            <button onclick="$(${Action.PurchaseAutoGenerator}, 3)">
-                Minute ${state.AutoGenerators[3].Count} ($${state.AutoGenerators[3].Cost})
-            </button>
-            <button onclick="$(${Action.PurchaseAutoGenerator}, 4)">
-                Minute ${state.AutoGenerators[4].Count} ($${state.AutoGenerators[4].Cost})
-            </button>
-        </div>
+    `;
+}
+
+function Generator(time: number, gen: GeneratorState, index: number) {
+    let disabled = time < gen.Cost ? "disabled" : "";
+    return html`
+        <button onclick="$(${Action.PurchaseGenerator}, ${index})" ${disabled}>
+            ${gen.Config.Kind} ${index} — Count: ${gen.Count}<br />
+            Upgrade: $${gen.Cost.toFixed(2)}
+        </button>
     `;
 }

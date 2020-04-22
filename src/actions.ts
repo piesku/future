@@ -1,8 +1,9 @@
 import {set_seed} from "../common/random.js";
-import {AUTO_GENERATORS, CLICK_GENERATORS} from "./config.js";
+import {GeneratorConfig, GENERATORS} from "./config.js";
 import {Game} from "./game.js";
 
 export interface GeneratorState {
+    Config: GeneratorConfig;
     Count: number;
     Cost: number;
 }
@@ -16,13 +17,11 @@ export interface GameState {
 
     // Model experiment
     TimeEarned: number;
-    ClickGenerators: Array<GeneratorState>;
-    AutoGenerators: Array<GeneratorState>;
+    Generators: Array<GeneratorState>;
 }
 
 export const enum Action {
-    PurchaseClickGenerator,
-    PurchaseAutoGenerator,
+    PurchaseGenerator,
     BuyUpdate,
     Click,
 }
@@ -53,21 +52,16 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             break;
         }
 
-        case Action.PurchaseClickGenerator: {
+        case Action.PurchaseGenerator: {
             let index = payload as number;
-            let gen = game.ClickGenerators[index];
-            let config = CLICK_GENERATORS[index];
-            gen.Count++;
-            gen.Cost = config.StartingCost * config.GrowthFactor ** gen.Count;
-            break;
-        }
+            let gen = game.Generators[index];
+            if (game.TimeEarned >= gen.Cost) {
+                game.TimeEarned -= gen.Cost;
 
-        case Action.PurchaseAutoGenerator: {
-            let index = payload as number;
-            let gen = game.AutoGenerators[index];
-            let config = AUTO_GENERATORS[index];
-            gen.Count++;
-            gen.Cost = config.StartingCost * config.GrowthFactor ** gen.Count;
+                let config = GENERATORS[index];
+                gen.Count++;
+                gen.Cost = config.StartingCost * config.GrowthFactor ** gen.Count;
+            }
             break;
         }
     }

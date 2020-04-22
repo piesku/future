@@ -3,7 +3,7 @@ import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
-import {AUTO_GENERATORS} from "./config.js";
+import {GENERATORS} from "./config.js";
 import {loop_start, loop_stop} from "./core.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_click} from "./systems/sys_click.js";
@@ -25,32 +25,36 @@ export class Game implements GameState {
     SecondsPerClick = 2;
 
     TimeEarned = 0;
-    ClickGenerators = [
+    Generators = [
         {
+            Config: GENERATORS[0],
             Count: 1,
-            Cost: 5,
-        },
-    ];
-    AutoGenerators = [
-        {
-            Count: 1,
-            Cost: AUTO_GENERATORS[0].StartingCost,
+            Cost: GENERATORS[0].StartingCost,
         },
         {
+            Config: GENERATORS[1],
             Count: 0,
-            Cost: AUTO_GENERATORS[1].StartingCost,
+            Cost: GENERATORS[1].StartingCost,
         },
         {
+            Config: GENERATORS[2],
             Count: 0,
-            Cost: AUTO_GENERATORS[2].StartingCost,
+            Cost: GENERATORS[2].StartingCost,
         },
         {
+            Config: GENERATORS[3],
             Count: 0,
-            Cost: AUTO_GENERATORS[3].StartingCost,
+            Cost: GENERATORS[3].StartingCost,
         },
         {
+            Config: GENERATORS[4],
             Count: 0,
-            Cost: AUTO_GENERATORS[4].StartingCost,
+            Cost: GENERATORS[4].StartingCost,
+        },
+        {
+            Config: GENERATORS[5],
+            Count: 0,
+            Cost: GENERATORS[5].StartingCost,
         },
     ];
 

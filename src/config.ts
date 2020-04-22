@@ -1,10 +1,10 @@
-export interface Generator {
+export interface GeneratorConfig {
     BaseIncome: number;
     StartingCost: number;
     GrowthFactor: number;
 }
 
-export const CLICK_GENERATORS: Array<Generator> = [
+export const CLICK_GENERATORS: Array<GeneratorConfig> = [
     {
         BaseIncome: 1,
         StartingCost: 5,
@@ -12,7 +12,7 @@ export const CLICK_GENERATORS: Array<Generator> = [
     },
 ];
 
-export const AUTO_GENERATORS: Array<Generator> = [
+export const AUTO_GENERATORS: Array<GeneratorConfig> = [
     {
         BaseIncome: 60,
         StartingCost: 180,

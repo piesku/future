@@ -3,6 +3,7 @@ import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
+import {AUTO_GENERATORS} from "./config.js";
 import {loop_start, loop_stop} from "./core.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_click} from "./systems/sys_click.js";
@@ -24,8 +25,34 @@ export class Game implements GameState {
     SecondsPerClick = 2;
 
     TimeEarned = 0;
-    ClickGenerators = [1];
-    AutoGenerators = [1, 0, 0, 0, 0];
+    ClickGenerators = [
+        {
+            Count: 1,
+            Cost: 5,
+        },
+    ];
+    AutoGenerators = [
+        {
+            Count: 1,
+            Cost: AUTO_GENERATORS[0].StartingCost,
+        },
+        {
+            Count: 0,
+            Cost: AUTO_GENERATORS[1].StartingCost,
+        },
+        {
+            Count: 0,
+            Cost: AUTO_GENERATORS[2].StartingCost,
+        },
+        {
+            Count: 0,
+            Cost: AUTO_GENERATORS[3].StartingCost,
+        },
+        {
+            Count: 0,
+            Cost: AUTO_GENERATORS[4].StartingCost,
+        },
+    ];
 
     World = new World();
 

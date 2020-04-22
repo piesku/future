@@ -7,11 +7,11 @@ export function sys_click(game: Game, delta: number) {
         dispatch(game, Action.Click, null);
 
         for (let i = 0; i < game.ClickGenerators.length; i++) {
-            game.TimeEarned += CLICK_GENERATORS[i].BaseIncome * game.ClickGenerators[i];
+            game.TimeEarned += CLICK_GENERATORS[i].BaseIncome * game.ClickGenerators[i].Count;
         }
     }
 
     for (let i = 0; i < game.AutoGenerators.length; i++) {
-        game.TimeEarned += AUTO_GENERATORS[i].BaseIncome * game.AutoGenerators[i];
+        game.TimeEarned += AUTO_GENERATORS[i].BaseIncome * game.AutoGenerators[i].Count;
     }
 }

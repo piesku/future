@@ -3,7 +3,7 @@ import {Action, GameState, GeneratorState} from "../actions.js";
 
 export function Idle(state: GameState) {
     return html`
-        <h1>${state.TimeEarned.toFixed(2)}</h1>
+        <h1></h1>
         <div>
             ${state.Generators.map((gen, idx) => Generator(state.TimeEarned, gen, idx))}
         </div>

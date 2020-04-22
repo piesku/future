@@ -7,6 +7,11 @@ export interface GameState {
     Seconds: number;
     UpdatePrice: number;
     SecondsPerClick: number;
+
+    // Model experiment
+    TimeEarned: number;
+    ClickGenerators: Array<number>;
+    AutoGenerators: Array<number>;
 }
 
 export const enum Action {

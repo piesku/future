@@ -23,6 +23,10 @@ export class Game implements GameState {
     UpdatePrice = 10;
     SecondsPerClick = 2;
 
+    TimeEarned = 0;
+    ClickGenerators = [1];
+    AutoGenerators = [1, 0, 0, 0, 0];
+
     World = new World();
 
     ViewportWidth = 0;

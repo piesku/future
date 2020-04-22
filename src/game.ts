@@ -17,6 +17,8 @@ import {World} from "./world.js";
 export type Entity = number;
 
 export class Game implements GameState {
+    CurrentScene?: Function;
+
     Seconds = 0;
     UpdatePrice = 10;
     SecondsPerClick = 2;

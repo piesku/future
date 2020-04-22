@@ -2,6 +2,8 @@ import {set_seed} from "../common/random.js";
 import {Game} from "./game.js";
 
 export interface GameState {
+    CurrentScene?: Function;
+
     Seconds: number;
     UpdatePrice: number;
     SecondsPerClick: number;

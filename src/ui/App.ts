@@ -1,20 +1,9 @@
-import {html} from "../../common/html.js";
 import {GameState} from "../actions.js";
-import {Timer} from "./Timer.js";
-import {UpdateButton} from "./UpdateButton.js";
+import {PoC} from "./PoC.js";
 
 export function App(state: GameState) {
-    return html`
-        <div
-            style="
-                position: absolute;
-                top: 0;
-                background-color: #000;
-                color: #fff;
-            "
-        >
-            ${UpdateButton(state)}
-        </div>
-        ${Timer(state)}
-    `;
+    switch (state.CurrentScene) {
+        default:
+            return PoC(state);
+    }
 }

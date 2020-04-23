@@ -16,7 +16,7 @@ function update(game: Game, entity: Entity) {
     let time_control = game.World.TimeControl[entity];
     let transform = game.World.Transform[entity];
 
-    let current_time = game.Seconds;
+    let current_time = game.TimeEarned;
 
     if (current_time >= time_control.FinishTime) {
         transform.Dirty = true;

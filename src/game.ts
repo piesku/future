@@ -3,9 +3,9 @@ import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
-import {loop_start, loop_stop} from "./core.js";
+import {GENERATORS} from "./config.js";
 import {sys_camera} from "./systems/sys_camera.js";
-import {sys_click} from "./systems/sys_click.js";
+import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
@@ -17,9 +17,40 @@ import {World} from "./world.js";
 export type Entity = number;
 
 export class Game implements GameState {
-    Seconds = 0;
-    UpdatePrice = 10;
-    SecondsPerClick = 2;
+    Rewinding = false;
+    TimeEarned = 0;
+    Generators = [
+        {
+            Config: GENERATORS[0],
+            Count: 1,
+            Cost: GENERATORS[0].StartingCost,
+        },
+        {
+            Config: GENERATORS[1],
+            Count: 0,
+            Cost: GENERATORS[1].StartingCost,
+        },
+        {
+            Config: GENERATORS[2],
+            Count: 0,
+            Cost: GENERATORS[2].StartingCost,
+        },
+        {
+            Config: GENERATORS[3],
+            Count: 0,
+            Cost: GENERATORS[3].StartingCost,
+        },
+        {
+            Config: GENERATORS[4],
+            Count: 0,
+            Cost: GENERATORS[4].StartingCost,
+        },
+        {
+            Config: GENERATORS[5],
+            Count: 0,
+            Cost: GENERATORS[5].StartingCost,
+        },
+    ];
 
     World = new World();
 
@@ -44,10 +75,6 @@ export class Game implements GameState {
     LightDetails = new Float32Array(4 * 8);
 
     constructor() {
-        document.addEventListener("visibilitychange", () =>
-            document.hidden ? loop_stop() : loop_start(this)
-        );
-
         window.addEventListener("keydown", (evt) => {
             if (!evt.repeat) {
                 this.InputState[evt.code] = 1;
@@ -96,7 +123,7 @@ export class Game implements GameState {
         sys_camera(this, delta);
         sys_light(this, delta);
         sys_render(this, delta);
-        sys_click(this, delta);
+        sys_earn(this, delta);
         sys_ui(this, delta);
 
         sys_framerate(this, delta, performance.now() - now);

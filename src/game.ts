@@ -22,7 +22,7 @@ export class Game implements GameState {
     Generators = [
         {
             Config: GENERATORS[0],
-            Count: 30,
+            Count: 1,
             Cost: GENERATORS[0].StartingCost,
         },
         {

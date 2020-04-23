@@ -23,7 +23,7 @@ function Generator(time: number, gen: GeneratorState, index: number) {
             <strong>${gen.Config.Kind} ${index}</strong><br />
             Count: ${gen.Count}<br />
             Current Income: ${current_income}<br />
-            Upgrade: $${gen.Cost.toFixed(2)}<br />
+            Upgrade: ${gen.Cost.toFixed(2)}<br />
             Next Income: ${next_income}
         </button>
     `;

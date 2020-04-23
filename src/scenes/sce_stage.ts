@@ -7,8 +7,7 @@ import {instantiate} from "../core.js";
 import {Game} from "../game.js";
 import {World} from "../world.js";
 
-export function scene_poc(game: Game) {
-    game.CurrentScene = scene_poc;
+export function scene_stage(game: Game) {
     game.World = new World();
     game.Camera = undefined;
     game.ViewportResized = true;

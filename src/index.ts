@@ -1,10 +1,10 @@
 import {dispatch} from "./actions.js";
 import {loop_start} from "./core.js";
 import {Game} from "./game.js";
-import {scene_idle} from "./scenes/sce_idle.js";
+import {scene_stage} from "./scenes/sce_stage.js";
 
 let game = new Game();
-scene_idle(game);
+scene_stage(game);
 loop_start(game);
 
 // @ts-ignore

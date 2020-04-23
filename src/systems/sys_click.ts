@@ -15,7 +15,7 @@ export function sys_click(game: Game, delta: number) {
 
     for (let i = 0; i < game.Generators.length; i++) {
         if (game.Generators[i].Config.Kind === "auto") {
-            game.TimeEarned += GENERATORS[i].BaseIncome * game.Generators[i].Count;
+            game.TimeEarned += GENERATORS[i].BaseIncome * game.Generators[i].Count * delta;
         }
     }
 }

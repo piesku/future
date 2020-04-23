@@ -1,6 +1,6 @@
 import {GENERATORS} from "./config.js";
-import {total_cost} from "./engine.js";
 import {Game} from "./game.js";
+import {total_cost} from "./generator.js";
 
 export const enum Action {
     PurchaseGenerator,

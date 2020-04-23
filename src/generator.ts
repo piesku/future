@@ -1,4 +1,10 @@
-import {GeneratorState} from "./game";
+import {GeneratorConfig} from "./config";
+
+export interface GeneratorState {
+    Config: GeneratorConfig;
+    Count: number;
+    Cost: number;
+}
 
 export function total_cost(gen: GeneratorState, count: number) {
     let factor = 0;

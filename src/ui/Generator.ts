@@ -1,8 +1,8 @@
 import {html} from "../../common/html.js";
 import {human_time_short} from "../../common/time.js";
 import {Action} from "../actions.js";
-import {income, total_cost} from "../engine.js";
 import {Game, GeneratorState} from "../game.js";
+import {income, total_cost} from "../generator.js";
 
 export function Generator(game: Game, gen: GeneratorState, index: number) {
     let buy_count = game.InputState["Shift"] ? 10 : 1;

@@ -2,7 +2,8 @@ import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
 import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {Camera} from "./components/com_camera.js";
-import {GeneratorConfig, GENERATORS} from "./config.js";
+import {GENERATORS} from "./config.js";
+import {GeneratorState} from "./generator.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
@@ -14,12 +15,6 @@ import {sys_ui} from "./systems/sys_ui.js";
 import {World} from "./world.js";
 
 export type Entity = number;
-
-export interface GeneratorState {
-    Config: GeneratorConfig;
-    Count: number;
-    Cost: number;
-}
 
 export class Game {
     Rewinding = false;

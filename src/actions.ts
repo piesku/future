@@ -1,17 +1,5 @@
-import {GeneratorConfig, GENERATORS} from "./config.js";
+import {GENERATORS} from "./config.js";
 import {Game} from "./game.js";
-
-export interface GeneratorState {
-    Config: GeneratorConfig;
-    Count: number;
-    Cost: number;
-}
-
-export interface GameState {
-    TimeEarned: number;
-    Generators: Array<GeneratorState>;
-    Rewinding: boolean;
-}
 
 export const enum Action {
     PurchaseGenerator,

@@ -54,7 +54,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
     }
 }
 
-function bulk(growth: number, count: number) {
+export function bulk(growth: number, count: number) {
     let factor = 0;
     for (let i = 0; i < count; i++) {
         factor += growth ** i;

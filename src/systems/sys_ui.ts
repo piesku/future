@@ -15,6 +15,6 @@ export function sys_ui(game: Game, delta: number) {
     // it impossible to click any buttons.
     let clock = document.querySelector("h1");
     if (clock) {
-        clock.textContent = human_time_long(game.TimeEarned);
+        clock.innerHTML = human_time_long(game.TimeEarned);
     }
 }

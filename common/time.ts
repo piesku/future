@@ -17,7 +17,7 @@ export function human_time_long(time: number) {
         .toString()
         .padStart(3, "0");
     let years = Math.floor(time / YEAR).toString();
-    return `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    return `${years} years ${days} days<br />${hours} hours ${minutes} minutes ${seconds} seconds`;
 }
 
 export function human_time_short(time: number) {

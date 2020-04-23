@@ -8,3 +8,7 @@ export function total_cost(gen: GeneratorState, count: number) {
 
     return gen.Config.StartingCost * gen.Config.GrowthFactor ** gen.Count * factor;
 }
+
+export function income(gen: GeneratorState, extra: number) {
+    return gen.Config.BaseIncome * (gen.Count + extra);
+}

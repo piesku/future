@@ -25,11 +25,24 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.PurchaseGenerator: {
             let index = payload as number;
             let gen = game.Generators[index];
-            if (!game.Rewinding && game.TimeEarned >= gen.Cost) {
+
+            let buy_count;
+            if (game.InputState["Shift"]) {
+                buy_count = 10;
+            } else {
+                buy_count = 1;
+            }
+
+            let total_cost =
+                gen.Config.StartingCost *
+                gen.Config.GrowthFactor ** gen.Count *
+                bulk(gen.Config.GrowthFactor, buy_count);
+
+            if (!game.Rewinding && game.TimeEarned >= total_cost) {
                 game.Rewinding = true;
 
                 current_keyframes = 0;
-                let step = gen.Cost / rewind_keyframes;
+                let step = total_cost / rewind_keyframes;
                 // XXX: This should be a system, but it's 5am already :)
                 let interval = setInterval(() => {
                     if (current_keyframes === rewind_keyframes) {
@@ -45,10 +58,18 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                 }, 1000 / 60);
 
                 let config = GENERATORS[index];
-                gen.Count++;
+                gen.Count += buy_count;
                 gen.Cost = config.StartingCost * config.GrowthFactor ** gen.Count;
             }
             break;
         }
     }
+}
+
+function bulk(growth: number, count: number) {
+    let factor = 0;
+    for (let i = 0; i < count; i++) {
+        factor += growth ** i;
+    }
+    return factor;
 }

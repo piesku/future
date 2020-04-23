@@ -77,13 +77,13 @@ export class Game implements GameState {
     constructor() {
         window.addEventListener("keydown", (evt) => {
             if (!evt.repeat) {
-                this.InputState[evt.code] = 1;
-                this.InputDelta[evt.code] = 1;
+                this.InputState[evt.key] = 1;
+                this.InputDelta[evt.key] = 1;
             }
         });
         window.addEventListener("keyup", (evt) => {
-            this.InputState[evt.code] = 0;
-            this.InputDelta[evt.code] = -1;
+            this.InputState[evt.key] = 0;
+            this.InputDelta[evt.key] = -1;
         });
         this.UI.addEventListener("mousedown", (evt) => {
             this.InputState[`Mouse${evt.button}`] = 1;

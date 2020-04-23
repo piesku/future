@@ -16,7 +16,10 @@ function Generator(time: number, gen: GeneratorState, index: number) {
     let next_income = gen.Config.BaseIncome * (gen.Count + 1);
     let disabled = time < gen.Cost ? "disabled" : "";
     return html`
-        <button onclick="$(${Action.PurchaseGenerator}, ${index});" ${disabled}>
+        <button
+            onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, ${index});"
+            ${disabled}
+        >
             <strong>${gen.Config.Kind} ${index}</strong><br />
             Count: ${gen.Count}<br />
             Current Income: ${current_income}<br />

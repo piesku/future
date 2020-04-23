@@ -10,7 +10,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "click",
         BaseIncome: 1,
         StartingCost: 5,
-        GrowthFactor: 1.01,
+        GrowthFactor: 1.07,
     },
     {
         Kind: "auto",

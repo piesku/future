@@ -12,11 +12,16 @@ export function Idle(state: GameState) {
 }
 
 function Generator(time: number, gen: GeneratorState, index: number) {
+    let current_income = gen.Config.BaseIncome * gen.Count;
+    let next_income = gen.Config.BaseIncome * (gen.Count + 1);
     let disabled = time < gen.Cost ? "disabled" : "";
     return html`
-        <button onclick="$(${Action.PurchaseGenerator}, ${index})" ${disabled}>
-            ${gen.Config.Kind} ${index} — Count: ${gen.Count}<br />
-            Upgrade: $${gen.Cost.toFixed(2)}
+        <button onclick="$(${Action.PurchaseGenerator}, ${index});" ${disabled}>
+            <strong>${gen.Config.Kind} ${index}</strong><br />
+            Count: ${gen.Count}<br />
+            Current Income: ${current_income}<br />
+            Upgrade: $${gen.Cost.toFixed(2)}<br />
+            Next Income: ${next_income}
         </button>
     `;
 }

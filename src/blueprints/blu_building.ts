@@ -1,4 +1,5 @@
-import {float, integer} from "../../common/random.js";
+import {Vec4} from "../../common/math.js";
+import {integer} from "../../common/random.js";
 import {render_diffuse} from "../components/com_render_diffuse.js";
 import {time_control} from "../components/com_time_control.js";
 import {Blueprint} from "../core.js";
@@ -9,7 +10,8 @@ export function blueprint_building(
     x: number,
     y: number,
     start: number,
-    finish: number
+    finish: number,
+    color: () => Vec4
 ) {
     let Children: Blueprint[] = [];
     let segments = integer(2, 5);
@@ -17,19 +19,12 @@ export function blueprint_building(
     let segment_time = (finish - start) / segments;
 
     for (let i = 0; i < segments; i++) {
-        let color = float(0.2, 0.7);
-
         Children.push({
             // Scale: [0.9, 0.9, 0.9],
             // Translation: [0, i, 0],
             Translation: [0, -1, 0],
             Using: [
-                render_diffuse(game.MaterialDiffuseGouraud, game.MeshCube, [
-                    color,
-                    color,
-                    color,
-                    1,
-                ]),
+                render_diffuse(game.MaterialDiffuseGouraud, game.MeshCube, color()),
                 time_control(
                     start,
                     // start + segment_time * i,

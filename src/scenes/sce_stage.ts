@@ -1,4 +1,5 @@
-import {integer} from "../../common/random.js";
+import {float, integer} from "../../common/random.js";
+import {human_time_long} from "../../common/time.js";
 import {blueprint_building} from "../blueprints/blu_building.js";
 import {blueprint_camera} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
@@ -32,19 +33,22 @@ export function scene_stage(game: Game) {
     });
 
     // Props
-    let buildings = integer(20, 30);
+    let buildings = 2;
+    // let buildings = integer(20, 30);
 
+    let era_end = 0;
     for (let i = 0; i < buildings; i++) {
-        let start_time = i * integer(5, 25);
+        let start_time = i * integer(1, 3) * 60;
+        let end_time = start_time + (i ? i : 0.5) * integer(360, 1200);
+        era_end = Math.max(era_end, end_time);
         instantiate(
             game,
-            blueprint_building(
-                game,
-                integer(-4, 3),
-                integer(-4, 3),
-                start_time,
-                start_time + integer(30, 120)
-            )
+            blueprint_building(game, integer(-4, 3), integer(-4, 3), start_time, end_time, () => {
+                let color = float(0.2, 0.7);
+                return [color, color, color, 1];
+            })
         );
     }
+
+    console.log(human_time_long(era_end));
 }

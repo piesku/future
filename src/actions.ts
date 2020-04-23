@@ -36,7 +36,11 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                         game.Rewinding = false;
                         clearInterval(interval);
                     }
-                    game.TimeEarned -= step;
+                    if (game.TimeEarned > step) {
+                        game.TimeEarned -= step;
+                    } else {
+                        game.TimeEarned = 0;
+                    }
                     current_keyframes++;
                 }, 1000 / 60);
 

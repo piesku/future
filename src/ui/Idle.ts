@@ -10,7 +10,7 @@ export function Idle(state: GameState) {
                 width: 250px;
             "
         >
-            ${state.Generators.map((gen, idx) => Generator(state.TimeEarned, gen, idx))}
+            ${state.Generators.map((gen, idx) => Generator(state, gen, idx))}
         </div>
     `;
 }

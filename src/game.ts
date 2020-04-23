@@ -17,6 +17,7 @@ import {World} from "./world.js";
 export type Entity = number;
 
 export class Game implements GameState {
+    Rewinding = false;
     TimeEarned = 0;
     Generators = [
         {

@@ -1,11 +1,11 @@
 import {html} from "../../common/html.js";
 import {human_time_short} from "../../common/time.js";
-import {Action, GeneratorState} from "../actions.js";
+import {Action, GameState, GeneratorState} from "../actions.js";
 
-export function Generator(time: number, gen: GeneratorState, index: number) {
+export function Generator(state: GameState, gen: GeneratorState, index: number) {
     let current_income = gen.Config.BaseIncome * gen.Count;
     let next_income = gen.Config.BaseIncome * (gen.Count + 1);
-    let disabled = time < gen.Cost ? "disabled" : "";
+    let disabled = state.Rewinding || state.TimeEarned < gen.Cost ? "disabled" : "";
     return html`
         <button
             style="width: 100%"

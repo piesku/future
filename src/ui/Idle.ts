@@ -4,6 +4,7 @@ import {Action, GameState, GeneratorState} from "../actions.js";
 export function Idle(state: GameState) {
     return html`
         <h1></h1>
+        <h2></h2>
         <div>
             ${state.Generators.map((gen, idx) => Generator(state.TimeEarned, gen, idx))}
         </div>

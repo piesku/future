@@ -1,17 +1,6 @@
-import {GeneratorConfig, GENERATORS} from "./config.js";
+import {GENERATORS} from "./config.js";
+import {total_cost} from "./engine.js";
 import {Game} from "./game.js";
-
-export interface GeneratorState {
-    Config: GeneratorConfig;
-    Count: number;
-    Cost: number;
-}
-
-export interface GameState {
-    TimeEarned: number;
-    Generators: Array<GeneratorState>;
-    Rewinding: boolean;
-}
 
 export const enum Action {
     PurchaseGenerator,
@@ -25,11 +14,15 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.PurchaseGenerator: {
             let index = payload as number;
             let gen = game.Generators[index];
-            if (!game.Rewinding && game.TimeEarned >= gen.Cost) {
+
+            let buy_count = game.InputState["Shift"] ? 10 : 1;
+            let cost = total_cost(gen, buy_count);
+
+            if (!game.Rewinding && game.TimeEarned >= cost) {
                 game.Rewinding = true;
 
                 current_keyframes = 0;
-                let step = gen.Cost / rewind_keyframes;
+                let step = cost / rewind_keyframes;
                 // XXX: This should be a system, but it's 5am already :)
                 let interval = setInterval(() => {
                     if (current_keyframes === rewind_keyframes) {
@@ -45,7 +38,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                 }, 1000 / 60);
 
                 let config = GENERATORS[index];
-                gen.Count++;
+                gen.Count += buy_count;
                 gen.Cost = config.StartingCost * config.GrowthFactor ** gen.Count;
             }
             break;

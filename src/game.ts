@@ -1,9 +1,8 @@
 import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
 import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
-import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
-import {GENERATORS} from "./config.js";
+import {GeneratorConfig, GENERATORS} from "./config.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
@@ -16,10 +15,16 @@ import {World} from "./world.js";
 
 export type Entity = number;
 
-export class Game implements GameState {
+export interface GeneratorState {
+    Config: GeneratorConfig;
+    Count: number;
+    Cost: number;
+}
+
+export class Game {
     Rewinding = false;
     TimeEarned = 0;
-    Generators = [
+    Generators: Array<GeneratorState> = [
         {
             Config: GENERATORS[0],
             Count: 1,
@@ -77,13 +82,13 @@ export class Game implements GameState {
     constructor() {
         window.addEventListener("keydown", (evt) => {
             if (!evt.repeat) {
-                this.InputState[evt.code] = 1;
-                this.InputDelta[evt.code] = 1;
+                this.InputState[evt.key] = 1;
+                this.InputDelta[evt.key] = 1;
             }
         });
         window.addEventListener("keyup", (evt) => {
-            this.InputState[evt.code] = 0;
-            this.InputDelta[evt.code] = -1;
+            this.InputState[evt.key] = 0;
+            this.InputDelta[evt.key] = -1;
         });
         this.UI.addEventListener("mousedown", (evt) => {
             this.InputState[`Mouse${evt.button}`] = 1;

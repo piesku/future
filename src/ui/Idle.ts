@@ -1,8 +1,8 @@
 import {html} from "../../common/html.js";
-import {GameState} from "../actions.js";
+import {Game} from "../game.js";
 import {Generator} from "./Generator.js";
 
-export function Idle(state: GameState) {
+export function Idle(game: Game) {
     return html`
         <h1 style="color: #fff;"></h1>
         <div
@@ -10,7 +10,7 @@ export function Idle(state: GameState) {
                 width: 250px;
             "
         >
-            ${state.Generators.map((gen, idx) => Generator(state, gen, idx))}
+            ${game.Generators.map((gen, idx) => Generator(game, gen, idx))}
         </div>
     `;
 }

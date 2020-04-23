@@ -1,10 +1,10 @@
 import {html} from "../../common/html.js";
+import {human_time_short} from "../../common/time.js";
 import {Action, GameState, GeneratorState} from "../actions.js";
 
 export function Idle(state: GameState) {
     return html`
         <h1></h1>
-        <h2></h2>
         <div>
             ${state.Generators.map((gen, idx) => Generator(state.TimeEarned, gen, idx))}
         </div>
@@ -22,9 +22,9 @@ function Generator(time: number, gen: GeneratorState, index: number) {
         >
             <strong>${gen.Config.Kind} ${index}</strong><br />
             Count: ${gen.Count}<br />
-            Current Income: ${current_income}<br />
-            Upgrade: ${gen.Cost.toFixed(2)}<br />
-            Next Income: ${next_income}
+            Current Income: ${human_time_short(current_income)}<br />
+            Upgrade: ${human_time_short(gen.Cost)}<br />
+            Next Income: ${human_time_short(next_income)}
         </button>
     `;
 }

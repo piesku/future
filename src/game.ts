@@ -4,7 +4,6 @@ import {mesh_cube} from "../meshes/cube.js";
 import {GameState} from "./actions.js";
 import {Camera} from "./components/com_camera.js";
 import {GENERATORS} from "./config.js";
-import {loop_start, loop_stop} from "./core.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
@@ -81,10 +80,6 @@ export class Game implements GameState {
     LightDetails = new Float32Array(4 * 8);
 
     constructor() {
-        document.addEventListener("visibilitychange", () =>
-            document.hidden ? loop_stop() : loop_start(this)
-        );
-
         window.addEventListener("keydown", (evt) => {
             if (!evt.repeat) {
                 this.InputState[evt.code] = 1;

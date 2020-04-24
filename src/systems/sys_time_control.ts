@@ -13,7 +13,13 @@ export function sys_time_control(game: Game, delta: number) {
 }
 
 function update(game: Game, entity: Entity) {
-    let time_control = game.World.TimeControl[entity];
+    let time_control_component = game.World.TimeControl[entity];
+    let time_control = time_control_component.Actions[time_control_component.Current];
+
+    if (!time_control_component) {
+        return;
+    }
+
     let transform = game.World.Transform[entity];
 
     let current_time = game.TimeEarned;

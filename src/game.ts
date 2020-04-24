@@ -23,32 +23,26 @@ export class Game {
         {
             Config: GENERATORS[0],
             Count: 1,
-            Cost: GENERATORS[0].StartingCost,
         },
         {
             Config: GENERATORS[1],
             Count: 0,
-            Cost: GENERATORS[1].StartingCost,
         },
         {
             Config: GENERATORS[2],
             Count: 0,
-            Cost: GENERATORS[2].StartingCost,
         },
         {
             Config: GENERATORS[3],
             Count: 0,
-            Cost: GENERATORS[3].StartingCost,
         },
         {
             Config: GENERATORS[4],
             Count: 0,
-            Cost: GENERATORS[4].StartingCost,
         },
         {
             Config: GENERATORS[5],
             Count: 0,
-            Cost: GENERATORS[5].StartingCost,
         },
     ];
 

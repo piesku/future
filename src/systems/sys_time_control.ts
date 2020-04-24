@@ -38,9 +38,10 @@ function update(game: Game, entity: Entity) {
 
     transform.Dirty = true;
 
-    let progress =
-        (current_time - time_control.StartTime) /
-        (time_control.FinishTime - time_control.StartTime);
+    let progress = Math.min(
+        1,
+        (current_time - time_control.StartTime) / (time_control.FinishTime - time_control.StartTime)
+    );
 
     transform.Translation = lerp(
         [0, 0, 0],

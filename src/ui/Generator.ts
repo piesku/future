@@ -4,13 +4,16 @@ import {Action} from "../actions.js";
 import {Game} from "../game.js";
 import {GeneratorState, income, mult_progress, total_cost} from "../generator.js";
 
-export function Generator(game: Game, gen: GeneratorState, index: number) {
+const percent = new Intl.NumberFormat("en", {style: "percent"});
+
+export function Generator(game: Game, total_income: number, gen: GeneratorState, index: number) {
     let buy_count = game.InputState["Shift"] ? 10 : 1;
     let cost = total_cost(gen.Config, gen.Count, buy_count);
     let disabled = game.Rewinding || game.TimeEarned < cost ? "disabled" : "";
 
     let current_income = income(gen.Config, gen.Count);
     let next_income = income(gen.Config, gen.Count + buy_count);
+    let share = total_income > 0 ? current_income / total_income : 0;
 
     let progress = mult_progress(gen.Config, gen.Count);
 
@@ -31,8 +34,9 @@ export function Generator(game: Game, gen: GeneratorState, index: number) {
             </div>
 
             <div>
-                Time per second: ${human_time_short(current_income)}<br />
-                Next (Debug): ${human_time_short(next_income)}<br />
+                ${gen.Config.Kind === "auto"
+                    ? `tps: ${human_time_short(current_income)} (${percent.format(share)})`
+                    : `tps: ${human_time_short(current_income)}`}
             </div>
 
             <button
@@ -42,6 +46,10 @@ export function Generator(game: Game, gen: GeneratorState, index: number) {
             >
                 Buy ${buy_count} for ${human_time_short(cost)}
             </button>
+
+            <div>
+                (tps after: ${human_time_short(next_income)})
+            </div>
 
             ${progress &&
             html`

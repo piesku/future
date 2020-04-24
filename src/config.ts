@@ -18,7 +18,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "auto",
         BaseIncome: 3,
         StartingCost: 40,
-        GrowthFactor: 1.09,
+        GrowthFactor: 1.12,
         Multipliers: [
             [10, 2],
             [25, 2],
@@ -35,7 +35,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "auto",
         BaseIncome: 53,
         StartingCost: 1500,
-        GrowthFactor: 1.12,
+        GrowthFactor: 1.15,
         Multipliers: [
             [10, 4],
             [25, 2],
@@ -52,7 +52,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "auto",
         BaseIncome: 887,
         StartingCost: 44350,
-        GrowthFactor: 1.09,
+        GrowthFactor: 1.11,
         Multipliers: [
             [10, 1.5],
             [25, 2],
@@ -69,7 +69,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "auto",
         BaseIncome: 3539,
         StartingCost: 353900,
-        GrowthFactor: 1.11,
+        GrowthFactor: 1.14,
         Multipliers: [
             [10, 1.5],
             [25, 1.4],
@@ -82,7 +82,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "auto",
         BaseIncome: 21371,
         StartingCost: 4274200,
-        GrowthFactor: 1.1,
+        GrowthFactor: 1.13,
         Multipliers: [],
     },
 ];

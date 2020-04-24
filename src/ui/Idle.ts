@@ -22,7 +22,7 @@ export function Idle(game: Game) {
                 width: 250px;
             "
         >
-            ${game.Generators.map((gen, idx) => Generator(game, gen, idx))}
+            ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
         </div>
     `;
 }

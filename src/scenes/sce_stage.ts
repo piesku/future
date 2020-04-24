@@ -46,7 +46,7 @@ export function scene_stage(game: Game) {
     let era_end = 0;
 
     for (let e = 0; e < eras_count; e++) {
-        let buildings_count = integer(10, 20);
+        let buildings_count = 2; //integer(10, 20);
         let buildings = [];
         // let buildings = integer(20, 30);
         era_end = 0;
@@ -79,7 +79,7 @@ export function scene_stage(game: Game) {
             Children: [
                 {
                     Translation: [0, -3, 0],
-                    ...blueprint_ground(game, 8, 8, ground_color_functions[e]),
+                    ...blueprint_ground(game, 8, ground_color_functions[e]),
                 },
                 ...buildings,
             ],

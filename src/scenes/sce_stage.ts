@@ -1,4 +1,4 @@
-import {Vec4} from "../../common/math.js";
+import {Vec3, Vec4} from "../../common/math.js";
 import {float, integer} from "../../common/random.js";
 import {human_time_long} from "../../common/time.js";
 import {blueprint_building} from "../blueprints/blu_building.js";
@@ -69,12 +69,14 @@ export function scene_stage(game: Game) {
         instantiate(game, {
             Translation: [0, e * levels_space + 20, 0],
             Using: [
-                time_control(
-                    last_era_end_time * 0.8,
-                    last_era_end_time,
-                    [0, e * levels_space + 20, 0],
-                    [0, e * levels_space, 0]
-                ),
+                time_control([
+                    {
+                        StartTime: last_era_end_time * 0.8,
+                        FinishTime: last_era_end_time,
+                        StartPosition: [0, e * levels_space + 20, 0] as Vec3,
+                        TargetPosition: [0, e * levels_space, 0] as Vec3,
+                    },
+                ]),
             ],
             Children: [
                 {

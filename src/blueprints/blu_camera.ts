@@ -10,7 +10,16 @@ export function blueprint_camera(game: Game, position: Vec3, transition_time: nu
     let end_position = position.slice() as Vec3;
     end_position[1] += levels_space;
     return <Blueprint>{
-        Using: [time_control(transition_time - 100, transition_time, position, end_position)],
+        Using: [
+            time_control([
+                {
+                    StartTime: transition_time - 100,
+                    FinishTime: transition_time,
+                    StartPosition: position,
+                    TargetPosition: end_position,
+                },
+            ]),
+        ],
         Children: [
             {
                 Rotation: [-0.28, 0.364, 0.116, 0.88],

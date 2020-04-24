@@ -1,4 +1,4 @@
-import {Vec4} from "../../common/math.js";
+import {Vec3, Vec4} from "../../common/math.js";
 import {integer} from "../../common/random.js";
 import {render_diffuse} from "../components/com_render_diffuse.js";
 import {time_control} from "../components/com_time_control.js";
@@ -25,13 +25,14 @@ export function blueprint_building(
             Translation: [0, -1, 0],
             Using: [
                 render_diffuse(game.MaterialDiffuseGouraud, game.MeshCube, color()),
-                time_control(
-                    start,
-                    // start + segment_time * i,
-                    start + segment_time * i + segment_time,
-                    [0, -1, 0],
-                    [0, i, 0]
-                ),
+                time_control([
+                    {
+                        StartTime: start,
+                        FinishTime: start + segment_time * i + segment_time,
+                        StartPosition: [0, -1, 0] as Vec3,
+                        TargetPosition: [0, i, 0] as Vec3,
+                    },
+                ]),
             ],
         });
     }

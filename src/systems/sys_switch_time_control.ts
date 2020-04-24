@@ -25,10 +25,15 @@ function update(game: Game, entity: Entity) {
 
     for (let i = 0; i < time_control_component.Actions.length; i++) {
         let action = time_control_component.Actions[i];
-
+        let previous_action = time_control_component.Actions[i - 1];
         if (action.StartTime <= current_time && action.FinishTime >= current_time) {
             time_control_component.Current = i;
             return;
+        } else if (previous_action) {
+            if (previous_action.FinishTime <= current_time && action.StartTime >= current_time) {
+                time_control_component.Current = i - 1;
+                return;
+            }
         }
     }
 }

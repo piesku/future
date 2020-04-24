@@ -1,6 +1,6 @@
 import {Vec3, Vec4} from "../../common/math.js";
 import {float, integer} from "../../common/random.js";
-import {human_time_long} from "../../common/time.js";
+import {human_time_short} from "../../common/time.js";
 import {blueprint_building} from "../blueprints/blu_building.js";
 import {blueprint_camera, levels_space} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
@@ -19,14 +19,29 @@ let building_color_functions: Array<() => Vec4> = [
         let color = float(0.2, 0.7);
         return [color, color * color, color * color, 1];
     },
-];
-
-let ground_color_functions: Array<() => Vec4> = [
-    () => [1, Math.min(1, 0.8 + float() * 0.3), 0.1 + float() * 0.4, 1],
     () => {
         let color = float(0.2, 0.7);
-        return [color, color, color, 1];
+        return [color * color, color, color * color, 1];
     },
+    () => {
+        let color = float(0.2, 0.7);
+        return [color, color * color, color, 1];
+    },
+    () => {
+        let color = float(0.2, 0.7);
+        return [color * color, color * color, color, 1];
+    },
+    () => {
+        let color = float(0.2, 0.7);
+        return [color * color, color, color, 1];
+    },
+];
+
+let first_ground_color_function: () => Vec4 = () => [
+    1,
+    Math.min(1, 0.8 + float() * 0.3),
+    0.1 + float() * 0.4,
+    1,
 ];
 
 export function scene_stage(game: Game) {
@@ -41,17 +56,18 @@ export function scene_stage(game: Game) {
         Using: [light_directional([1, 1, 1], 1)],
     });
 
-    let eras_count = 2;
+    let eras_count = 4;
+    let eras_transition_times = [];
     let last_era_end_time = 0;
     let era_end = 0;
 
     for (let e = 0; e < eras_count; e++) {
-        let buildings_count = 2; //integer(10, 20);
+        let buildings_count = 1; //integer(10, 20);
         let buildings = [];
-        // let buildings = integer(20, 30);
+        let color_index = e % building_color_functions.length;
         era_end = 0;
         for (let i = 0; i < buildings_count; i++) {
-            let start_time = last_era_end_time + i * integer(1, 3) * 60;
+            let start_time = last_era_end_time; // + i * integer(1, 3) * 60;
             let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((e + 1) * 2);
             era_end = Math.max(era_end, end_time);
             buildings.push(
@@ -61,7 +77,7 @@ export function scene_stage(game: Game) {
                     integer(-4, 3),
                     start_time,
                     end_time,
-                    building_color_functions[e]
+                    building_color_functions[color_index]
                 )
             );
         }
@@ -71,7 +87,7 @@ export function scene_stage(game: Game) {
             Using: [
                 time_control([
                     {
-                        StartTime: last_era_end_time * 0.8,
+                        StartTime: last_era_end_time - 100,
                         FinishTime: last_era_end_time,
                         StartPosition: [0, e * levels_space + 20, 0] as Vec3,
                         TargetPosition: [0, e * levels_space, 0] as Vec3,
@@ -81,18 +97,24 @@ export function scene_stage(game: Game) {
             Children: [
                 {
                     Translation: [0, -3, 0],
-                    ...blueprint_ground(game, 8, ground_color_functions[e]),
+                    ...blueprint_ground(
+                        game,
+                        8,
+                        color_index < 1
+                            ? first_ground_color_function
+                            : building_color_functions[color_index - 1]
+                    ),
                 },
                 ...buildings,
             ],
         });
 
-        era_end *= 1.1;
-
-        console.log(human_time_long(era_end));
+        // era_end *= 1.05;
         last_era_end_time += era_end;
+        console.log(human_time_short(last_era_end_time));
+        eras_transition_times.push(last_era_end_time);
     }
 
     // Camera.
-    instantiate(game, blueprint_camera(game, [6, 5, 8], last_era_end_time - era_end));
+    instantiate(game, blueprint_camera(game, [6, 5, 8], eras_transition_times));
 }

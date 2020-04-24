@@ -25,3 +25,18 @@ export function income(gen: GeneratorConfig, count: number) {
     }
     return gen.BaseIncome * count * multiplier;
 }
+
+export function mult_progress(gen: GeneratorConfig, count: number) {
+    let current = 0;
+    for (let [threshold, mult] of gen.Multipliers) {
+        if (count < threshold) {
+            return {
+                Value: count - current,
+                Target: threshold - current,
+                Multiplier: mult,
+            };
+        } else {
+            current = threshold;
+        }
+    }
+}

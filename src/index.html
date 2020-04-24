@@ -14,6 +14,7 @@
         width: 100vw;
         height: 100vh;
         user-select: none;
+        overflow: auto;
     }
     #debug {
         display: flex;
@@ -53,8 +54,14 @@
         color: black;
     }
 
-    button[disabled] {
-        opacity: 0.5;
+    button:enabled {
+        background-color: #3f3;
+        color: #fff;
+    }
+
+    button:disabled {
+        background-color: #ccc;
+        color: #aaa;
     }
 </style>
 <body>

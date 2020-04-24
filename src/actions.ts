@@ -16,7 +16,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             let gen = game.Generators[index];
 
             let buy_count = game.InputState["Shift"] ? 10 : 1;
-            let cost = total_cost(gen, buy_count);
+            let cost = total_cost(gen.Config, gen.Count, buy_count);
 
             if (!game.Rewinding && game.TimeEarned >= cost) {
                 game.Rewinding = true;

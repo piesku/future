@@ -6,7 +6,7 @@ export function sys_earn(game: Game, delta: number) {
         for (let i = 0; i < game.Generators.length; i++) {
             let gen = game.Generators[i];
             if (gen.Config.Kind === "click") {
-                game.TimeEarned += income(gen, 0);
+                game.TimeEarned += income(gen.Config, gen.Count);
             }
         }
     }
@@ -14,7 +14,7 @@ export function sys_earn(game: Game, delta: number) {
     for (let i = 0; i < game.Generators.length; i++) {
         let gen = game.Generators[i];
         if (gen.Config.Kind === "auto") {
-            game.TimeEarned += income(gen, 0) * delta;
+            game.TimeEarned += income(gen.Config, gen.Count) * delta;
         }
     }
 }

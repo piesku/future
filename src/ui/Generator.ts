@@ -6,11 +6,11 @@ import {GeneratorState, income, total_cost} from "../generator.js";
 
 export function Generator(game: Game, gen: GeneratorState, index: number) {
     let buy_count = game.InputState["Shift"] ? 10 : 1;
-    let cost = total_cost(gen, buy_count);
+    let cost = total_cost(gen.Config, gen.Count, buy_count);
     let disabled = game.Rewinding || game.TimeEarned < cost ? "disabled" : "";
 
-    let current_income = income(gen, 0);
-    let next_income = income(gen, buy_count);
+    let current_income = income(gen.Config, gen.Count);
+    let next_income = income(gen.Config, gen.Count + buy_count);
 
     return html`
         <button

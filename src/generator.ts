@@ -16,5 +16,14 @@ export function total_cost(gen: GeneratorState, count: number) {
 }
 
 export function income(gen: GeneratorState, extra: number) {
-    return gen.Config.BaseIncome * (gen.Count + extra);
+    let total_count = gen.Count + extra;
+    let multiplier = 1;
+    for (let [count, mult] of gen.Config.Multipliers) {
+        if (total_count >= count) {
+            multiplier *= mult;
+        } else {
+            break;
+        }
+    }
+    return gen.Config.BaseIncome * total_count * multiplier;
 }

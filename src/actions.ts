@@ -1,4 +1,3 @@
-import {GENERATORS} from "./config.js";
 import {Game} from "./game.js";
 import {total_cost} from "./generator.js";
 
@@ -37,9 +36,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                     current_keyframes++;
                 }, 1000 / 60);
 
-                let config = GENERATORS[index];
                 gen.Count += buy_count;
-                gen.Cost = config.StartingCost * config.GrowthFactor ** gen.Count;
             }
             break;
         }

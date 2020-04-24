@@ -9,6 +9,7 @@ import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
+import {sys_switch_time_control} from "./systems/sys_switch_time_control.js";
 import {sys_time_control} from "./systems/sys_time_control.js";
 import {sys_transform} from "./systems/sys_transform.js";
 import {sys_ui} from "./systems/sys_ui.js";
@@ -118,6 +119,7 @@ export class Game {
 
     FrameUpdate(delta: number) {
         let now = performance.now();
+        sys_switch_time_control(this, delta);
         sys_time_control(this, delta);
         sys_transform(this, delta);
         sys_camera(this, delta);

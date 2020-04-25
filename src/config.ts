@@ -13,9 +13,9 @@ export const GENERATORS: Array<GeneratorConfig> = [
         Kind: "click",
         Name: "👉 Tick",
         BaseIncome: 1,
-        IncomeFactor: 1.9,
-        StartingCost: 4,
-        CostFactor: 1.07,
+        IncomeFactor: 1.4,
+        StartingCost: 7,
+        CostFactor: 1.5,
         Multipliers: [],
     },
     {

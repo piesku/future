@@ -17,7 +17,12 @@ export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: n
 
 export function income(gen: GeneratorConfig, count: number) {
     let multiplier = mult_current(gen, count);
-    return multiplier * gen.BaseIncome * count ** gen.IncomeFactor;
+    let factor =
+        gen.Kind === "auto"
+            ? count ** gen.IncomeFactor
+            : // Click generators increase income exponentially.
+              gen.IncomeFactor ** count;
+    return multiplier * gen.BaseIncome * factor;
 }
 
 export function mult_current(gen: GeneratorConfig, count: number) {

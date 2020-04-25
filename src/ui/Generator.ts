@@ -61,7 +61,7 @@ export function Generator(game: Game, total_income: number, gen: GeneratorState,
                     >
                         ${progress.Value / progress.Target}
                     </progress>
-                    <div style="flex: 1">+${progress.Multiplier * 100}%</div>
+                    <div style="flex: 1">+${percent.format(progress.Multiplier - 1)}</div>
                 </div>
             `}
         </div>

@@ -3,7 +3,7 @@ import {Game} from "../game.js";
 
 export function Clock(game: Game) {
     return html`
-        <div class="window" style="margin: 32px; width: 250px">
+        <div class="window" style="margin: 32px; width: 300px">
             <div class="title-bar">
                 <div class="title-bar-text">
                     Clock

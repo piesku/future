@@ -11,10 +11,8 @@ let current_keyframes = 0;
 export function dispatch(game: Game, action: Action, payload: unknown) {
     switch (action) {
         case Action.PurchaseGenerator: {
-            let index = payload as number;
+            let [index, buy_count] = payload as [number, number];
             let gen = game.Generators[index];
-
-            let buy_count = game.InputState["Shift"] ? 10 : 1;
             let cost = total_cost(gen.Config, gen.Count, buy_count);
 
             if (!game.Rewinding && game.TimeEarned >= cost) {

@@ -7,14 +7,12 @@ import {GeneratorState, mult_progress, total_cost} from "../generator.js";
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 
 export function Generator(game: Game, gen: GeneratorState, index: number) {
-    let buy_count = game.InputState["Shift"] ? 10 : 1;
-    let cost = total_cost(gen.Config, gen.Count, buy_count);
-    let disabled = game.Rewinding || game.TimeEarned < cost ? "disabled" : "";
-
+    let cost_1 = total_cost(gen.Config, gen.Count, 1);
+    let cost_10 = total_cost(gen.Config, gen.Count, 10);
     let progress = mult_progress(gen.Config, gen.Count);
 
     return html`
-        <div class="window" style="margin: 32px; width: 250px">
+        <div class="window" style="margin: 32px; width: 300px;">
             <div class="title-bar">
                 <div class="title-bar-text">
                     ${gen.Config.Kind.toUpperCase()}${index}
@@ -24,10 +22,20 @@ export function Generator(game: Game, gen: GeneratorState, index: number) {
                 <div class="field-row" style="justify-content: space-between;">
                     <h4 style="margin: 0;">${gen.Count}</h4>
                     <button
-                        onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, ${index});"
-                        ${disabled}
+                        onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, [${index}, 1]);"
+                        ${game.Rewinding || game.TimeEarned < cost_1 ? "disabled" : ""}
+                        style="height: 33px;"
                     >
-                        Buy ${buy_count} for ${human_time_short(cost)}
+                        Buy 1 <br />
+                        ${human_time_short(cost_1)}
+                    </button>
+                    <button
+                        onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, [${index}, 10]);"
+                        ${game.Rewinding || game.TimeEarned < cost_10 ? "disabled" : ""}
+                        style="height: 35px;"
+                    >
+                        Buy 10 <br />
+                        ${human_time_short(cost_10)}
                     </button>
                 </div>
 

@@ -6,7 +6,6 @@ import {income, mult_current} from "../generator.js";
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 
 export function Statistics(game: Game) {
-    let buy_count = game.InputState["Shift"] ? 10 : 1;
     let total_income = 0;
     for (let gen of game.Generators) {
         if (gen.Config.Kind === "auto") {
@@ -32,7 +31,8 @@ export function Statistics(game: Game) {
                     ${game.Generators.map((gen, idx) => {
                         if (gen.Count > 0) {
                             let current_income = income(gen.Config, gen.Count);
-                            let next_income = income(gen.Config, gen.Count + buy_count);
+                            let next_income_1 = income(gen.Config, gen.Count + 1);
+                            let next_income_10 = income(gen.Config, gen.Count + 10);
                             let share = total_income > 0 ? current_income / total_income : 0;
 
                             return html`
@@ -48,7 +48,8 @@ export function Statistics(game: Game) {
                                         <li>Share of Total: ${percent.format(share)}
                                     `}
                                         <li>Multiplier: ${mult_current(gen.Config, gen.Count)}x</li>
-                                        <li>Next Income: ${human_time_short(next_income)}</li>
+                                        <li>Income +1: ${human_time_short(next_income_1)}</li>
+                                        <li>Income +10: ${human_time_short(next_income_10)}</li>
                                     </ul>
                                 </li>
                             `;

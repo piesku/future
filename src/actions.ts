@@ -37,6 +37,12 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                 }, 1000 / 60);
 
                 gen.Count += buy_count;
+
+                // Unlock the next generator for purchase
+                let next = game.Generators[index + 1];
+                if (next && !next.Unlocked) {
+                    next.Unlocked = true;
+                }
             }
             break;
         }

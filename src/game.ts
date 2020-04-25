@@ -18,31 +18,39 @@ export type Entity = number;
 
 export class Game {
     Rewinding = false;
+    TimeStart = Date.UTC(-10000, 0, 1, 0, 0, 0);
+    TimeGoal = Date.now();
     TimeEarned = 0;
     Generators: Array<GeneratorState> = [
         {
             Config: GENERATORS[0],
             Count: 1,
+            Unlocked: true,
         },
         {
             Config: GENERATORS[1],
             Count: 0,
+            Unlocked: true,
         },
         {
             Config: GENERATORS[2],
             Count: 0,
+            Unlocked: false,
         },
         {
             Config: GENERATORS[3],
             Count: 0,
+            Unlocked: false,
         },
         {
             Config: GENERATORS[4],
             Count: 0,
+            Unlocked: false,
         },
         {
             Config: GENERATORS[5],
             Count: 0,
+            Unlocked: false,
         },
     ];
 

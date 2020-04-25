@@ -31,5 +31,8 @@
     },
     "engines": {
         "node": "12.x"
+    },
+    "dependencies": {
+        "98.css": "^0.1.6"
     }
 }

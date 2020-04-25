@@ -15,7 +15,7 @@ export function scene_stage(game: Game) {
 
     // Camera.
     instantiate(game, {
-        Translation: [6, 5, 8],
+        Translation: [7, 5, 7],
         ...blueprint_camera(game),
     });
 

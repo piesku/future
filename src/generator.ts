@@ -3,6 +3,7 @@ import {GeneratorConfig} from "./config";
 export interface GeneratorState {
     Config: GeneratorConfig;
     Count: number;
+    Unlocked: boolean;
 }
 
 export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: number) {
@@ -15,6 +16,11 @@ export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: n
 }
 
 export function income(gen: GeneratorConfig, count: number) {
+    let multiplier = mult_current(gen, count);
+    return multiplier * gen.BaseIncome * count ** gen.IncomeFactor;
+}
+
+export function mult_current(gen: GeneratorConfig, count: number) {
     let multiplier = 1;
     for (let [threshold, mult] of gen.Multipliers) {
         if (count >= threshold) {
@@ -23,7 +29,7 @@ export function income(gen: GeneratorConfig, count: number) {
             break;
         }
     }
-    return multiplier * gen.BaseIncome * count ** gen.IncomeFactor;
+    return multiplier;
 }
 
 export function mult_progress(gen: GeneratorConfig, count: number) {

@@ -13,7 +13,7 @@ export function sys_ui(game: Game, delta: number) {
     // We need to write TimeEarned outside the App component; otherwise App's
     // output would be different each frame, forcing its re-renders and making
     // it impossible to click any buttons.
-    let clock = document.querySelector("h1 span");
+    let clock = document.getElementById("time");
     if (clock) {
         clock.innerHTML = human_time_long(game.TimeEarned);
     }

@@ -17,7 +17,7 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
         <div class="window" style="margin: 32px; width: 300px;">
             <div class="title-bar">
                 <div class="title-bar-text">
-                    ${gen.Kind.toUpperCase()}${index}
+                    ${gen.Name}
                 </div>
             </div>
             <div class="window-body">

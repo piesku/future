@@ -42,7 +42,7 @@ export function Statistics(game: Game) {
 
                             return html`
                                 <li>
-                                    ${gen.Kind.toUpperCase()}${own.Id}
+                                    ${gen.Name}
                                     <ul>
                                         <li>Count: ${own.Count}</li>
                                         <li>

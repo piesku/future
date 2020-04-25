@@ -1,5 +1,6 @@
 export interface GeneratorConfig {
     Kind: "click" | "auto";
+    Name: string;
     BaseIncome: number;
     IncomeFactor: number;
     StartingCost: number;
@@ -10,6 +11,7 @@ export interface GeneratorConfig {
 export const GENERATORS: Array<GeneratorConfig> = [
     {
         Kind: "click",
+        Name: "Tick",
         BaseIncome: 1,
         IncomeFactor: 1.9,
         StartingCost: 4,
@@ -18,6 +20,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
     },
     {
         Kind: "auto",
+        Name: "Sundial",
         BaseIncome: 3,
         IncomeFactor: 1.1,
         StartingCost: 40,
@@ -36,6 +39,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
     },
     {
         Kind: "auto",
+        Name: "Hourglass",
         BaseIncome: 53,
         IncomeFactor: 1.2,
         StartingCost: 1500,
@@ -54,6 +58,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
     },
     {
         Kind: "auto",
+        Name: "Pendulum",
         BaseIncome: 887,
         IncomeFactor: 1.1,
         StartingCost: 44350,
@@ -72,6 +77,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
     },
     {
         Kind: "auto",
+        Name: "Quartz",
         BaseIncome: 3539,
         IncomeFactor: 1.3,
         StartingCost: 707800,
@@ -90,6 +96,7 @@ export const GENERATORS: Array<GeneratorConfig> = [
     },
     {
         Kind: "auto",
+        Name: "Atomic",
         BaseIncome: 21371,
         IncomeFactor: 1.5,
         StartingCost: 10685500,

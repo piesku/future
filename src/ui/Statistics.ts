@@ -22,7 +22,7 @@ export function Statistics(game: Game) {
                 </div>
             </div>
             <div class="window-body">
-                <ul class="tree-view">
+                <ul class="tree-view" style="overflow-y: scroll;">
                     ${game.Generators.map((gen, idx) => {
                         let current_income = income(gen.Config, gen.Count);
                         let next_income = income(gen.Config, gen.Count + buy_count);

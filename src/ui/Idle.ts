@@ -14,31 +14,38 @@ export function Idle(game: Game) {
     }
 
     return html`
-        <div class="window" style="margin: 32px; width: 250px">
-            <div class="title-bar">
-                <div class="title-bar-text">
-                    Time Info
-                </div>
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
             </div>
-            <div class="window-body">
-                <fieldset class="field-row">
-                    <legend>
-                        Time Earned
-                    </legend>
-                    <div class="field-row">
-                        <span id="time" />
+            <div>
+                <div class="window" style="margin: 32px; width: 250px">
+                    <div class="title-bar">
+                        <div class="title-bar-text">
+                            Time Info
+                        </div>
                     </div>
-                </fieldset>
-                <fieldset class="field-row">
-                    <legend>
-                        Time per Second
-                    </legend>
-                    <div class="field-row">
-                        ${human_time_short(tps)}
+                    <div class="window-body">
+                        <fieldset class="field-row">
+                            <legend>
+                                Time Earned
+                            </legend>
+                            <div class="field-row">
+                                <span id="time" />
+                            </div>
+                        </fieldset>
+                        <fieldset class="field-row">
+                            <legend>
+                                Time per Second
+                            </legend>
+                            <div class="field-row">
+                                ${human_time_short(tps)}
+                            </div>
+                        </fieldset>
                     </div>
-                </fieldset>
+                </div>
+                ${Statistics(game)}
             </div>
         </div>
-        ${Statistics(game)} ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
     `;
 }

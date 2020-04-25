@@ -5,6 +5,7 @@ import {Game} from "../game.js";
 import {income, mult_current} from "../generator.js";
 
 const percent = new Intl.NumberFormat("en", {style: "percent"});
+const multiplier = new Intl.NumberFormat("en", {maximumFractionDigits: 2});
 
 export function Statistics(game: Game) {
     let total_income = 0;
@@ -28,6 +29,7 @@ export function Statistics(game: Game) {
                         Total
                         <ul>
                             <li>Time per second: ${human_time_short(total_income)}</li>
+                            <li>Seconds per second: ${total_income.toFixed(0)}</li>
                         </ul>
                     </li>
                     ${game.Generators.map((own) => {
@@ -50,7 +52,10 @@ export function Statistics(game: Game) {
                                         `
                                         <li>Share of Total: ${percent.format(share)}
                                     `}
-                                        <li>Multiplier: ${mult_current(gen, own.Count)}x</li>
+                                        <li>
+                                            Multiplier:
+                                            ${multiplier.format(mult_current(gen, own.Count))}x
+                                        </li>
                                         <li>Income +1: ${human_time_short(next_income_1)}</li>
                                         <li>Income +10: ${human_time_short(next_income_10)}</li>
                                     </ul>

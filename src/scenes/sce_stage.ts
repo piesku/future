@@ -37,13 +37,6 @@ let building_color_functions: Array<() => Vec4> = [
     },
 ];
 
-let first_ground_color_function: () => Vec4 = () => [
-    1,
-    Math.min(1, 0.8 + float() * 0.3),
-    0.1 + float() * 0.4,
-    1,
-];
-
 export function scene_stage(game: Game) {
     game.World = new World();
     game.Camera = undefined;
@@ -97,13 +90,7 @@ export function scene_stage(game: Game) {
             Children: [
                 {
                     Translation: [0, -3, 0],
-                    ...blueprint_ground(
-                        game,
-                        8,
-                        color_index < 1
-                            ? first_ground_color_function
-                            : building_color_functions[color_index - 1]
-                    ),
+                    ...blueprint_ground(game, 8, game.Textures.grass),
                 },
                 ...buildings,
             ],

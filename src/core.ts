@@ -1,4 +1,5 @@
 import {Quat, Vec3} from "../common/math.js";
+import {GL_PIXEL_UNSIGNED_BYTE, GL_RGBA, GL_TEXTURE_2D} from "../common/webgl.js";
 import {Has} from "./components/com_index.js";
 import {transform} from "./components/com_transform.js";
 import {Entity, Game} from "./game.js";
@@ -73,4 +74,14 @@ export function destroy(world: World, entity: Entity) {
         }
     }
     world.Mask[entity] = 0;
+}
+
+export function load_texture(game: Game, image: HTMLImageElement) {
+    let gl = game.GL;
+    let texture = gl.createTexture()!;
+    gl.bindTexture(GL_TEXTURE_2D, texture);
+    gl.texImage2D(GL_TEXTURE_2D, 0, GL_RGBA, GL_RGBA, GL_PIXEL_UNSIGNED_BYTE, image);
+    gl.generateMipmap(GL_TEXTURE_2D);
+
+    return texture;
 }

@@ -1,5 +1,6 @@
 import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
 import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
+import {mat_textured} from "../materials/mat_textured.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {Camera} from "./components/com_camera.js";
 import {GeneratorState} from "./generator.js";
@@ -21,6 +22,8 @@ export type Entity = number;
 
 export class Game {
     FirstRun = true;
+    Textures: {[key: string]: WebGLTexture} = {};
+
     Rewinding = false;
     TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
     TimeGoal = Date.now() + 1000;
@@ -73,6 +76,7 @@ export class Game {
     Canvas = document.querySelector("canvas")!;
     GL = this.Canvas.getContext("webgl")!;
 
+    MaterialTextured = mat_textured(this.GL);
     MaterialDiffuseGouraud = mat_diffuse_gouraud(this.GL);
     MeshCube = mesh_cube(this.GL);
 

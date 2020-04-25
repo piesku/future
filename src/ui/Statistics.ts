@@ -18,7 +18,7 @@ export function Statistics(game: Game, total_income: number) {
             <div class="window-body">
                 <ul class="tree-view" style="overflow-y: scroll;">
                     ${game.Generators.map((gen, idx) => {
-                        if (gen.Unlocked) {
+                        if (gen.Count > 0) {
                             let current_income = income(gen.Config, gen.Count);
                             let next_income = income(gen.Config, gen.Count + buy_count);
                             let share = total_income > 0 ? current_income / total_income : 0;

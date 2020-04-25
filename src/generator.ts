@@ -8,10 +8,10 @@ export interface GeneratorState {
 export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: number) {
     let factor = 0;
     for (let i = 0; i < buy_count; i++) {
-        factor += gen.GrowthFactor ** i;
+        factor += gen.CostFactor ** i;
     }
 
-    return gen.StartingCost * gen.GrowthFactor ** own_count * factor;
+    return gen.StartingCost * gen.CostFactor ** own_count * factor;
 }
 
 export function income(gen: GeneratorConfig, count: number) {
@@ -23,7 +23,7 @@ export function income(gen: GeneratorConfig, count: number) {
             break;
         }
     }
-    return gen.BaseIncome * count * multiplier;
+    return multiplier * gen.BaseIncome * count ** gen.IncomeFactor;
 }
 
 export function mult_progress(gen: GeneratorConfig, count: number) {

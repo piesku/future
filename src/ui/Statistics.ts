@@ -5,8 +5,14 @@ import {income, mult_current} from "../generator.js";
 
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 
-export function Statistics(game: Game, total_income: number) {
+export function Statistics(game: Game) {
     let buy_count = game.InputState["Shift"] ? 10 : 1;
+    let total_income = 0;
+    for (let gen of game.Generators) {
+        if (gen.Config.Kind === "auto") {
+            total_income += income(gen.Config, gen.Count);
+        }
+    }
 
     return html`
         <div class="window" style="margin: 32px; width: 250px">
@@ -17,6 +23,7 @@ export function Statistics(game: Game, total_income: number) {
             </div>
             <div class="window-body">
                 <ul class="tree-view" style="overflow-y: scroll;">
+                    <li>Total time per second: ${human_time_short(total_income)}</li>
                     ${game.Generators.map((gen, idx) => {
                         if (gen.Count > 0) {
                             let current_income = income(gen.Config, gen.Count);

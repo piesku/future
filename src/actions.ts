@@ -12,10 +12,10 @@ let current_keyframes = 0;
 export function dispatch(game: Game, action: Action, payload: unknown) {
     switch (action) {
         case Action.PurchaseGenerator: {
-            let [index, buy_count] = payload as [number, number];
-            let config = GENERATORS[index];
-            let gen = game.Generators[index];
-            let cost = total_cost(config, gen.Count, buy_count);
+            let [id, buy_count] = payload as [number, number];
+            let gen = GENERATORS[id];
+            let own = game.Generators[id];
+            let cost = total_cost(gen, own.Count, buy_count);
 
             if (!game.Rewinding && game.TimeEarned >= cost) {
                 game.Rewinding = true;
@@ -36,10 +36,10 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                     current_keyframes++;
                 }, 1000 / 60);
 
-                gen.Count += buy_count;
+                own.Count += buy_count;
 
                 // Unlock the next generator for purchase
-                let next = game.Generators[index + 1];
+                let next = game.Generators[id + 1];
                 if (next && !next.Unlocked) {
                     next.Unlocked = true;
                 }

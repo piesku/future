@@ -8,10 +8,10 @@ const percent = new Intl.NumberFormat("en", {style: "percent"});
 
 export function Statistics(game: Game) {
     let total_income = 0;
-    for (let gen of game.Generators) {
-        let config = GENERATORS[gen.Config];
-        if (config.Kind === "auto") {
-            total_income += income(config, gen.Count);
+    for (let own of game.Generators) {
+        let gen = GENERATORS[own.Id];
+        if (gen.Kind === "auto") {
+            total_income += income(gen, own.Count);
         }
     }
 
@@ -30,27 +30,27 @@ export function Statistics(game: Game) {
                             <li>Time per second: ${human_time_short(total_income)}</li>
                         </ul>
                     </li>
-                    ${game.Generators.map((gen, idx) => {
-                        if (gen.Count > 0) {
-                            let config = GENERATORS[gen.Config];
-                            let current_income = income(config, gen.Count);
-                            let next_income_1 = income(config, gen.Count + 1);
-                            let next_income_10 = income(config, gen.Count + 10);
+                    ${game.Generators.map((own) => {
+                        if (own.Count > 0) {
+                            let gen = GENERATORS[own.Id];
+                            let current_income = income(gen, own.Count);
+                            let next_income_1 = income(gen, own.Count + 1);
+                            let next_income_10 = income(gen, own.Count + 10);
                             let share = total_income > 0 ? current_income / total_income : 0;
 
                             return html`
                                 <li>
-                                    ${config.Kind.toUpperCase()}${idx}
+                                    ${gen.Kind.toUpperCase()}${own.Id}
                                     <ul>
-                                        <li>Count: ${gen.Count}</li>
+                                        <li>Count: ${own.Count}</li>
                                         <li>
                                             Time per second: ${human_time_short(current_income)}
                                         </li>
-                                        ${config.Kind === "auto" &&
+                                        ${gen.Kind === "auto" &&
                                         `
                                         <li>Share of Total: ${percent.format(share)}
                                     `}
-                                        <li>Multiplier: ${mult_current(config, gen.Count)}x</li>
+                                        <li>Multiplier: ${mult_current(gen, own.Count)}x</li>
                                         <li>Income +1: ${human_time_short(next_income_1)}</li>
                                         <li>Income +10: ${human_time_short(next_income_10)}</li>
                                     </ul>

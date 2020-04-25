@@ -22,32 +22,32 @@ export class Game {
     TimeEarned = 0;
     Generators: Array<GeneratorState> = [
         {
-            Config: 0,
+            Id: 0,
             Count: 1,
             Unlocked: true,
         },
         {
-            Config: 1,
+            Id: 1,
             Count: 0,
             Unlocked: true,
         },
         {
-            Config: 2,
+            Id: 2,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: 3,
+            Id: 3,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: 4,
+            Id: 4,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: 5,
+            Id: 5,
             Count: 0,
             Unlocked: false,
         },

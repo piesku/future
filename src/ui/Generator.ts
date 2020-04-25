@@ -7,22 +7,22 @@ import {GeneratorState, mult_progress, total_cost} from "../generator.js";
 
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 
-export function Generator(game: Game, gen: GeneratorState, index: number) {
-    let config = GENERATORS[gen.Config];
-    let cost_1 = total_cost(config, gen.Count, 1);
-    let cost_10 = total_cost(config, gen.Count, 10);
-    let progress = mult_progress(config, gen.Count);
+export function Generator(game: Game, own: GeneratorState, index: number) {
+    let gen = GENERATORS[own.Id];
+    let cost_1 = total_cost(gen, own.Count, 1);
+    let cost_10 = total_cost(gen, own.Count, 10);
+    let progress = mult_progress(gen, own.Count);
 
     return html`
         <div class="window" style="margin: 32px; width: 300px;">
             <div class="title-bar">
                 <div class="title-bar-text">
-                    ${config.Kind.toUpperCase()}${index}
+                    ${gen.Kind.toUpperCase()}${index}
                 </div>
             </div>
             <div class="window-body">
                 <div class="field-row" style="justify-content: space-between;">
-                    <h4 style="margin: 0;">${gen.Count}</h4>
+                    <h4 style="margin: 0;">${own.Count}</h4>
                     <button
                         onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, [${index}, 1]);"
                         ${game.Rewinding || game.TimeEarned < cost_1 ? "disabled" : ""}

@@ -23,7 +23,12 @@ export function Statistics(game: Game) {
             </div>
             <div class="window-body">
                 <ul class="tree-view" style="overflow-y: scroll;">
-                    <li>Total time per second: ${human_time_short(total_income)}</li>
+                    <li>
+                        Total
+                        <ul>
+                            <li>Time per second: ${human_time_short(total_income)}</li>
+                        </ul>
+                    </li>
                     ${game.Generators.map((gen, idx) => {
                         if (gen.Count > 0) {
                             let current_income = income(gen.Config, gen.Count);
@@ -35,7 +40,9 @@ export function Statistics(game: Game) {
                                     ${gen.Config.Kind.toUpperCase()}${idx}
                                     <ul>
                                         <li>Count: ${gen.Count}</li>
-                                        <li>Income: ${human_time_short(current_income)}</li>
+                                        <li>
+                                            Time per second: ${human_time_short(current_income)}
+                                        </li>
                                         ${gen.Config.Kind === "auto" &&
                                         `
                                         <li>Share of Total: ${percent.format(share)}

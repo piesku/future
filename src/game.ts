@@ -13,6 +13,8 @@ import {sys_transform} from "./systems/sys_transform.js";
 import {sys_ui} from "./systems/sys_ui.js";
 import {World} from "./world.js";
 
+const SAVE_KEY = "com.piesku.future.save";
+
 export type Entity = number;
 
 export class Game {
@@ -20,6 +22,7 @@ export class Game {
     TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
     TimeGoal = Date.now() + 1000;
     TimeEarned = 0;
+    TimeOffline = 0;
     Generators: Array<GeneratorState> = [
         {
             Id: 0,
@@ -85,6 +88,25 @@ export class Game {
             this.InputDelta[`Mouse${evt.button}`] = -1;
         });
         this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
+
+        window.addEventListener("unload", () => {
+            let payload = JSON.stringify({
+                Timestamp: Date.now(),
+                TimeEarned: this.TimeEarned,
+                Generators: this.Generators,
+            });
+            localStorage.setItem(SAVE_KEY, payload);
+        });
+
+        let saved = localStorage.getItem(SAVE_KEY);
+        if (saved) {
+            let payload = JSON.parse(saved);
+            this.TimeEarned = payload.TimeEarned;
+            this.Generators = payload.Generators;
+
+            sys_earn(this, (Date.now() - payload.Timestamp) / 1000);
+            this.TimeOffline = this.TimeEarned - payload.TimeEarned;
+        }
 
         this.GL.enable(GL_DEPTH_TEST);
         this.GL.enable(GL_CULL_FACE);

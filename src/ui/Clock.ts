@@ -1,7 +1,23 @@
 import {html} from "../../common/html.js";
 import {Game} from "../game.js";
 
+let df = new Intl.DateTimeFormat("en-US", {
+    era: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+});
+
+let tf = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: false,
+});
+
 export function Clock(game: Game) {
+    let time = game.TimeEarned * 1000 + game.TimeStart;
     return html`
         <div class="window" style="margin: 32px; width: 300px">
             <div class="title-bar">
@@ -13,18 +29,28 @@ export function Clock(game: Game) {
                 <p>To win the game, reach the future!</p>
                 <fieldset class="field-row">
                     <legend>
-                        Current Game Time
+                        Current Date
                     </legend>
-                    <div class="field-row">
-                        ${new Date(game.TimeEarned * 1000 + game.TimeStart).toString()}
+                    <div class="field-row" style="justify-content: space-evenly;">
+                        <div style="width: 150px; text-align: center;">
+                            ${df.format(time)}
+                        </div>
+                        <div style="width: 50px; text-align: center;">
+                            ${tf.format(time)}
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset class="field-row">
                     <legend>
-                        Goal
+                        Goal Date
                     </legend>
-                    <div class="field-row">
-                        ${new Date(game.TimeGoal).toString()}
+                    <div class="field-row" style="justify-content: space-evenly;">
+                        <div>
+                            ${df.format(game.TimeGoal)}
+                        </div>
+                        <div>
+                            ${tf.format(game.TimeGoal)}
+                        </div>
                     </div>
                 </fieldset>
             </div>

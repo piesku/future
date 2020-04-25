@@ -77,16 +77,6 @@ export class Game {
     LightDetails = new Float32Array(4 * 8);
 
     constructor() {
-        window.addEventListener("keydown", (evt) => {
-            if (!evt.repeat) {
-                this.InputState[evt.key] = 1;
-                this.InputDelta[evt.key] = 1;
-            }
-        });
-        window.addEventListener("keyup", (evt) => {
-            this.InputState[evt.key] = 0;
-            this.InputDelta[evt.key] = -1;
-        });
         this.UI.addEventListener("mousedown", (evt) => {
             this.InputState[`Mouse${evt.button}`] = 1;
             this.InputDelta[`Mouse${evt.button}`] = 1;
@@ -94,15 +84,6 @@ export class Game {
         this.UI.addEventListener("mouseup", (evt) => {
             this.InputState[`Mouse${evt.button}`] = 0;
             this.InputDelta[`Mouse${evt.button}`] = -1;
-        });
-        this.UI.addEventListener("mousemove", (evt) => {
-            this.InputState.MouseX = evt.offsetX;
-            this.InputState.MouseY = evt.offsetY;
-            this.InputDelta.MouseX = evt.movementX;
-            this.InputDelta.MouseY = evt.movementY;
-        });
-        this.UI.addEventListener("wheel", (evt) => {
-            this.InputDelta.WheelY = evt.deltaY;
         });
         this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
 

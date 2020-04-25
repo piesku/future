@@ -2,6 +2,7 @@ import {html} from "../../common/html.js";
 import {Game} from "../game.js";
 import {Clock} from "./Clock.js";
 import {Generator} from "./Generator.js";
+import {OfflineProgress} from "./OfflineProgress.js";
 import {Score} from "./Score.js";
 import {Statistics} from "./Statistics.js";
 
@@ -22,5 +23,6 @@ export function Idle(game: Game) {
                 ${Score()} ${Statistics(game)}
             </div>
         </div>
+        ${game.TimeOffline > 0 && OfflineProgress(game)}
     `;
 }

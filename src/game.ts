@@ -2,17 +2,19 @@ import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
 import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {Camera} from "./components/com_camera.js";
-import {GENERATORS} from "./config.js";
 import {GeneratorState} from "./generator.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
+import {sys_save} from "./systems/sys_save.js";
 import {sys_time_control} from "./systems/sys_time_control.js";
 import {sys_transform} from "./systems/sys_transform.js";
 import {sys_ui} from "./systems/sys_ui.js";
 import {World} from "./world.js";
+
+const SAVE_KEY = "com.piesku.future.save";
 
 export type Entity = number;
 
@@ -21,34 +23,35 @@ export class Game {
     TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
     TimeGoal = Date.now() + 1000;
     TimeEarned = 0;
+    TimeOffline = 0;
     Generators: Array<GeneratorState> = [
         {
-            Config: GENERATORS[0],
+            Id: 0,
             Count: 1,
             Unlocked: true,
         },
         {
-            Config: GENERATORS[1],
+            Id: 1,
             Count: 0,
             Unlocked: true,
         },
         {
-            Config: GENERATORS[2],
+            Id: 2,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: GENERATORS[3],
+            Id: 3,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: GENERATORS[4],
+            Id: 4,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: GENERATORS[5],
+            Id: 5,
             Count: 0,
             Unlocked: false,
         },
@@ -87,6 +90,18 @@ export class Game {
         });
         this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
 
+        window.addEventListener("unload", () => game_save(this));
+
+        let saved = localStorage.getItem(SAVE_KEY);
+        if (saved) {
+            let payload = JSON.parse(saved);
+            this.TimeEarned = payload.TimeEarned;
+            this.Generators = payload.Generators;
+
+            sys_earn(this, (Date.now() - payload.Timestamp) / 1000);
+            this.TimeOffline = this.TimeEarned - payload.TimeEarned;
+        }
+
         this.GL.enable(GL_DEPTH_TEST);
         this.GL.enable(GL_CULL_FACE);
     }
@@ -107,8 +122,18 @@ export class Game {
         sys_light(this, delta);
         sys_render(this, delta);
         sys_earn(this, delta);
+        sys_save(this, delta);
         sys_ui(this, delta);
 
         sys_framerate(this, delta, performance.now() - now);
     }
+}
+
+export function game_save(game: Game) {
+    let payload = JSON.stringify({
+        Timestamp: Date.now(),
+        TimeEarned: game.TimeEarned,
+        Generators: game.Generators,
+    });
+    localStorage.setItem(SAVE_KEY, payload);
 }

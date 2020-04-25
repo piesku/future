@@ -1,7 +1,7 @@
 import {GeneratorConfig} from "./config";
 
 export interface GeneratorState {
-    Config: GeneratorConfig;
+    Config: number;
     Count: number;
     Unlocked: boolean;
 }

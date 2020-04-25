@@ -1,21 +1,23 @@
 import {html} from "../../common/html.js";
 import {human_time_short} from "../../common/time.js";
 import {Action} from "../actions.js";
+import {GENERATORS} from "../config.js";
 import {Game} from "../game.js";
 import {GeneratorState, mult_progress, total_cost} from "../generator.js";
 
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 
 export function Generator(game: Game, gen: GeneratorState, index: number) {
-    let cost_1 = total_cost(gen.Config, gen.Count, 1);
-    let cost_10 = total_cost(gen.Config, gen.Count, 10);
-    let progress = mult_progress(gen.Config, gen.Count);
+    let config = GENERATORS[gen.Config];
+    let cost_1 = total_cost(config, gen.Count, 1);
+    let cost_10 = total_cost(config, gen.Count, 10);
+    let progress = mult_progress(config, gen.Count);
 
     return html`
         <div class="window" style="margin: 32px; width: 300px;">
             <div class="title-bar">
                 <div class="title-bar-text">
-                    ${gen.Config.Kind.toUpperCase()}${index}
+                    ${config.Kind.toUpperCase()}${index}
                 </div>
             </div>
             <div class="window-body">

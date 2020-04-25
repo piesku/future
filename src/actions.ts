@@ -1,3 +1,4 @@
+import {GENERATORS} from "./config.js";
 import {Game} from "./game.js";
 import {total_cost} from "./generator.js";
 
@@ -12,8 +13,9 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
     switch (action) {
         case Action.PurchaseGenerator: {
             let [index, buy_count] = payload as [number, number];
+            let config = GENERATORS[index];
             let gen = game.Generators[index];
-            let cost = total_cost(gen.Config, gen.Count, buy_count);
+            let cost = total_cost(config, gen.Count, buy_count);
 
             if (!game.Rewinding && game.TimeEarned >= cost) {
                 game.Rewinding = true;

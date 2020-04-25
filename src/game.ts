@@ -2,7 +2,6 @@ import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
 import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {Camera} from "./components/com_camera.js";
-import {GENERATORS} from "./config.js";
 import {GeneratorState} from "./generator.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
@@ -23,32 +22,32 @@ export class Game {
     TimeEarned = 0;
     Generators: Array<GeneratorState> = [
         {
-            Config: GENERATORS[0],
+            Config: 0,
             Count: 1,
             Unlocked: true,
         },
         {
-            Config: GENERATORS[1],
+            Config: 1,
             Count: 0,
             Unlocked: true,
         },
         {
-            Config: GENERATORS[2],
+            Config: 2,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: GENERATORS[3],
+            Config: 3,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: GENERATORS[4],
+            Config: 4,
             Count: 0,
             Unlocked: false,
         },
         {
-            Config: GENERATORS[5],
+            Config: 5,
             Count: 0,
             Unlocked: false,
         },

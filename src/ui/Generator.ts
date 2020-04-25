@@ -25,20 +25,8 @@ export function Generator(game: Game, total_income: number, gen: GeneratorState,
                 </div>
             </div>
             <div class="window-body">
-                <div class="field-row">
-                    <div style="flex: 1">${gen.Count}</div>
-                </div>
-
-                <div class="field-row">
-                    ${gen.Config.Kind === "auto"
-                        ? `tps: ${human_time_short(current_income)} (${percent.format(share)})`
-                        : `tps: ${human_time_short(current_income)}`}
-                </div>
-                <div class="field-row">
-                    (tps after: ${human_time_short(next_income)})
-                </div>
-
-                <div class="field-row" style="justify-content: center;">
+                <div class="field-row" style="justify-content: space-between;">
+                    <h4 style="margin: 0;">${gen.Count}</h4>
                     <button
                         onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, ${index});"
                         ${disabled}
@@ -46,6 +34,17 @@ export function Generator(game: Game, total_income: number, gen: GeneratorState,
                         Buy ${buy_count} for ${human_time_short(cost)}
                     </button>
                 </div>
+
+                <!--
+                <div class="field-row">
+                    ${gen.Config.Kind === "auto"
+                    ? `tps: ${human_time_short(current_income)} (${percent.format(share)})`
+                    : `tps: ${human_time_short(current_income)}`}
+                </div>
+                <div class="field-row">
+                    (tps after: ${human_time_short(next_income)})
+                </div>
+                -->
 
                 ${progress &&
                 html`

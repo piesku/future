@@ -3,6 +3,16 @@ const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
 const YEAR = DAY * 365;
 
+export function human_time(time: number) {
+    return {
+        Seconds: Math.floor(time % MINUTE).toString(),
+        Minutes: Math.floor((time % HOUR) / MINUTE).toString(),
+        Hours: Math.floor((time % DAY) / HOUR).toString(),
+        Days: Math.floor((time % YEAR) / DAY).toString(),
+        Years: Math.floor(time / YEAR).toString(),
+    };
+}
+
 export function human_time_long(time: number) {
     let seconds = Math.floor(time % MINUTE).toString();
     let minutes = Math.floor((time % HOUR) / MINUTE).toString();

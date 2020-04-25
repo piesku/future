@@ -4,6 +4,7 @@ import {total_cost} from "./generator.js";
 
 export const enum Action {
     PurchaseGenerator,
+    AcceptOfflineProgress,
 }
 
 let rewind_keyframes = 10;
@@ -44,6 +45,10 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                     next.Unlocked = true;
                 }
             }
+            break;
+        }
+        case Action.AcceptOfflineProgress: {
+            game.TimeOffline = 0;
             break;
         }
     }

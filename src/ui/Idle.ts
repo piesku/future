@@ -13,16 +13,26 @@ export function Idle(game: Game) {
     }
 
     return html`
-        <h1 style="color: #fff;">Current time: <span /></h1>
-        <h2 style="color: #fff;">
-            Current <abbr title="time per second">tps</abbr>: ${human_time_short(tps)}
-        </h1>
-        <div
-            style="
-                width: 250px;
-            "
-        >
-            ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
+        <div class="window" style="margin: 32px; width: 250px">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Current Statistics
+                </div>
+            </div>
+            <div class="window-body">
+                <p>Current time: <span id="time" /></p>
+                <p>Current <abbr title="time per second">tps</abbr>: ${human_time_short(tps)}</p>
+            </div>
+        </div>
+        <div class="window" style="margin: 32px; width: 250px">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Generators
+                </div>
+            </div>
+            <div class="window-body">
+                ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
+            </div>
         </div>
     `;
 }

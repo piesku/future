@@ -14,19 +14,16 @@ export function human_time(time: number) {
 }
 
 export function human_time_long(time: number) {
-    let seconds = Math.floor(time % MINUTE).toString();
-    let minutes = Math.floor((time % HOUR) / MINUTE).toString();
-    let hours = Math.floor((time % DAY) / HOUR).toString();
-    let days = Math.floor((time % YEAR) / DAY).toString();
-    let years = Math.floor(time / YEAR).toString();
-    return `years:&nbsp;${years}<br>days:&nbsp;${days}<br>hours:&nbsp;${hours}<br>minutes:&nbsp;${minutes}<br>seconds:&nbsp;${seconds}`;
+    let ht = human_time(time);
+    return `
+        years:&nbsp;${ht.Years}<br>
+        days:&nbsp;${ht.Days}<br>
+        hours:&nbsp;${ht.Hours}<br>
+        minutes:&nbsp;${ht.Minutes}<br>
+        seconds:&nbsp;${ht.Seconds}`;
 }
 
 export function human_time_short(time: number) {
-    let seconds = Math.floor(time % MINUTE).toString();
-    let minutes = Math.floor((time % HOUR) / MINUTE).toString();
-    let hours = Math.floor((time % DAY) / HOUR).toString();
-    let days = Math.floor((time % YEAR) / DAY).toString();
-    let years = Math.floor(time / YEAR).toString();
-    return `${years}y ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    let ht = human_time(time);
+    return `${ht.Years}y${ht.Days}d${ht.Hours}h${ht.Minutes}m${ht.Seconds}s`;
 }

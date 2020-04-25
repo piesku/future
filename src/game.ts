@@ -25,26 +25,32 @@ export class Game {
         {
             Config: GENERATORS[0],
             Count: 1,
+            Unlocked: true,
         },
         {
             Config: GENERATORS[1],
             Count: 0,
+            Unlocked: true,
         },
         {
             Config: GENERATORS[2],
             Count: 0,
+            Unlocked: false,
         },
         {
             Config: GENERATORS[3],
             Count: 0,
+            Unlocked: false,
         },
         {
             Config: GENERATORS[4],
             Count: 0,
+            Unlocked: false,
         },
         {
             Config: GENERATORS[5],
             Count: 0,
+            Unlocked: false,
         },
     ];
 

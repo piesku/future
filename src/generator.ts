@@ -3,6 +3,7 @@ import {GeneratorConfig} from "./config";
 export interface GeneratorState {
     Config: GeneratorConfig;
     Count: number;
+    Unlocked: boolean;
 }
 
 export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: number) {

@@ -16,7 +16,13 @@ export function Idle(game: Game) {
     return html`
         <div style="display: flex; justify-content: space-between;">
             <div>
-                ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
+                ${game.Generators.map((gen, idx) => {
+                    if (gen.Unlocked) {
+                        return Generator(game, tps, gen, idx);
+                    } else {
+                        return null;
+                    }
+                })}
             </div>
             <div>
                 <div class="window" style="margin: 32px; width: 250px">

@@ -8,6 +8,7 @@ import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
+import {sys_save} from "./systems/sys_save.js";
 import {sys_time_control} from "./systems/sys_time_control.js";
 import {sys_transform} from "./systems/sys_transform.js";
 import {sys_ui} from "./systems/sys_ui.js";
@@ -121,6 +122,7 @@ export class Game {
         sys_light(this, delta);
         sys_render(this, delta);
         sys_earn(this, delta);
+        sys_save(this, delta);
         sys_ui(this, delta);
 
         sys_framerate(this, delta, performance.now() - now);

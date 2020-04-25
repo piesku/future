@@ -23,6 +23,13 @@ function update(game: Game, entity: Entity) {
 
     let current_time = game.TimeEarned;
 
+    // This whole system needs a little refactor...
+    let first_action = time_control_component.Actions[0];
+    if (first_action.StartTime >= current_time) {
+        time_control_component.Current = 0;
+        return;
+    }
+
     for (let i = 0; i < time_control_component.Actions.length; i++) {
         let action = time_control_component.Actions[i];
         let previous_action = time_control_component.Actions[i - 1];
@@ -35,5 +42,10 @@ function update(game: Game, entity: Entity) {
                 return;
             }
         }
+    }
+
+    let last_action = time_control_component.Actions[time_control_component.Actions.length - 1];
+    if (last_action.FinishTime <= current_time) {
+        time_control_component.Current = time_control_component.Actions.length - 1;
     }
 }

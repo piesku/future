@@ -11,9 +11,9 @@ export function blueprint_camera(game: Game, position: Vec3, transition_times: A
 
     for (let i = 0; i < transition_times.length; i++) {
         let start_position = position.slice() as Vec3;
-        start_position[1] += levels_space * i;
+        start_position[0] += levels_space * i;
         let end_position = position.slice() as Vec3;
-        end_position[1] += levels_space * (i + 1);
+        end_position[0] += levels_space * (i + 1);
 
         let transition_time = transition_times[i];
         time_control_actions.push({

@@ -56,7 +56,7 @@ export function scene_stage(game: Game) {
         Using: [light_directional([1, 1, 1], 1)],
     });
 
-    let eras_count = 4;
+    let eras_count = 5;
     let eras_transition_times = [];
     let last_era_end_time = 0;
     let era_end = 0;
@@ -83,14 +83,14 @@ export function scene_stage(game: Game) {
         }
 
         instantiate(game, {
-            Translation: [0, e * levels_space + 20, 0],
+            Translation: [e * levels_space + 20, 0, 0],
             Using: [
                 time_control([
                     {
                         StartTime: last_era_end_time - 100,
                         FinishTime: last_era_end_time,
-                        StartPosition: [0, e * levels_space + 20, 0] as Vec3,
-                        TargetPosition: [0, e * levels_space, 0] as Vec3,
+                        StartPosition: [e * levels_space + 20, 0, 0] as Vec3,
+                        TargetPosition: [e * levels_space, 0, 0] as Vec3,
                     },
                 ]),
             ],
@@ -114,6 +114,8 @@ export function scene_stage(game: Game) {
         console.log(human_time_short(last_era_end_time));
         eras_transition_times.push(last_era_end_time);
     }
+
+    eras_transition_times.pop();
 
     // Camera.
     instantiate(game, blueprint_camera(game, [6, 5, 8], eras_transition_times));

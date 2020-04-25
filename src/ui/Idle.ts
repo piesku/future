@@ -3,6 +3,7 @@ import {human_time_short} from "../../common/time.js";
 import {Game} from "../game.js";
 import {income} from "../generator.js";
 import {Generator} from "./Generator.js";
+import {Statistics} from "./Statistics.js";
 
 export function Idle(game: Game) {
     let tps = 0;
@@ -16,7 +17,7 @@ export function Idle(game: Game) {
         <div class="window" style="margin: 32px; width: 250px">
             <div class="title-bar">
                 <div class="title-bar-text">
-                    Current Statistics
+                    Time Info
                 </div>
             </div>
             <div class="window-body">
@@ -38,6 +39,6 @@ export function Idle(game: Game) {
                 </fieldset>
             </div>
         </div>
-        ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
+        ${Statistics(game)} ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
     `;
 }

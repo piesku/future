@@ -28,6 +28,22 @@ export function Idle(game: Game) {
                     <div class="window-body">
                         <fieldset class="field-row">
                             <legend>
+                                Goal
+                            </legend>
+                            <div class="field-row">
+                                ${new Date(game.TimeGoal).toString()}
+                            </div>
+                        </fieldset>
+                        <fieldset class="field-row">
+                            <legend>
+                                Current Game Time
+                            </legend>
+                            <div class="field-row">
+                                ${new Date(game.TimeEarned * 1000 + game.TimeStart).toString()}
+                            </div>
+                        </fieldset>
+                        <fieldset class="field-row">
+                            <legend>
                                 Time Earned
                             </legend>
                             <div class="field-row">

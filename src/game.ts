@@ -18,6 +18,8 @@ export type Entity = number;
 
 export class Game {
     Rewinding = false;
+    TimeStart = Date.UTC(-10000, 0, 1, 0, 0, 0);
+    TimeGoal = Date.now();
     TimeEarned = 0;
     Generators: Array<GeneratorState> = [
         {

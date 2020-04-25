@@ -1,4 +1,4 @@
-import {df, human_time_long, tf} from "../../common/time.js";
+import {day_f, human_time_long, time_f, year_f} from "../../common/time.js";
 import {Game} from "../game.js";
 import {App} from "../ui/App.js";
 
@@ -20,24 +20,32 @@ export function sys_ui(game: Game, delta: number) {
 
     {
         let current = game.TimeEarned * 1000 + game.TimeStart;
-        let date = document.getElementById("clock-current-date");
-        if (date) {
-            date.textContent = df.format(current);
+        let year = document.getElementById("clock-current-year");
+        if (year) {
+            year.textContent = year_f.format(current);
+        }
+        let day = document.getElementById("clock-current-day");
+        if (day) {
+            day.textContent = day_f.format(current);
         }
         let time = document.getElementById("clock-current-time");
         if (time) {
-            time.textContent = tf.format(current);
+            time.textContent = time_f.format(current);
         }
     }
 
     {
-        let date = document.getElementById("clock-future-date");
-        if (date) {
-            date.textContent = df.format(game.TimeGoal);
+        let year = document.getElementById("clock-future-year");
+        if (year) {
+            year.textContent = year_f.format(game.TimeGoal);
+        }
+        let day = document.getElementById("clock-future-day");
+        if (day) {
+            day.textContent = day_f.format(game.TimeGoal);
         }
         let time = document.getElementById("clock-future-time");
         if (time) {
-            time.textContent = tf.format(game.TimeGoal);
+            time.textContent = time_f.format(game.TimeGoal);
         }
     }
 }

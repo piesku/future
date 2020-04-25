@@ -15,10 +15,8 @@ export function Clock() {
                         Current Date
                     </legend>
                     <div class="field-row" style="justify-content: space-evenly;">
-                        <div
-                            id="clock-current-date"
-                            style="width: 200px; text-align: center;"
-                        ></div>
+                        <div id="clock-current-year" style="width: 50px; text-align: center;"></div>
+                        <div id="clock-current-day" style="width: 150px; text-align: center;"></div>
                         <div id="clock-current-time" style="width: 50px; text-align: center;"></div>
                     </div>
                 </fieldset>
@@ -27,7 +25,8 @@ export function Clock() {
                         Goal Date
                     </legend>
                     <div class="field-row" style="justify-content: space-evenly;">
-                        <div id="clock-future-date" style="width: 200px; text-align: center;"></div>
+                        <div id="clock-future-year" style="width: 50px; text-align: center;"></div>
+                        <div id="clock-future-day" style="width: 150px; text-align: center;"></div>
                         <div id="clock-future-time" style="width: 50px; text-align: center;"></div>
                     </div>
                 </fieldset>

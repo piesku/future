@@ -28,15 +28,18 @@ export function human_time_short(time: number) {
     return `${ht.Years}y${ht.Days}d${ht.Hours}h${ht.Minutes}m${ht.Seconds}s`;
 }
 
-export const df = new Intl.DateTimeFormat("en-US", {
+export const year_f = new Intl.DateTimeFormat("en-US", {
     era: "short",
     year: "numeric",
+});
+
+export const day_f = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     weekday: "long",
 });
 
-export const tf = new Intl.DateTimeFormat("en-US", {
+export const time_f = new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",

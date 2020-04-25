@@ -9,7 +9,7 @@ export function human_time_long(time: number) {
     let hours = Math.floor((time % DAY) / HOUR).toString();
     let days = Math.floor((time % YEAR) / DAY).toString();
     let years = Math.floor(time / YEAR).toString();
-    return `${years}&nbsp;years<br>${days}&nbsp;days<br>${hours}&nbsp;hours<br>${minutes}&nbsp;minutes<br>${seconds}&nbsp;seconds`;
+    return `years:&nbsp;${years}<br>days:&nbsp;${days}<br>hours:&nbsp;${hours}<br>minutes:&nbsp;${minutes}<br>seconds:&nbsp;${seconds}`;
 }
 
 export function human_time_short(time: number) {

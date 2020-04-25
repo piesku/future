@@ -89,14 +89,7 @@ export class Game {
         });
         this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
 
-        window.addEventListener("unload", () => {
-            let payload = JSON.stringify({
-                Timestamp: Date.now(),
-                TimeEarned: this.TimeEarned,
-                Generators: this.Generators,
-            });
-            localStorage.setItem(SAVE_KEY, payload);
-        });
+        window.addEventListener("unload", () => game_save(this));
 
         let saved = localStorage.getItem(SAVE_KEY);
         if (saved) {
@@ -132,4 +125,13 @@ export class Game {
 
         sys_framerate(this, delta, performance.now() - now);
     }
+}
+
+export function game_save(game: Game) {
+    let payload = JSON.stringify({
+        Timestamp: Date.now(),
+        TimeEarned: game.TimeEarned,
+        Generators: game.Generators,
+    });
+    localStorage.setItem(SAVE_KEY, payload);
 }

@@ -1,5 +1,5 @@
 import {GENERATORS} from "./config.js";
-import {Game} from "./game.js";
+import {Game, game_save} from "./game.js";
 import {total_cost} from "./generator.js";
 
 export const enum Action {
@@ -44,6 +44,8 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                 if (next && !next.Unlocked) {
                     next.Unlocked = true;
                 }
+
+                game_save(game);
             }
             break;
         }

@@ -20,19 +20,24 @@ export function Idle(game: Game) {
                 </div>
             </div>
             <div class="window-body">
-                <p>Current time: <span id="time" /></p>
-                <p>Current <abbr title="time per second">tps</abbr>: ${human_time_short(tps)}</p>
+                <fieldset class="field-row">
+                    <legend>
+                        Time Earned
+                    </legend>
+                    <div class="field-row">
+                        <span id="time" />
+                    </div>
+                </fieldset>
+                <fieldset class="field-row">
+                    <legend>
+                        Time per Second
+                    </legend>
+                    <div class="field-row">
+                        ${human_time_short(tps)}
+                    </div>
+                </fieldset>
             </div>
         </div>
-        <div class="window" style="margin: 32px; width: 250px">
-            <div class="title-bar">
-                <div class="title-bar-text">
-                    Generators
-                </div>
-            </div>
-            <div class="window-body">
-                ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
-            </div>
-        </div>
+        ${game.Generators.map((gen, idx) => Generator(game, tps, gen, idx))}
     `;
 }

@@ -18,48 +18,54 @@ export function Generator(game: Game, total_income: number, gen: GeneratorState,
     let progress = mult_progress(gen.Config, gen.Count);
 
     return html`
-        <fieldset>
-            <legend>
-                ${gen.Config.Kind.toUpperCase()}${index}
-            </legend>
-
-            <div class="field-row">
-                <div style="flex: 1">${gen.Count}</div>
-            </div>
-
-            <div class="field-row">
-                ${gen.Config.Kind === "auto"
-                    ? `tps: ${human_time_short(current_income)} (${percent.format(share)})`
-                    : `tps: ${human_time_short(current_income)}`}
-            </div>
-
-            <div class="field-row">
-                <button
-                    style="width: 100%; height: 30px;"
-                    onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, ${index});"
-                    ${disabled}
-                >
-                    Buy ${buy_count} for ${human_time_short(cost)}
-                </button>
-            </div>
-
-            <div class="field-row">
-                (tps after: ${human_time_short(next_income)})
-            </div>
-
-            ${progress &&
-            html`
-                <div class="field-row" style="display: flex; padding: 2px 0;">
-                    <progress
-                        style="flex: 3; margin: 0;"
-                        value="${progress.Value}"
-                        max="${progress.Target}"
-                    >
-                        ${progress.Value / progress.Target}
-                    </progress>
-                    <div style="flex: 1">+${percent.format(progress.Multiplier - 1)}</div>
+        <div class="window" style="margin: 32px; width: 250px">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    ${gen.Config.Kind.toUpperCase()}${index}
                 </div>
-            `}
-        </fieldset>
+            </div>
+            <div class="window-body">
+                <div class="field-row">
+                    <div style="flex: 1">${gen.Count}</div>
+                </div>
+
+                <div class="field-row">
+                    ${gen.Config.Kind === "auto"
+                        ? `tps: ${human_time_short(current_income)} (${percent.format(share)})`
+                        : `tps: ${human_time_short(current_income)}`}
+                </div>
+                <div class="field-row">
+                    (tps after: ${human_time_short(next_income)})
+                </div>
+
+                <div class="field-row" style="justify-content: center;">
+                    <button
+                        onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, ${index});"
+                        ${disabled}
+                    >
+                        Buy ${buy_count} for ${human_time_short(cost)}
+                    </button>
+                </div>
+
+                ${progress &&
+                html`
+                    <fieldset class="field-row">
+                        <legend>
+                            Next Bonus: +${percent.format(progress.Multiplier - 1)}
+                        </legend>
+
+                        <div class="field-row">
+                            <progress
+                                style="width: 100%"
+                                value="${progress.Value}"
+                                max="${progress.Target}"
+                            >
+                                ${progress.Value / progress.Target}
+                            </progress>
+                        </div>
+                    </fieldset>
+                `}
+            </div>
+        </div>
     `;
 }

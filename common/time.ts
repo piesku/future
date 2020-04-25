@@ -5,11 +5,11 @@ const YEAR = DAY * 365;
 
 export function human_time(time: number) {
     return {
-        Seconds: Math.floor(time % MINUTE).toString(),
-        Minutes: Math.floor((time % HOUR) / MINUTE).toString(),
-        Hours: Math.floor((time % DAY) / HOUR).toString(),
-        Days: Math.floor((time % YEAR) / DAY).toString(),
-        Years: Math.floor(time / YEAR).toString(),
+        Seconds: Math.floor(time % MINUTE),
+        Minutes: Math.floor((time % HOUR) / MINUTE),
+        Hours: Math.floor((time % DAY) / HOUR),
+        Days: Math.floor((time % YEAR) / DAY),
+        Years: Math.floor(time / YEAR),
     };
 }
 
@@ -25,7 +25,10 @@ export function human_time_long(time: number) {
 
 export function human_time_short(time: number) {
     let ht = human_time(time);
-    return `${ht.Years}y${ht.Days}d${ht.Hours}h${ht.Minutes}m${ht.Seconds}s`;
+    if (ht.Years > 0) return `${ht.Years}y${ht.Days}d`;
+    if (ht.Days > 0) return `${ht.Days}y${ht.Hours}h`;
+    if (ht.Hours > 0) return `${ht.Hours}h${ht.Minutes}m`;
+    return `${ht.Minutes}m${ht.Seconds}s`;
 }
 
 export const year_f = new Intl.DateTimeFormat("en-US", {

@@ -14,7 +14,7 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
     let progress = mult_progress(gen, own.Count);
 
     return html`
-        <div class="window" style="margin: 32px; width: 300px;">
+        <div class="window" style="margin: 32px; width: 250px;">
             <div class="title-bar">
                 <div class="title-bar-text">
                     ${gen.Name}

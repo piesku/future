@@ -55,12 +55,12 @@ export function scene_stage(game: Game) {
     let era_end = 0;
 
     for (let e = 0; e < eras_count; e++) {
-        let buildings_count = 1; //integer(10, 20);
+        let buildings_count = integer(10, 20);
         let buildings = [];
         let color_index = e % building_color_functions.length;
         era_end = 0;
         for (let i = 0; i < buildings_count; i++) {
-            let start_time = last_era_end_time; // + i * integer(1, 3) * 60;
+            let start_time = last_era_end_time + i * integer(1, 3) * 60;
             let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((e + 1) * 2);
             era_end = Math.max(era_end, end_time);
             buildings.push(
@@ -70,7 +70,7 @@ export function scene_stage(game: Game) {
                     integer(-4, 3),
                     start_time,
                     end_time,
-                    building_color_functions[color_index]
+                    game.Textures.stone
                 )
             );
         }

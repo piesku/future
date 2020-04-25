@@ -1,6 +1,6 @@
-import {Vec3, Vec4} from "../../common/math.js";
+import {Vec3} from "../../common/math.js";
 import {integer} from "../../common/random.js";
-import {render_diffuse} from "../components/com_render_diffuse.js";
+import {render_textured} from "../components/com_render_textured.js";
 import {time_control} from "../components/com_time_control.js";
 import {Blueprint} from "../core.js";
 import {Game} from "../game.js";
@@ -11,12 +11,13 @@ export function blueprint_building(
     y: number,
     start: number,
     finish: number,
-    color: () => Vec4
+    texture: WebGLTexture
 ) {
     let Children: Blueprint[] = [];
-    let segments = integer(2, 5);
+    let segments = integer(4, 6);
 
     let segment_time = (finish - start) / segments;
+    let face_segment = segments - 2;
 
     for (let i = 0; i < segments; i++) {
         Children.push({
@@ -24,7 +25,11 @@ export function blueprint_building(
             // Translation: [0, i, 0],
             Translation: [0, -1, 0],
             Using: [
-                render_diffuse(game.MaterialDiffuseGouraud, game.MeshCube, color()),
+                render_textured(
+                    game.MaterialTextured,
+                    game.MeshCube,
+                    face_segment == i ? game.Textures.stone2 : texture
+                ),
                 time_control([
                     {
                         StartTime: start,

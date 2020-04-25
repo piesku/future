@@ -1,7 +1,7 @@
 import {html} from "../../common/html.js";
 import {human_time_short} from "../../common/time.js";
 import {Game} from "../game.js";
-import {income} from "../generator.js";
+import {income, mult_current} from "../generator.js";
 
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 
@@ -38,6 +38,7 @@ export function Statistics(game: Game) {
                                     `
                                         <li>Share of Total: ${percent.format(share)}
                                     `}
+                                    <li>Multiplier: ${mult_current(gen.Config, gen.Count)}x</li>
                                     <li>Next Income: ${human_time_short(next_income)}</li>
                                 </ul>
                             </li>

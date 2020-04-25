@@ -27,3 +27,18 @@ export function human_time_short(time: number) {
     let ht = human_time(time);
     return `${ht.Years}y${ht.Days}d${ht.Hours}h${ht.Minutes}m${ht.Seconds}s`;
 }
+
+export const df = new Intl.DateTimeFormat("en-US", {
+    era: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+});
+
+export const tf = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: false,
+});

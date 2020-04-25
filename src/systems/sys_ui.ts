@@ -1,4 +1,4 @@
-import {human_time_long} from "../../common/time.js";
+import {df, human_time_long, tf} from "../../common/time.js";
 import {Game} from "../game.js";
 import {App} from "../ui/App.js";
 
@@ -16,5 +16,28 @@ export function sys_ui(game: Game, delta: number) {
     let clock = document.getElementById("time");
     if (clock) {
         clock.innerHTML = human_time_long(game.TimeEarned);
+    }
+
+    {
+        let current = game.TimeEarned * 1000 + game.TimeStart;
+        let date = document.getElementById("clock-current-date");
+        if (date) {
+            date.textContent = df.format(current);
+        }
+        let time = document.getElementById("clock-current-time");
+        if (time) {
+            time.textContent = tf.format(current);
+        }
+    }
+
+    {
+        let date = document.getElementById("clock-future-date");
+        if (date) {
+            date.textContent = df.format(game.TimeGoal);
+        }
+        let time = document.getElementById("clock-future-time");
+        if (time) {
+            time.textContent = tf.format(game.TimeGoal);
+        }
     }
 }

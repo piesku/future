@@ -10,7 +10,7 @@ export function Idle(game: Game) {
     return html`
         <div style="display: flex; justify-content: space-between;">
             <div>
-                ${Clock(game)}
+                ${Clock()}
                 ${game.Generators.map((gen, idx) => {
                     if (gen.Unlocked) {
                         return Generator(game, gen, idx);

@@ -1,23 +1,6 @@
 import {html} from "../../common/html.js";
-import {Game} from "../game.js";
 
-let df = new Intl.DateTimeFormat("en-US", {
-    era: "short",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-});
-
-let tf = new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: false,
-});
-
-export function Clock(game: Game) {
-    let time = game.TimeEarned * 1000 + game.TimeStart;
+export function Clock() {
     return html`
         <div class="window" style="margin: 32px; width: 300px">
             <div class="title-bar">
@@ -32,12 +15,11 @@ export function Clock(game: Game) {
                         Current Date
                     </legend>
                     <div class="field-row" style="justify-content: space-evenly;">
-                        <div style="width: 150px; text-align: center;">
-                            ${df.format(time)}
-                        </div>
-                        <div style="width: 50px; text-align: center;">
-                            ${tf.format(time)}
-                        </div>
+                        <div
+                            id="clock-current-date"
+                            style="width: 200px; text-align: center;"
+                        ></div>
+                        <div id="clock-current-time" style="width: 50px; text-align: center;"></div>
                     </div>
                 </fieldset>
                 <fieldset class="field-row">
@@ -45,12 +27,8 @@ export function Clock(game: Game) {
                         Goal Date
                     </legend>
                     <div class="field-row" style="justify-content: space-evenly;">
-                        <div>
-                            ${df.format(game.TimeGoal)}
-                        </div>
-                        <div>
-                            ${tf.format(game.TimeGoal)}
-                        </div>
+                        <div id="clock-future-date" style="width: 200px; text-align: center;"></div>
+                        <div id="clock-future-time" style="width: 50px; text-align: center;"></div>
                     </div>
                 </fieldset>
             </div>

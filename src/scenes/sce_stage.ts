@@ -49,7 +49,7 @@ export function scene_stage(game: Game) {
         Using: [light_directional([1, 1, 1], 1)],
     });
 
-    let eras_count = 5;
+    let eras_count = 2;
     let eras_transition_times = [];
     let last_era_end_time = 0;
     let era_end = 0;
@@ -64,14 +64,7 @@ export function scene_stage(game: Game) {
             let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((e + 1) * 2);
             era_end = Math.max(era_end, end_time);
             buildings.push(
-                blueprint_building(
-                    game,
-                    integer(-4, 3),
-                    integer(-4, 3),
-                    start_time,
-                    end_time,
-                    game.Textures.stone
-                )
+                blueprint_building(game, integer(-4, 3), integer(-4, 3), start_time, end_time)
             );
         }
 
@@ -90,7 +83,7 @@ export function scene_stage(game: Game) {
             Children: [
                 {
                     Translation: [0, -3, 0],
-                    ...blueprint_ground(game, 8, game.Textures.grass),
+                    ...blueprint_ground(game, 8, e),
                 },
                 ...buildings,
             ],

@@ -61,10 +61,10 @@ export function scene_stage(game: Game) {
         era_end = 0;
         for (let i = 0; i < buildings_count; i++) {
             let start_time = last_era_end_time + i * integer(1, 3) * 60;
-            let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((e + 1) * 2);
+            let end_time = start_time + (i ? i : 0.5) * integer(3600, 12000) * ((e + 1) * 2);
             era_end = Math.max(era_end, end_time);
             buildings.push(
-                blueprint_building(game, integer(-4, 3), integer(-4, 3), start_time, end_time)
+                blueprint_building(game, integer(-4, 3), integer(-4, 3), start_time, end_time, e)
             );
         }
 

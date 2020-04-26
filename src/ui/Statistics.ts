@@ -45,13 +45,16 @@ export function Statistics(game: Game) {
                                     ${gen.Name}
                                     <ul>
                                         <li>Count: ${own.Count}</li>
-                                        <li>
-                                            Time per second: ${human_time_short(current_income)}
-                                        </li>
-                                        ${gen.Kind === "auto" &&
-                                        `
-                                        <li>Share of Total: ${percent.format(share)}
-                                    `}
+                                        ${gen.Kind === "auto"
+                                            ? `<li>Time per second: ${human_time_short(
+                                                  current_income
+                                              )}</li>
+                                                <li>Share of Total: ${percent.format(share)}</li>
+                                            `
+                                            : `<li>Time per click: ${human_time_short(
+                                                  current_income
+                                              )}</li>
+                                            `}
                                         <li>
                                             Multiplier:
                                             ${multiplier.format(mult_current(gen, own.Count))}x

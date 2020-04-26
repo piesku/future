@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <meta charset="utf8" />
 <meta name="viewport" content="width=device-width, user-scalable=0" />
-<title>GoodLuck (opt)</title>
+<title>⏰ Time Is Money™ 1.0</title>
+<link rel="stylesheet" href="../node_modules/98.css/dist/98.css" />
 <style>
     html,
     body {
-        overflow: hidden;
         margin: 0;
     }
     canvas,
@@ -14,9 +14,24 @@
         width: 100vw;
         height: 100vh;
         user-select: none;
+        overflow: auto;
+    }
+
+    progress[value] {
+        background-color: #fff;
+        border: 1px inset #dfdfdf;
+        width: 100%;
+        height: 15px;
+    }
+
+    progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: #00007f;
     }
 </style>
 <canvas id="scene"></canvas>
-<canvas id="billboard"></canvas>
 <main></main>
 <script src="game.terser.js"></script>

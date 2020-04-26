@@ -26,7 +26,7 @@ export function human_time_long(time: number) {
 export function human_time_short(time: number) {
     let ht = human_time(time);
     if (ht.Years > 0) return `${ht.Years}y${ht.Days}d`;
-    if (ht.Days > 0) return `${ht.Days}y${ht.Hours}h`;
+    if (ht.Days > 0) return `${ht.Days}d${ht.Hours}h`;
     if (ht.Hours > 0) return `${ht.Hours}h${ht.Minutes}m`;
     return `${ht.Minutes}m${ht.Seconds}s`;
 }

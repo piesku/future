@@ -3,8 +3,9 @@ import {Game} from "../game.js";
 import {prehistory_ground} from "./eras/0_prehistory.js";
 import {ancient_ground} from "./eras/1_ancient.js";
 import {medieval_ground} from "./eras/2_medieval.js";
+import {renaissance_ground} from "./eras/3_renaissance.js";
 
-const grounds_by_era = [prehistory_ground, ancient_ground, medieval_ground];
+const grounds_by_era = [prehistory_ground, ancient_ground, medieval_ground, renaissance_ground];
 
 export function blueprint_ground(game: Game, size: number, era: number) {
     let Children: Blueprint[] = [];

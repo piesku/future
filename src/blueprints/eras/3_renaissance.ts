@@ -6,12 +6,12 @@ import {time_control} from "../../components/com_time_control.js";
 import {Blueprint} from "../../core.js";
 import {Game} from "../../game.js";
 
-export const medieval_ground = (game: Game, x: number, y: number): Blueprint => ({
+export const renaissance_ground = (game: Game, x: number, y: number): Blueprint => ({
     Translation: [x, 0, y],
-    Using: [render_textured(game.MaterialTextured, game.MeshCube, game.Textures.stone3)],
+    Using: [render_textured(game.MaterialTextured, game.MeshCube, game.Textures.castle_floor)],
 });
 
-export let medieval_structure = (
+export let renaissance_structure = (
     game: Game,
     start_time: number,
     end_time: number
@@ -22,13 +22,7 @@ export let medieval_structure = (
     let segment_time = (end_time - start_time) / segments;
 
     for (let i = 0; i < segments; i++) {
-        let texture;
-
-        if (i === 0) {
-            texture = game.Textures.house1;
-        } else {
-            texture = game.Textures.house2;
-        }
+        let texture = element([game.Textures.castle1, game.Textures.castle2]);
         Children.push({
             Translation: [0, -1, 0],
             Rotation: from_euler([0, 0, 0, 1], 0, element([0, 90, 180]), 0),

@@ -14,6 +14,9 @@ let textures = [
     "column3",
     "house1",
     "house2",
+    "castle1",
+    "castle2",
+    "castle_floor",
 ];
 
 let game = new Game();

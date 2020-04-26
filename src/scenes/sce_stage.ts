@@ -76,10 +76,14 @@ export function scene_stage(game: Game) {
                     y,
                 });
 
+                // XXX: HERE
                 let start_time = last_world_end_time + i * integer(1, 3) * 60;
                 let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((world + 1) * 2);
+
                 world_end = Math.max(world_end, end_time);
-                buildings.push(blueprint_structure(game, x, y, start_time, end_time, era));
+                buildings.push(
+                    blueprint_structure(game, x, y, start_time, last_world_end_time + end_time, era)
+                );
             }
 
             instantiate(game, {

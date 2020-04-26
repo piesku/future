@@ -5,6 +5,7 @@ import {ancient_ground} from "./eras/1_ancient.js";
 import {medieval_ground} from "./eras/2_medieval.js";
 import {renaissance_ground} from "./eras/3_renaissance.js";
 import {industrial_ground} from "./eras/4_industrial.js";
+import {modern_ground} from "./eras/modern.js";
 
 const grounds_by_era = [
     prehistory_ground,
@@ -12,6 +13,7 @@ const grounds_by_era = [
     medieval_ground,
     renaissance_ground,
     industrial_ground,
+    modern_ground,
 ];
 
 export function blueprint_ground(game: Game, size: number, era: number) {

@@ -5,6 +5,7 @@ import {ancient_structure} from "./eras/1_ancient.js";
 import {medieval_structure} from "./eras/2_medieval.js";
 import {renaissance_structure} from "./eras/3_renaissance.js";
 import {industrial_structure} from "./eras/4_industrial.js";
+import {modern_structure} from "./eras/modern.js";
 
 let structures_by_era = [
     prehistory_structure,
@@ -12,6 +13,7 @@ let structures_by_era = [
     medieval_structure,
     renaissance_structure,
     industrial_structure,
+    modern_structure,
 ];
 
 export function blueprint_structure(

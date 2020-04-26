@@ -4,6 +4,7 @@ import {total_cost} from "./generator.js";
 
 export const enum Action {
     PurchaseGenerator,
+    AcceptFirstRun,
     AcceptOfflineProgress,
 }
 
@@ -47,6 +48,11 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
 
                 game_save(game);
             }
+            break;
+        }
+        case Action.AcceptFirstRun: {
+            game.FirstRun = false;
+            game_save(game);
             break;
         }
         case Action.AcceptOfflineProgress: {

@@ -19,6 +19,7 @@ const SAVE_KEY = "com.piesku.future.save";
 export type Entity = number;
 
 export class Game {
+    FirstRun = true;
     Rewinding = false;
     TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
     TimeGoal = Date.now() + 1000;
@@ -95,6 +96,7 @@ export class Game {
         let saved = localStorage.getItem(SAVE_KEY);
         if (saved) {
             let payload = JSON.parse(saved);
+            this.FirstRun = payload.FirstRun;
             this.TimeEarned = payload.TimeEarned;
             this.Generators = payload.Generators;
 
@@ -132,6 +134,7 @@ export class Game {
 export function game_save(game: Game) {
     let payload = JSON.stringify({
         Timestamp: Date.now(),
+        FirstRun: game.FirstRun,
         TimeEarned: game.TimeEarned,
         Generators: game.Generators,
     });

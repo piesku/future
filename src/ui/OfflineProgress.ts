@@ -12,7 +12,7 @@ export function OfflineProgress(game: Game) {
         >
             <div class="title-bar">
                 <div class="title-bar-text">
-                    Offline Progress
+                    💡 Offline Progress
                 </div>
             </div>
             <div class="window-body">

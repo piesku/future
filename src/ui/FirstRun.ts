@@ -11,7 +11,7 @@ export function FirstRun(game: Game) {
         >
             <div class="title-bar">
                 <div class="title-bar-text">
-                    Time Is Money™ 1.0
+                    ⏰ Time Is Money™ 1.0
                 </div>
             </div>
             <div class="window-body">

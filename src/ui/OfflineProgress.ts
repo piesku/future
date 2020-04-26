@@ -4,7 +4,7 @@ import {Action} from "../actions.js";
 import {Game} from "../game.js";
 
 export function OfflineProgress(game: Game) {
-    let time = human_time(game.TimeOffline);
+    let time = human_time(game.TimeEarnedOffline);
     return html`
         <div
             class="window"

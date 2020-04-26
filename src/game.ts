@@ -24,7 +24,7 @@ export class Game {
     TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
     TimeGoal = Date.now() + 1000;
     TimeEarned = 0;
-    TimeOffline = 0;
+    TimeEarnedOffline = 0;
     Generators: Array<GeneratorState> = [
         {
             Id: 0,
@@ -100,8 +100,10 @@ export class Game {
             this.TimeEarned = payload.TimeEarned;
             this.Generators = payload.Generators;
 
-            sys_earn(this, (Date.now() - payload.Timestamp) / 1000);
-            this.TimeOffline = this.TimeEarned - payload.TimeEarned;
+            // Scale the delta down with a sqrt.
+            let delta_offline = (Date.now() - payload.Timestamp) / 1000;
+            sys_earn(this, delta_offline ** 0.75);
+            this.TimeEarnedOffline = this.TimeEarned - payload.TimeEarned;
         }
 
         this.GL.enable(GL_DEPTH_TEST);

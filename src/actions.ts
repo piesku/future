@@ -56,7 +56,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             break;
         }
         case Action.AcceptOfflineProgress: {
-            game.TimeOffline = 0;
+            game.TimeEarnedOffline = 0;
             break;
         }
     }

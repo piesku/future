@@ -24,6 +24,6 @@ export function Idle(game: Game) {
                 ${Score()} ${Statistics(game)}
             </div>
         </div>
-        ${game.TimeOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
+        ${game.TimeEarnedOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
     `;
 }

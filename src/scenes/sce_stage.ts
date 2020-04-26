@@ -49,7 +49,7 @@ export function scene_stage(game: Game) {
         Using: [light_directional([1, 1, 1], 1)],
     });
 
-    let eras_count = 4;
+    let eras_count = 5;
     let worlds_per_era = 3;
     let world_transition_times = [];
     let last_world_end_time = 0;
@@ -75,6 +75,7 @@ export function scene_stage(game: Game) {
                     x,
                     y,
                 });
+
                 let start_time = last_world_end_time + i * integer(1, 3) * 60;
                 let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((world + 1) * 2);
                 world_end = Math.max(world_end, end_time);

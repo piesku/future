@@ -4,12 +4,14 @@ import {prehistory_structure} from "./eras/0_prehistory.js";
 import {ancient_structure} from "./eras/1_ancient.js";
 import {medieval_structure} from "./eras/2_medieval.js";
 import {renaissance_structure} from "./eras/3_renaissance.js";
+import {industrial_structure} from "./eras/4_industrial.js";
 
 let structures_by_era = [
     prehistory_structure,
     ancient_structure,
     medieval_structure,
     renaissance_structure,
+    industrial_structure,
 ];
 
 export function blueprint_structure(

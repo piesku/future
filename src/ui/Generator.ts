@@ -49,11 +49,7 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
                         </legend>
 
                         <div class="field-row">
-                            <progress
-                                style="width: 100%"
-                                value="${progress.Value}"
-                                max="${progress.Target}"
-                            >
+                            <progress value="${progress.Value}" max="${progress.Target}">
                                 ${progress.Value / progress.Target}
                             </progress>
                         </div>

@@ -43,6 +43,21 @@
         background: #000;
         color: #fff;
     }
+
+    progress[value] {
+        background-color: #fff;
+        border: 1px inset #dfdfdf;
+        width: 100%;
+        height: 15px;
+    }
+
+    progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: #00007f;
+    }
 </style>
 <body>
     <canvas></canvas>

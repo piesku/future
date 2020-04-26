@@ -96,9 +96,6 @@ export class Game {
             this.InputState[`Mouse${evt.button}`] = 0;
             this.InputDelta[`Mouse${evt.button}`] = -1;
         });
-        this.UI.addEventListener("contextmenu", (evt) => evt.preventDefault());
-
-        // window.addEventListener("unload", () => game_save(this));
 
         let saved = localStorage.getItem(SAVE_KEY);
         if (saved) {

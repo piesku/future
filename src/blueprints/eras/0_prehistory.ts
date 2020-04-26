@@ -1,6 +1,6 @@
 import {Vec3} from "../../../common/math.js";
 import {from_euler} from "../../../common/quat.js";
-import {element, float, integer} from "../../../common/random.js";
+import {element, integer} from "../../../common/random.js";
 import {render_textured} from "../../components/com_render_textured.js";
 import {time_control} from "../../components/com_time_control.js";
 import {Blueprint} from "../../core.js";
@@ -28,7 +28,7 @@ export let prehistory_structure = (
     let segment_time = (end_time - start_time) / segments;
 
     for (let i = 0; i < segments; i++) {
-        let is_special = !has_special && segments >= 5 && i === segments - 2 && float() > 0.5;
+        let is_special = !has_special && segments >= 5 && i === segments - 2;
         if (is_special) {
             has_special = true;
         }

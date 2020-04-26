@@ -1,9 +1,9 @@
 import {Vec3, Vec4} from "../../common/math.js";
 import {float, integer} from "../../common/random.js";
 import {human_time_short} from "../../common/time.js";
-import {blueprint_structure} from "../blueprints/blu_building.js";
 import {blueprint_camera, levels_space} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
+import {blueprint_structure} from "../blueprints/blu_structure.js";
 import {light_directional} from "../components/com_light.js";
 import {time_control} from "../components/com_time_control.js";
 import {instantiate} from "../core.js";
@@ -55,17 +55,29 @@ export function scene_stage(game: Game) {
     let era_end = 0;
 
     for (let e = 0; e < eras_count; e++) {
-        let buildings_count = integer(10, 20);
+        let taken_fields: Array<{x: number; y: number}> = [];
+
+        let buildings_count = integer(10, 30);
         let buildings = [];
-        let color_index = e % building_color_functions.length;
         era_end = 0;
         for (let i = 0; i < buildings_count; i++) {
+            let x = integer(-4, 3);
+            let y = integer(-4, 3);
+
+            while (taken_fields.some((point) => point.x === x && point.y === y)) {
+                x = integer(-4, 3);
+                y = integer(-4, 3);
+                console.log("YES!");
+            }
+
+            taken_fields.push({
+                x,
+                y,
+            });
             let start_time = last_era_end_time + i * integer(1, 3) * 60;
             let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((e + 1) * 2);
             era_end = Math.max(era_end, end_time);
-            buildings.push(
-                blueprint_structure(game, integer(-4, 3), integer(-4, 3), start_time, end_time, e)
-            );
+            buildings.push(blueprint_structure(game, x, y, start_time, end_time, e));
         }
 
         instantiate(game, {
@@ -91,7 +103,7 @@ export function scene_stage(game: Game) {
 
         // era_end *= 1.05;
         last_era_end_time += era_end;
-        console.log(human_time_short(last_era_end_time));
+        console.log(human_time_short(last_era_end_time), {buildings_count});
         eras_transition_times.push(last_era_end_time);
     }
 

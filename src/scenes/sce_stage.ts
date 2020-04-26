@@ -1,7 +1,7 @@
 import {Vec3, Vec4} from "../../common/math.js";
 import {float, integer} from "../../common/random.js";
 import {human_time_short} from "../../common/time.js";
-import {blueprint_building} from "../blueprints/blu_building.js";
+import {blueprint_structure} from "../blueprints/blu_building.js";
 import {blueprint_camera, levels_space} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
 import {light_directional} from "../components/com_light.js";
@@ -49,7 +49,7 @@ export function scene_stage(game: Game) {
         Using: [light_directional([1, 1, 1], 1)],
     });
 
-    let eras_count = 2;
+    let eras_count = 3;
     let eras_transition_times = [];
     let last_era_end_time = 0;
     let era_end = 0;
@@ -61,10 +61,10 @@ export function scene_stage(game: Game) {
         era_end = 0;
         for (let i = 0; i < buildings_count; i++) {
             let start_time = last_era_end_time + i * integer(1, 3) * 60;
-            let end_time = start_time + (i ? i : 0.5) * integer(3600, 12000) * ((e + 1) * 2);
+            let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((e + 1) * 2);
             era_end = Math.max(era_end, end_time);
             buildings.push(
-                blueprint_building(game, integer(-4, 3), integer(-4, 3), start_time, end_time, e)
+                blueprint_structure(game, integer(-4, 3), integer(-4, 3), start_time, end_time, e)
             );
         }
 

@@ -3,7 +3,18 @@ import {load_texture, loop_start} from "./core.js";
 import {Game} from "./game.js";
 import {scene_stage} from "./scenes/sce_stage.js";
 
-let textures = ["grass", "stone", "stone2", "sandstone", "column1", "column2", "column3"];
+let textures = [
+    "grass",
+    "stone",
+    "stone2",
+    "stone3",
+    "sandstone",
+    "column1",
+    "column2",
+    "column3",
+    "house1",
+    "house2",
+];
 
 let game = new Game();
 // @ts-ignore

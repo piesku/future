@@ -2,9 +2,11 @@ import {Blueprint} from "../core.js";
 import {Game} from "../game.js";
 import {prehistory_structure} from "./eras/0_prehistory.js";
 import {ancient_structure} from "./eras/1_ancient.js";
+import {medieval_structure} from "./eras/2_medieval.js";
 
-let structures_by_era = [prehistory_structure, ancient_structure];
-export function blueprint_building(
+let structures_by_era = [prehistory_structure, ancient_structure, medieval_structure];
+
+export function blueprint_structure(
     game: Game,
     x: number,
     y: number,

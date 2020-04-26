@@ -50,80 +50,73 @@ export function scene_stage(game: Game) {
     });
 
     let eras_count = 6;
-    let worlds_per_era = 3;
+    let worlds_per_era = 20;
     let world_transition_times = [];
     let last_world_end_time = 0;
     let world_end = 0;
+    let era = game.EraCurrent;
 
-    for (let era = 0; era < eras_count; era++) {
-        for (let world = 0; world < worlds_per_era; world++) {
-            let taken_fields: Array<{x: number; y: number}> = [];
+    // for (let era = 0; era < eras_count; era++) {
+    for (let world = 0; world < worlds_per_era; world++) {
+        let taken_fields: Array<{x: number; y: number}> = [];
 
-            let buildings_count = integer(8, 20);
-            let buildings = [];
-            world_end = 0;
-            for (let i = 0; i < buildings_count; i++) {
-                let x = integer(-4, 3);
-                let y = integer(-4, 3);
+        let buildings_count = integer(8, 20);
+        let buildings = [];
+        world_end = 0;
+        for (let i = 0; i < buildings_count; i++) {
+            let x = integer(-4, 3);
+            let y = integer(-4, 3);
 
-                while (taken_fields.some((point) => point.x === x && point.y === y)) {
-                    x = integer(-4, 3);
-                    y = integer(-4, 3);
-                }
-
-                taken_fields.push({
-                    x,
-                    y,
-                });
-
-                // XXX: HERE
-                let start_time = last_world_end_time + i * integer(1, 3) * 60;
-                let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((world + 1) * 2);
-
-                world_end = Math.max(world_end, end_time);
-                buildings.push(
-                    blueprint_structure(game, x, y, start_time, last_world_end_time + end_time, era)
-                );
+            while (taken_fields.some((point) => point.x === x && point.y === y)) {
+                x = integer(-4, 3);
+                y = integer(-4, 3);
             }
 
-            instantiate(game, {
-                Translation: [(era * worlds_per_era + world) * levels_space + 20, 0, 0],
-                Using: [
-                    time_control([
-                        {
-                            StartTime: last_world_end_time - 100,
-                            FinishTime: last_world_end_time,
-                            StartPosition: [
-                                (era * worlds_per_era + world) * levels_space + 20,
-                                0,
-                                0,
-                            ] as Vec3,
-                            TargetPosition: [
-                                (era * worlds_per_era + world) * levels_space,
-                                0,
-                                0,
-                            ] as Vec3,
-                        },
-                    ]),
-                ],
-                Children: [
-                    {
-                        Translation: [0, -3, 0],
-                        ...blueprint_ground(game, 8, era),
-                    },
-                    ...buildings,
-                ],
+            taken_fields.push({
+                x,
+                y,
             });
 
-            // era_end *= 1.05;
-            last_world_end_time += world_end;
-            console.log(human_time_short(last_world_end_time), {
-                buildings_count,
-            });
+            // XXX: HERE
+            let start_time = last_world_end_time + i * integer(1, 3) * 60;
+            let end_time = start_time + (i ? i : 0.5) * integer(360, 1200) * ((world + 1) * 2);
 
-            world_transition_times.push(last_world_end_time);
+            world_end = Math.max(world_end, end_time);
+            buildings.push(
+                blueprint_structure(game, x, y, start_time, last_world_end_time + end_time, era)
+            );
         }
+
+        instantiate(game, {
+            Translation: [world * levels_space + 20, 0, 0],
+            Using: [
+                time_control([
+                    {
+                        StartTime: last_world_end_time - 100,
+                        FinishTime: last_world_end_time,
+                        StartPosition: [world * levels_space + 20, 0, 0] as Vec3,
+                        TargetPosition: [world * levels_space, 0, 0] as Vec3,
+                    },
+                ]),
+            ],
+            Children: [
+                {
+                    Translation: [0, -3, 0],
+                    ...blueprint_ground(game, 8, era),
+                },
+                ...buildings,
+            ],
+        });
+
+        // era_end *= 1.05;
+        last_world_end_time += world_end;
+        console.log(human_time_short(last_world_end_time), {
+            buildings_count,
+        });
+
+        world_transition_times.push(last_world_end_time);
     }
+    // }
 
     world_transition_times.pop();
     // Camera.

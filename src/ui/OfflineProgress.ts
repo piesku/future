@@ -22,7 +22,11 @@ export function OfflineProgress(game: Game) {
                     hours, ${time.Minutes} minutes, and ${time.Seconds} seconds have gone by.
                 </p>
                 <div class="field-row" style="justify-content: center">
-                    <button onmouseup="$(${Action.AcceptOfflineProgress});">OK</button>
+                    <button
+                        onmouseup="event.stopPropagation(); $(${Action.AcceptOfflineProgress});"
+                    >
+                        OK
+                    </button>
                 </div>
             </div>
         </div>

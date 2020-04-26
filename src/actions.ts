@@ -1,6 +1,8 @@
+import {play_note} from "../common/audio.js";
 import {GENERATORS} from "./config.js";
 import {Game, game_save} from "./game.js";
 import {total_cost} from "./generator.js";
+import {ins_click} from "./sounds/snd_click.js";
 
 export const enum Action {
     PurchaseGenerator,
@@ -47,6 +49,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                     next.unlocked = true;
                 }
 
+                play_note(game.Audio, ins_click, 84, 0);
                 game_save(game);
             }
             break;

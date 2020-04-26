@@ -74,6 +74,8 @@ export class Game {
     InputDelta: Record<string, number> = {};
 
     UI = document.querySelector("main")!;
+    // @ts-ignore
+    Audio = new (window["AudioContext"] || window.webkitAudioContext)();
 
     Canvas = document.querySelector("canvas")!;
     GL = this.Canvas.getContext("webgl")!;

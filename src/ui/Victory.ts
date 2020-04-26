@@ -18,7 +18,9 @@ export function Victory() {
                     Congratulations, you have reached the future!
                 </p>
                 <div class="field-row" style="justify-content: center">
-                    <button onmouseup="$(${Action.AcceptVictory});">OK</button>
+                    <button onmouseup="event.stopPropagation(); $(${Action.AcceptVictory});">
+                        OK
+                    </button>
                 </div>
             </div>
         </div>

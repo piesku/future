@@ -27,7 +27,9 @@ export function FirstRun(game: Game) {
                 </p>
                 <p>To ${year_f.format(game.TimeGoal)}, and beyond!</p>
                 <div class="field-row" style="justify-content: center">
-                    <button onmouseup="$(${Action.AcceptFirstRun});">OK</button>
+                    <button onmouseup="event.stopPropagation(); $(${Action.AcceptFirstRun});">
+                        OK
+                    </button>
                 </div>
             </div>
         </div>

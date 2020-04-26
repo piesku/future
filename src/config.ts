@@ -132,31 +132,31 @@ export const ERAS: Array<EraConfig> = [
     {
         Id: 1,
         Name: "Classical Era",
-        TpsRequired: 100,
+        TpsRequired: 100000,
         Multiplier: 2,
     },
     {
         Id: 2,
         Name: "Middle Ages",
-        TpsRequired: 20,
+        TpsRequired: 1000000,
         Multiplier: 4,
     },
     {
         Id: 3,
         Name: "Renaissance",
-        TpsRequired: 25,
+        TpsRequired: 10000000,
         Multiplier: 8,
     },
     {
         Id: 4,
         Name: "Industrial Era",
-        TpsRequired: 25,
+        TpsRequired: 100000000,
         Multiplier: 16,
     },
     {
         Id: 5,
         Name: "Information Era",
-        TpsRequired: 25,
+        TpsRequired: 1000000000,
         Multiplier: 32,
     },
 ];

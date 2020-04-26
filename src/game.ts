@@ -23,12 +23,13 @@ export type Entity = number;
 export class Game {
     FirstRun = true;
     HasWon = false;
-    Textures: {[key: string]: WebGLTexture} = {};
+    EraCurrent = 0;
 
     Rewinding = false;
     TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
-    TimeCurrent = Date.now();
+    TimeCurrent = 0;
     TimeGoal = Date.now() + 1000;
+    TpsCurrent = 0;
     TimeEarned = 0;
     TimeEarnedOffline = 0;
     Generators: Array<GeneratorState> = [
@@ -83,6 +84,7 @@ export class Game {
     MaterialTextured = mat_textured(this.GL);
     MaterialDiffuseGouraud = mat_diffuse_gouraud(this.GL);
     MeshCube = mesh_cube(this.GL);
+    Textures: {[key: string]: WebGLTexture} = {};
 
     Camera?: Camera;
     // The rendering pipeline supports 8 lights.
@@ -104,6 +106,7 @@ export class Game {
             let payload: SavedProgress = JSON.parse(saved);
             this.FirstRun = payload.firstRun;
             this.HasWon = payload.hasWon;
+            this.EraCurrent = payload.eraCurrent;
             this.TimeEarned = payload.timeEarned;
             this.Generators = payload.generators;
 
@@ -145,6 +148,7 @@ interface SavedProgress {
     timeSaved: number;
     firstRun: boolean;
     hasWon: boolean;
+    eraCurrent: number;
     timeEarned: number;
     generators: Array<GeneratorState>;
 }
@@ -154,6 +158,7 @@ export function game_save(game: Game) {
         timeSaved: Date.now(),
         firstRun: game.FirstRun,
         hasWon: game.HasWon,
+        eraCurrent: game.EraCurrent,
         timeEarned: game.TimeEarned,
         generators: game.Generators,
     };

@@ -114,3 +114,49 @@ export const GENERATORS: Array<GeneratorConfig> = [
         ],
     },
 ];
+
+export interface EraConfig {
+    Id: number;
+    Name: string;
+    TpsRequired: number;
+    Multiplier: number;
+}
+
+export const ERAS: Array<EraConfig> = [
+    {
+        Id: 0,
+        Name: "Ancient Era",
+        TpsRequired: 0,
+        Multiplier: 1,
+    },
+    {
+        Id: 1,
+        Name: "Classical Era",
+        TpsRequired: 100,
+        Multiplier: 2,
+    },
+    {
+        Id: 2,
+        Name: "Middle Ages",
+        TpsRequired: 20,
+        Multiplier: 4,
+    },
+    {
+        Id: 3,
+        Name: "Renaissance",
+        TpsRequired: 25,
+        Multiplier: 8,
+    },
+    {
+        Id: 4,
+        Name: "Industrial Era",
+        TpsRequired: 25,
+        Multiplier: 16,
+    },
+    {
+        Id: 5,
+        Name: "Information Era",
+        TpsRequired: 25,
+        Multiplier: 32,
+    },
+];

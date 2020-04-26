@@ -1,6 +1,6 @@
 import {html} from "../../common/html.js";
 import {human_time_short} from "../../common/time.js";
-import {GENERATORS} from "../config.js";
+import {ERAS, GENERATORS} from "../config.js";
 import {Game} from "../game.js";
 import {income, mult_current} from "../generator.js";
 
@@ -8,13 +8,7 @@ const percent = new Intl.NumberFormat("en", {style: "percent"});
 const multiplier = new Intl.NumberFormat("en", {maximumFractionDigits: 2});
 
 export function Statistics(game: Game) {
-    let total_income = 0;
-    for (let own of game.Generators) {
-        let gen = GENERATORS[own.id];
-        if (gen.Kind === "auto") {
-            total_income += income(gen, own.count);
-        }
-    }
+    let era = ERAS[game.EraCurrent];
 
     return html`
         <div class="window" style="margin: 16px; width: 250px">
@@ -28,15 +22,16 @@ export function Statistics(game: Game) {
                     <li>
                         Total
                         <ul>
-                            <li>Time per second: ${human_time_short(total_income)}</li>
-                            <li>Seconds per second: ${total_income.toFixed(0)}</li>
+                            <li>Time per second: ${human_time_short(game.TpsCurrent)}</li>
+                            <li>Seconds per second: ${game.TpsCurrent.toFixed(0)}</li>
+                            <li>Era Multiplier : ${multiplier.format(era.Multiplier)}x</li>
                         </ul>
                     </li>
                     ${game.Generators.map((own) => {
                         if (own.count > 0) {
                             let gen = GENERATORS[own.id];
-                            let current_income = income(gen, own.count);
-                            let share = total_income > 0 ? current_income / total_income : 0;
+                            let current_income = income(era, gen, own.count);
+                            let share = game.TpsCurrent > 0 ? current_income / game.TpsCurrent : 0;
 
                             return html`
                                 <li>
@@ -58,10 +53,10 @@ export function Statistics(game: Game) {
                                             ${multiplier.format(mult_current(gen, own.count))}x
                                         </li>
                                         <!-- <li>Income +1: ${human_time_short(
-                                            income(gen, own.count + 1)
+                                            income(era, gen, own.count + 1)
                                         )}</li>
                                             <li>Income +10: ${human_time_short(
-                                            income(gen, own.count + 10)
+                                            income(era, gen, own.count + 10)
                                         )}</li> -->
                                     </ul>
                                 </li>

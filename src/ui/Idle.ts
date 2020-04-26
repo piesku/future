@@ -1,6 +1,7 @@
 import {html} from "../../common/html.js";
 import {Game} from "../game.js";
 import {Clock} from "./Clock.js";
+import {EraProgress} from "./EraProgress.js";
 import {FirstRun} from "./FirstRun.js";
 import {Generator} from "./Generator.js";
 import {OfflineProgress} from "./OfflineProgress.js";
@@ -20,6 +21,9 @@ export function Idle(game: Game) {
                         return null;
                     }
                 })}
+            </div>
+            <div>
+                ${EraProgress(game)}
             </div>
             <div>
                 ${Score()} ${Statistics(game)}

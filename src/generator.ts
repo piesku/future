@@ -1,4 +1,4 @@
-import {GeneratorConfig} from "./config";
+import {EraConfig, GeneratorConfig} from "./config.js";
 
 export interface GeneratorState {
     id: number;
@@ -15,14 +15,14 @@ export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: n
     return gen.StartingCost * gen.CostFactor ** own_count * factor;
 }
 
-export function income(gen: GeneratorConfig, count: number) {
+export function income(era: EraConfig, gen: GeneratorConfig, count: number) {
     let multiplier = mult_current(gen, count);
     let factor =
         gen.Kind === "auto"
             ? count ** gen.IncomeFactor
             : // Click generators increase income exponentially.
               gen.IncomeFactor ** count;
-    return multiplier * gen.BaseIncome * factor;
+    return era.Multiplier * multiplier * gen.BaseIncome * factor;
 }
 
 export function mult_current(gen: GeneratorConfig, count: number) {

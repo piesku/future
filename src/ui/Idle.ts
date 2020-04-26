@@ -6,6 +6,7 @@ import {Generator} from "./Generator.js";
 import {OfflineProgress} from "./OfflineProgress.js";
 import {Score} from "./Score.js";
 import {Statistics} from "./Statistics.js";
+import {Victory} from "./Victory.js";
 
 export function Idle(game: Game) {
     return html`
@@ -25,5 +26,6 @@ export function Idle(game: Game) {
             </div>
         </div>
         ${game.TimeEarnedOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
+        ${!game.HasWon && game.TimeCurrent > game.TimeGoal && Victory()}
     `;
 }

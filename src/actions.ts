@@ -6,6 +6,7 @@ export const enum Action {
     PurchaseGenerator,
     AcceptFirstRun,
     AcceptOfflineProgress,
+    AcceptVictory,
 }
 
 let rewind_keyframes = 10;
@@ -57,6 +58,10 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.AcceptOfflineProgress: {
             game.TimeEarnedOffline = 0;
+            break;
+        }
+        case Action.AcceptVictory: {
+            game.HasWon = true;
             break;
         }
     }

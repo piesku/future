@@ -19,18 +19,17 @@ export function sys_ui(game: Game, delta: number) {
     }
 
     {
-        let current = game.TimeEarned * 1000 + game.TimeStart;
         let year = document.getElementById("clock-current-year");
         if (year) {
-            year.textContent = year_f.format(current);
+            year.textContent = year_f.format(game.TimeCurrent);
         }
         let day = document.getElementById("clock-current-day");
         if (day) {
-            day.textContent = day_f.format(current);
+            day.textContent = day_f.format(game.TimeCurrent);
         }
         let time = document.getElementById("clock-current-time");
         if (time) {
-            time.textContent = time_f.format(current);
+            time.textContent = time_f.format(game.TimeCurrent);
         }
     }
 

@@ -2,7 +2,7 @@ import {html} from "../../common/html.js";
 
 export function Clock() {
     return html`
-        <div class="window" style="margin: 32px; width: 300px">
+        <div class="window" style="margin: 16px; width: 300px">
             <div class="title-bar">
                 <div class="title-bar-text">
                     Clock

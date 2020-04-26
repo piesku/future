@@ -2,7 +2,7 @@ import {html} from "../../common/html.js";
 
 export function Score() {
     return html`
-        <div class="window" style="margin: 32px; width: 250px">
+        <div class="window" style="margin: 16px; width: 250px">
             <div class="title-bar">
                 <div class="title-bar-text">
                     Time Elapsed

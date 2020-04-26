@@ -10,9 +10,9 @@ const multiplier = new Intl.NumberFormat("en", {maximumFractionDigits: 2});
 export function Statistics(game: Game) {
     let total_income = 0;
     for (let own of game.Generators) {
-        let gen = GENERATORS[own.Id];
+        let gen = GENERATORS[own.id];
         if (gen.Kind === "auto") {
-            total_income += income(gen, own.Count);
+            total_income += income(gen, own.count);
         }
     }
 
@@ -33,16 +33,16 @@ export function Statistics(game: Game) {
                         </ul>
                     </li>
                     ${game.Generators.map((own) => {
-                        if (own.Count > 0) {
-                            let gen = GENERATORS[own.Id];
-                            let current_income = income(gen, own.Count);
+                        if (own.count > 0) {
+                            let gen = GENERATORS[own.id];
+                            let current_income = income(gen, own.count);
                             let share = total_income > 0 ? current_income / total_income : 0;
 
                             return html`
                                 <li>
                                     ${gen.Name}
                                     <ul>
-                                        <li>Count: ${own.Count}</li>
+                                        <li>Count: ${own.count}</li>
                                         ${gen.Kind === "auto"
                                             ? `<li>Time per second: ${human_time_short(
                                                   current_income
@@ -55,13 +55,13 @@ export function Statistics(game: Game) {
                                             `}
                                         <li>
                                             Multiplier:
-                                            ${multiplier.format(mult_current(gen, own.Count))}x
+                                            ${multiplier.format(mult_current(gen, own.count))}x
                                         </li>
                                         <!-- <li>Income +1: ${human_time_short(
-                                            income(gen, own.Count + 1)
+                                            income(gen, own.count + 1)
                                         )}</li>
                                             <li>Income +10: ${human_time_short(
-                                            income(gen, own.Count + 10)
+                                            income(gen, own.count + 10)
                                         )}</li> -->
                                     </ul>
                                 </li>

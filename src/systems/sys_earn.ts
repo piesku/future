@@ -5,17 +5,17 @@ import {income} from "../generator.js";
 export function sys_earn(game: Game, delta: number) {
     if (game.InputDelta["Mouse0"] === -1) {
         for (let own of game.Generators) {
-            let gen = GENERATORS[own.Id];
+            let gen = GENERATORS[own.id];
             if (gen.Kind === "click") {
-                game.TimeEarned += income(gen, own.Count);
+                game.TimeEarned += income(gen, own.count);
             }
         }
     }
 
     for (let own of game.Generators) {
-        let gen = GENERATORS[own.Id];
+        let gen = GENERATORS[own.id];
         if (gen.Kind === "auto") {
-            game.TimeEarned += income(gen, own.Count) * delta;
+            game.TimeEarned += income(gen, own.count) * delta;
         }
     }
 

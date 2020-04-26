@@ -33,34 +33,34 @@ export class Game {
     TimeEarnedOffline = 0;
     Generators: Array<GeneratorState> = [
         {
-            Id: 0,
-            Count: 1,
-            Unlocked: true,
+            id: 0,
+            count: 1,
+            unlocked: true,
         },
         {
-            Id: 1,
-            Count: 0,
-            Unlocked: true,
+            id: 1,
+            count: 0,
+            unlocked: true,
         },
         {
-            Id: 2,
-            Count: 0,
-            Unlocked: false,
+            id: 2,
+            count: 0,
+            unlocked: false,
         },
         {
-            Id: 3,
-            Count: 0,
-            Unlocked: false,
+            id: 3,
+            count: 0,
+            unlocked: false,
         },
         {
-            Id: 4,
-            Count: 0,
-            Unlocked: false,
+            id: 4,
+            count: 0,
+            unlocked: false,
         },
         {
-            Id: 5,
-            Count: 0,
-            Unlocked: false,
+            id: 5,
+            count: 0,
+            unlocked: false,
         },
     ];
 
@@ -102,16 +102,16 @@ export class Game {
 
         let saved = localStorage.getItem(SAVE_KEY);
         if (saved) {
-            let payload = JSON.parse(saved);
-            this.FirstRun = payload.FirstRun;
-            this.HasWon = payload.HasWon;
-            this.TimeEarned = payload.TimeEarned;
-            this.Generators = payload.Generators;
+            let payload: SavedProgress = JSON.parse(saved);
+            this.FirstRun = payload.firstRun;
+            this.HasWon = payload.hasWon;
+            this.TimeEarned = payload.timeEarned;
+            this.Generators = payload.generators;
 
             // Scale the delta down with a sqrt.
-            let delta_offline = (Date.now() - payload.Timestamp) / 1000;
+            let delta_offline = (Date.now() - payload.timeSaved) / 1000;
             sys_earn(this, delta_offline ** 0.75);
-            this.TimeEarnedOffline = this.TimeEarned - payload.TimeEarned;
+            this.TimeEarnedOffline = this.TimeEarned - payload.timeEarned;
         }
 
         this.GL.enable(GL_DEPTH_TEST);
@@ -142,13 +142,21 @@ export class Game {
     }
 }
 
+interface SavedProgress {
+    timeSaved: number;
+    firstRun: boolean;
+    hasWon: boolean;
+    timeEarned: number;
+    generators: Array<GeneratorState>;
+}
+
 export function game_save(game: Game) {
-    let payload = JSON.stringify({
-        Timestamp: Date.now(),
-        FirstRun: game.FirstRun,
-        HasWon: game.HasWon,
-        TimeEarned: game.TimeEarned,
-        Generators: game.Generators,
-    });
-    localStorage.setItem(SAVE_KEY, payload);
+    let payload: SavedProgress = {
+        timeSaved: Date.now(),
+        firstRun: game.FirstRun,
+        hasWon: game.HasWon,
+        timeEarned: game.TimeEarned,
+        generators: game.Generators,
+    };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
 }

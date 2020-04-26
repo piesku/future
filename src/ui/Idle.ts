@@ -14,7 +14,7 @@ export function Idle(game: Game) {
             <div>
                 ${Clock()}
                 ${game.Generators.map((gen, idx) => {
-                    if (gen.Unlocked) {
+                    if (gen.unlocked) {
                         return Generator(game, gen, idx);
                     } else {
                         return null;

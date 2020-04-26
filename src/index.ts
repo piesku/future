@@ -34,7 +34,7 @@ let texture_promises = textures.map(
     async (file: string) =>
         new Promise((resolve, reject) => {
             let texture = new Image();
-            texture.src = `/textures/${file}.jpg`;
+            texture.src = `./textures/${file}.jpg`;
             texture.onload = () => {
                 game.Textures[file] = load_texture(game, texture);
                 resolve();

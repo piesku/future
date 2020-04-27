@@ -1,11 +1,5 @@
 import {EraConfig, GeneratorConfig} from "./config.js";
 
-export interface GeneratorState {
-    id: number;
-    count: number;
-    unlocked: boolean;
-}
-
 export function total_cost(gen: GeneratorConfig, own_count: number, buy_count: number) {
     let factor = 0;
     for (let i = 0; i < buy_count; i++) {

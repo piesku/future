@@ -3,7 +3,8 @@ import {human_time_short} from "../../common/time.js";
 import {Action} from "../actions.js";
 import {GENERATORS} from "../config.js";
 import {Game} from "../game.js";
-import {GeneratorState, mult_progress, total_cost} from "../generator.js";
+import {mult_progress, total_cost} from "../generator.js";
+import {GeneratorState} from "../state.js";
 
 const percent = new Intl.NumberFormat("en", {style: "percent"});
 

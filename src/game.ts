@@ -3,7 +3,7 @@ import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mat_textured} from "../materials/mat_textured.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {Camera} from "./components/com_camera.js";
-import {GeneratorState} from "./generator.js";
+import {GeneratorState, init_generators} from "./state.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
@@ -32,38 +32,7 @@ export class Game {
     TpsCurrent = 0;
     TimeEarned = 0;
     TimeEarnedOffline = 0;
-    Generators: Array<GeneratorState> = [
-        {
-            id: 0,
-            count: 1,
-            unlocked: true,
-        },
-        {
-            id: 1,
-            count: 0,
-            unlocked: true,
-        },
-        {
-            id: 2,
-            count: 0,
-            unlocked: false,
-        },
-        {
-            id: 3,
-            count: 0,
-            unlocked: false,
-        },
-        {
-            id: 4,
-            count: 0,
-            unlocked: false,
-        },
-        {
-            id: 5,
-            count: 0,
-            unlocked: false,
-        },
-    ];
+    Generators = init_generators();
 
     World = new World();
 

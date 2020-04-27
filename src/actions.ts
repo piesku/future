@@ -4,6 +4,7 @@ import {Game, game_save} from "./game.js";
 import {total_cost} from "./generator.js";
 import {scene_stage} from "./scenes/sce_stage.js";
 import {ins_click} from "./sounds/snd_click.js";
+import {init_generators} from "./state.js";
 
 export const enum Action {
     PurchaseGenerator,
@@ -79,38 +80,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                     game.TpsCurrent = 0;
                     game.TimeEarned = 0;
                     game.TimeEarnedOffline = 0;
-                    game.Generators = [
-                        {
-                            id: 0,
-                            count: 1,
-                            unlocked: true,
-                        },
-                        {
-                            id: 1,
-                            count: 0,
-                            unlocked: true,
-                        },
-                        {
-                            id: 2,
-                            count: 0,
-                            unlocked: false,
-                        },
-                        {
-                            id: 3,
-                            count: 0,
-                            unlocked: false,
-                        },
-                        {
-                            id: 4,
-                            count: 0,
-                            unlocked: false,
-                        },
-                        {
-                            id: 5,
-                            count: 0,
-                            unlocked: false,
-                        },
-                    ];
+                    game.Generators = init_generators();
 
                     game_save(game);
                     scene_stage(game);

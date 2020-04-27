@@ -21,30 +21,30 @@ export function sys_ui(game: Game, delta: number) {
     {
         let year = document.getElementById("clock-current-year");
         if (year) {
-            year.textContent = year_f.format(game.TimeCurrent);
+            year.textContent = year_f.format(game.DateCurrent);
         }
         let day = document.getElementById("clock-current-day");
         if (day) {
-            day.textContent = day_f.format(game.TimeCurrent);
+            day.textContent = day_f.format(game.DateCurrent);
         }
         let time = document.getElementById("clock-current-time");
         if (time) {
-            time.textContent = time_f.format(game.TimeCurrent);
+            time.textContent = time_f.format(game.DateCurrent);
         }
     }
 
     {
         let year = document.getElementById("clock-future-year");
         if (year) {
-            year.textContent = year_f.format(game.TimeGoal);
+            year.textContent = year_f.format(game.DateGoal);
         }
         let day = document.getElementById("clock-future-day");
         if (day) {
-            day.textContent = day_f.format(game.TimeGoal);
+            day.textContent = day_f.format(game.DateGoal);
         }
         let time = document.getElementById("clock-future-time");
         if (time) {
-            time.textContent = time_f.format(game.TimeGoal);
+            time.textContent = time_f.format(game.DateGoal);
         }
     }
 }

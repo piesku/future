@@ -25,8 +25,8 @@ export function sys_earn(game: Game, delta: number) {
         }
     }
 
-    game.TimeCurrent = game.TimeEarned * 1000 + game.TimeStart;
-    game.TimeGoal = Date.now() + 1000;
+    game.DateCurrent = game.TimeEarned * 1000 + game.DateStart;
+    game.DateGoal = Date.now() + 1000;
 
     game.TpsCurrent = 0;
     for (let own of game.Generators) {

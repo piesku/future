@@ -30,6 +30,6 @@ export function Idle(game: Game) {
             </div>
         </div>
         ${game.TimeEarnedOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
-        ${!game.HasWon && game.TimeCurrent > game.TimeGoal && Victory()}
+        ${!game.HasWon && game.DateCurrent > game.DateGoal && Victory()}
     `;
 }

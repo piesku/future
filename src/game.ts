@@ -21,18 +21,19 @@ const SAVE_KEY = "com.piesku.future.save";
 export type Entity = number;
 
 export class Game {
-    FirstRun = true;
-    HasWon = false;
-    EraCurrent = 0;
+    // Serializable state for saving progress.
+    FirstRun: boolean;
+    HasWon: boolean;
+    EraCurrent: number;
+    Generators: Array<GeneratorState>;
+    TimeEarned: number;
 
-    Rewinding = false;
-    TimeStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
-    TimeCurrent = 0;
-    TimeGoal = Date.now() + 1000;
+    DateStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
+    DateGoal = Date.now() + 1000;
+    DateCurrent = 0;
     TpsCurrent = 0;
-    TimeEarned = 0;
     TimeEarnedOffline = 0;
-    Generators = init_generators();
+    Rewinding = false;
 
     World = new World();
 
@@ -83,6 +84,13 @@ export class Game {
             let delta_offline = (Date.now() - payload.timeSaved) / 1000;
             sys_earn(this, delta_offline ** 0.75);
             this.TimeEarnedOffline = this.TimeEarned - payload.timeEarned;
+        } else {
+            this.FirstRun = true;
+            this.HasWon = false;
+            this.EraCurrent = 0;
+            this.TimeEarned = 0;
+            this.TimeEarnedOffline = 0;
+            this.Generators = init_generators();
         }
 
         this.GL.enable(GL_DEPTH_TEST);
@@ -114,6 +122,7 @@ export class Game {
 }
 
 interface SavedProgress {
+    // Timestamp when the game was saved.
     timeSaved: number;
     firstRun: boolean;
     hasWon: boolean;

@@ -11,6 +11,7 @@ export const enum Action {
     AcceptOfflineProgress,
     AcceptVictory,
     AdvanceEra,
+    StartNewGame,
 }
 
 let rewind_keyframes = 10;
@@ -72,10 +73,8 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.AdvanceEra: {
             let next_era = ERAS[game.EraCurrent + 1];
             if (game.TpsCurrent > next_era.TpsRequired) {
-                game.EraCurrent++;
-                game_save(game);
-
                 requestAnimationFrame(() => {
+                    game.EraCurrent++;
                     game.Rewinding = false;
                     game.TpsCurrent = 0;
                     game.TimeEarned = 0;
@@ -112,6 +111,58 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                             unlocked: false,
                         },
                     ];
+
+                    game_save(game);
+                    scene_stage(game);
+                });
+            }
+            break;
+        }
+        case Action.StartNewGame: {
+            if (game.HasWon) {
+                requestAnimationFrame(() => {
+                    game.FirstRun = true;
+                    game.HasWon = false;
+                    game.EraCurrent = 0;
+
+                    game.Rewinding = false;
+                    game.TpsCurrent = 0;
+                    game.TimeEarned = 0;
+                    game.TimeEarnedOffline = 0;
+                    game.Generators = [
+                        {
+                            id: 0,
+                            count: 1,
+                            unlocked: true,
+                        },
+                        {
+                            id: 1,
+                            count: 0,
+                            unlocked: true,
+                        },
+                        {
+                            id: 2,
+                            count: 0,
+                            unlocked: false,
+                        },
+                        {
+                            id: 3,
+                            count: 0,
+                            unlocked: false,
+                        },
+                        {
+                            id: 4,
+                            count: 0,
+                            unlocked: false,
+                        },
+                        {
+                            id: 5,
+                            count: 0,
+                            unlocked: false,
+                        },
+                    ];
+
+                    game_save(game);
                     scene_stage(game);
                 });
             }

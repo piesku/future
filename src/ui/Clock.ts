@@ -1,6 +1,8 @@
 import {html} from "../../common/html.js";
+import {Action} from "../actions.js";
+import {Game} from "../game.js";
 
-export function Clock() {
+export function Clock(game: Game) {
     return html`
         <div class="window" style="margin: 16px; width: 300px">
             <div class="title-bar">
@@ -9,7 +11,9 @@ export function Clock() {
                 </div>
             </div>
             <div class="window-body">
-                <p>To win the game, reach the future!</p>
+                ${game.HasWon
+                    ? `<p>Congratulations! You have reached the future.</p>`
+                    : `<p>To win the game, reach the future!</p>`}
                 <fieldset class="field-row">
                     <legend>
                         Current Date
@@ -30,6 +34,14 @@ export function Clock() {
                         <div id="clock-future-time" style="width: 50px; text-align: center;"></div>
                     </div>
                 </fieldset>
+                ${game.HasWon &&
+                `
+                    <div class="field-row" style="justify-content: center;">
+                        <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">
+                            Start a New Game
+                        </button>
+                    </div>
+                `}
             </div>
         </div>
     `;

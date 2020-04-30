@@ -15,6 +15,11 @@ import {Statistics} from "./Statistics.js";
 import {Victory} from "./Victory.js";
 
 export function App(game: Game) {
+    let is_victory = game.DateCurrent > game.DateGoal;
+    let is_beyond_date = game.DateCurrent > MAX_SECONDS;
+    let is_beyond_integer = game.TimeEarned > Number.MAX_SAFE_INTEGER;
+    let is_beyond_float = game.TimeEarned >= Number.MAX_VALUE;
+
     return html`
         <div style="display: flex; justify-content: space-between;">
             <div>
@@ -34,15 +39,12 @@ export function App(game: Game) {
                 ${Score()} ${Statistics(game)}
             </div>
         </div>
+
         ${!(game.DialogState & Dialog.FirstRun) && FirstRun(game)}
         ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
-        ${!(game.DialogState & Dialog.Victory) && game.DateCurrent > game.DateGoal && Victory()}
-        ${!(game.DialogState & Dialog.BeyondDate) && game.DateCurrent > MAX_SECONDS && BeyondDate()}
-        ${!(game.DialogState & Dialog.BeyondInteger) &&
-        game.TimeEarned > Number.MAX_SAFE_INTEGER &&
-        BeyondInteger()}
-        ${!(game.DialogState & Dialog.BeyondFloat) &&
-        game.TimeEarned >= Number.MAX_VALUE &&
-        BeyondFloat()}
+        ${is_victory && !(game.DialogState & Dialog.Victory) && Victory()}
+        ${is_beyond_date && !(game.DialogState & Dialog.BeyondDate) && BeyondDate()}
+        ${is_beyond_integer && !(game.DialogState & Dialog.BeyondInteger) && BeyondInteger()}
+        ${is_beyond_float && !(game.DialogState & Dialog.BeyondFloat) && BeyondFloat()}
     `;
 }

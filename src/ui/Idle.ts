@@ -1,5 +1,6 @@
 import {html} from "../../common/html.js";
 import {Game} from "../game.js";
+import {Beyond} from "./Beyond.js";
 import {Clock} from "./Clock.js";
 import {EraProgress} from "./EraProgress.js";
 import {FirstRun} from "./FirstRun.js";
@@ -31,5 +32,6 @@ export function Idle(game: Game) {
         </div>
         ${game.TimeEarnedOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
         ${!game.HasWon && game.DateCurrent > game.DateGoal && Victory()}
+        ${game.TimeEarned === Number.MAX_SAFE_INTEGER / 1000 && Beyond()}
     `;
 }

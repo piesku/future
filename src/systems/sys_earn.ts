@@ -25,9 +25,6 @@ export function sys_earn(game: Game, delta: number) {
         }
     }
 
-    game.DateCurrent = game.TimeEarned * 1000 + game.DateStart;
-    game.DateGoal = Date.now() + 1000;
-
     game.TpsCurrent = 0;
     for (let own of game.Generators) {
         let gen = GENERATORS[own.id];
@@ -35,4 +32,11 @@ export function sys_earn(game: Game, delta: number) {
             game.TpsCurrent += income(era, gen, own.count);
         }
     }
+
+    if (game.TimeEarned > Number.MAX_SAFE_INTEGER / 1000) {
+        game.TimeEarned = Number.MAX_SAFE_INTEGER / 1000;
+    }
+
+    game.DateCurrent = game.TimeEarned * 1000 + game.DateStart;
+    game.DateGoal = Date.now() + 1000;
 }

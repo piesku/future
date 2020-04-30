@@ -9,7 +9,7 @@ export function Score() {
                 </div>
             </div>
             <div class="window-body">
-                <h3 id="time" style="margin: 0;"></h3>
+                <h3 id="time" style="margin: 0; overflow: hidden; text-overflow: ellipsis;"></h3>
             </div>
         </div>
     `;

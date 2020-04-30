@@ -1,7 +1,7 @@
 import {integer_f} from "../../common/number.js";
 import {
     days_from,
-    human_time_long,
+    human_time,
     MAX_SECONDS,
     time_from,
     YEAR,
@@ -23,7 +23,13 @@ export function sys_ui(game: Game, delta: number) {
     // it impossible to click any buttons.
     let clock = document.getElementById("time");
     if (clock) {
-        clock.innerHTML = human_time_long(game.TimeEarned);
+        let ht = human_time(game.TimeEarned);
+        clock.innerHTML = `
+            years:&nbsp;${integer_f.format(ht.Years)}<br>
+            days:&nbsp;${ht.Days}<br>
+            hours:&nbsp;${ht.Hours}<br>
+            minutes:&nbsp;${ht.Minutes}<br>
+            seconds:&nbsp;${ht.Seconds}`;
     }
 
     if (game.DateCurrent <= MAX_SECONDS) {

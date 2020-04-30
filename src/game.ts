@@ -77,8 +77,14 @@ export class Game {
             this.FirstRun = payload.firstRun;
             this.HasWon = payload.hasWon;
             this.EraCurrent = payload.eraCurrent;
-            this.TimeEarned = payload.timeEarned;
             this.Generators = payload.generators;
+
+            // Infinity serializes as null in JSON.
+            if (payload.timeEarned === null) {
+                this.TimeEarned = Infinity;
+            } else {
+                this.TimeEarned = payload.timeEarned;
+            }
 
             // Scale the delta down with a sqrt.
             let delta_offline = (Date.now() - payload.timeSaved) / 1000;

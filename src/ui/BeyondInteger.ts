@@ -17,7 +17,7 @@ export function BeyondInteger() {
                 <p>You have reached the really far future!</p>
                 <p>
                     You have now earned more than ${integer_f.format(Number.MAX_SAFE_INTEGER)}
-                    seconds, which is the largest integer which can be represented in JavaScript
+                    seconds, which is the largest integer that can be represented in JavaScript
                     without any loss of precision.
                 </p>
                 <p>

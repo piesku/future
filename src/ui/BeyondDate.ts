@@ -19,6 +19,10 @@ export function BeyondDate() {
                     JavaScript cannot properly format dates larger than ${years_from(MAX_SECONDS)}.
                     From now on the clock will only show years into the future.
                 </p>
+                <p>
+                    Lōʻihi, the youngest volcano in the Hawaiian–Emperor seamount chain, has risen
+                    above the surface of the ocean and has become a new volcanic island.
+                </p>
                 <div class="field-row" style="justify-content: center">
                     <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">
                         Start a New Game

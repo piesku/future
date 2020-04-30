@@ -19,7 +19,10 @@ export function Victory() {
                 </p>
                 <div class="field-row" style="justify-content: center">
                     <button onmouseup="event.stopPropagation(); $(${Action.AcceptVictory});">
-                        OK
+                        Continue Playing
+                    </button>
+                    <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">
+                        Start a New Game
                     </button>
                 </div>
             </div>

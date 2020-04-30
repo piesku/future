@@ -25,7 +25,7 @@ export function FirstRun(game: Game) {
                     of time. Careful though, as each purchase will rewind the world's clock by the
                     duration equal to its cost.
                 </p>
-                <p>To ${year_f.format(game.TimeGoal)}, and beyond!</p>
+                <p>To ${year_f.format(game.DateGoal)}, and beyond!</p>
                 <div class="field-row" style="justify-content: center">
                     <button onmouseup="event.stopPropagation(); $(${Action.AcceptFirstRun});">
                         OK

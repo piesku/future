@@ -1,11 +1,9 @@
 import {html} from "../../common/html.js";
+import {decimal_f, integer_f, percent_f} from "../../common/number.js";
 import {human_time_short} from "../../common/time.js";
 import {ERAS, GENERATORS} from "../config.js";
 import {Game} from "../game.js";
 import {income, mult_current} from "../generator.js";
-
-const percent = new Intl.NumberFormat("en", {style: "percent"});
-const multiplier = new Intl.NumberFormat("en", {maximumFractionDigits: 2});
 
 export function Statistics(game: Game) {
     let era = ERAS[game.EraCurrent];
@@ -23,8 +21,8 @@ export function Statistics(game: Game) {
                         Total
                         <ul>
                             <li>Time per second: ${human_time_short(game.TpsCurrent)}</li>
-                            <li>Seconds per second: ${game.TpsCurrent.toFixed(0)}</li>
-                            <li>Era Multiplier : ${multiplier.format(era.Multiplier)}x</li>
+                            <li>Seconds per second: ${integer_f.format(game.TpsCurrent)}</li>
+                            <li>Era Multiplier : ${decimal_f.format(era.Multiplier)}x</li>
                         </ul>
                     </li>
                     ${game.Generators.map((own) => {
@@ -42,7 +40,7 @@ export function Statistics(game: Game) {
                                             ? `<li>Time per second: ${human_time_short(
                                                   current_income
                                               )}</li>
-                                                <li>Share of Total: ${percent.format(share)}</li>
+                                                <li>Share of Total: ${percent_f.format(share)}</li>
                                             `
                                             : `<li>Time per click: ${human_time_short(
                                                   current_income
@@ -50,7 +48,7 @@ export function Statistics(game: Game) {
                                             `}
                                         <li>
                                             Multiplier:
-                                            ${multiplier.format(mult_current(gen, own.count))}x
+                                            ${decimal_f.format(mult_current(gen, own.count))}x
                                         </li>
                                         <!-- <li>Income +1: ${human_time_short(
                                             income(era, gen, own.count + 1)

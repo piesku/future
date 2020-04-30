@@ -2,7 +2,7 @@ import {html} from "../../common/html.js";
 import {MAX_SECONDS, years_from} from "../../common/time.js";
 import {Action} from "../actions.js";
 
-export function Beyond() {
+export function BeyondDate() {
     return html`
         <div
             class="window"
@@ -10,7 +10,7 @@ export function Beyond() {
         >
             <div class="title-bar">
                 <div class="title-bar-text">
-                    🌌 The Far Future
+                    🚀 The Far Future
                 </div>
             </div>
             <div class="window-body">

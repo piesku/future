@@ -22,7 +22,14 @@ export function Clock(game: Game) {
                     ${game.DateCurrent > MAX_SECONDS
                         ? `<div class="field-row" style="justify-content: space-evenly;">
                             <div style="">Years into the far future:</div>
-                            <div id="clock-current-year" style="width: 75px; text-align: center;"></div>
+                            <div
+                                id="clock-current-year"
+                                style="
+                                    width: 75px;
+                                    text-align: center;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                "></div>
                         </div>`
                         : `<div class="field-row" style="justify-content: space-evenly;">
                             <div id="clock-current-year" style="width: 60px; text-align: center;"></div>

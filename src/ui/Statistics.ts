@@ -16,7 +16,7 @@ export function Statistics(game: Game) {
                 </div>
             </div>
             <div class="window-body">
-                <ul class="tree-view" style="overflow-y: scroll;">
+                <ul class="tree-view" style="overflow-y: scroll; overflow-wrap: break-word;">
                     <li>
                         Total
                         <ul>

@@ -2,7 +2,7 @@ import {html} from "../../common/html.js";
 import {integer_f} from "../../common/number.js";
 import {Action} from "../actions.js";
 
-export function BeyondInteger() {
+export function BeyondFloat() {
     return html`
         <div
             class="window"
@@ -10,19 +10,22 @@ export function BeyondInteger() {
         >
             <div class="title-bar">
                 <div class="title-bar-text">
-                    🌌 The Really Far Future
+                    🌠 Beyond Future
                 </div>
             </div>
             <div class="window-body">
-                <p>You have reached the really far future!</p>
-                <p>
-                    You have now earned more than ${integer_f.format(Number.MAX_SAFE_INTEGER)}
-                    seconds, which is the largest integer which can be represented in JavaScript
-                    without any loss of precision.
+                <p>You have reached beyond the future!</p>
+                <p style="overflow-wrap: anywhere;">
+                    You have now earned more than ${integer_f.format(Number.MAX_VALUE)} seconds,
+                    which is the largest number which can be represented in JavaScript.
                 </p>
+                <p><em>Nice</em>.</p>
                 <p>
-                    The Solar System has completed a full revolution around the Milky Way. This is a
-                    good moment to start over.
+                    All
+                    <a href="https://en.wikipedia.org/wiki/Timeline_of_the_far_future">
+                        nucleons in the observable universe decayed</a
+                    >
+                    eons ago. How about starting a new game?
                 </p>
                 <div class="field-row" style="justify-content: center">
                     <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">

@@ -2,6 +2,7 @@ import {html} from "../../common/html.js";
 import {MAX_SECONDS} from "../../common/time.js";
 import {Game} from "../game.js";
 import {BeyondDate} from "./BeyondDate.js";
+import {BeyondFloat} from "./BeyondFloat.js";
 import {BeyondInteger} from "./BeyondInteger.js";
 import {Clock} from "./Clock.js";
 import {EraProgress} from "./EraProgress.js";
@@ -36,5 +37,6 @@ export function Idle(game: Game) {
         ${!game.HasWon && game.DateCurrent > game.DateGoal && Victory()}
         ${game.DateCurrent > MAX_SECONDS && BeyondDate()}
         ${game.TimeEarned > Number.MAX_SAFE_INTEGER && BeyondInteger()}
+        ${game.TimeEarned >= Number.MAX_VALUE && BeyondFloat()}
     `;
 }

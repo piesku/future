@@ -16,27 +16,23 @@ export function Clock(game: Game) {
                     ? `<p>Congratulations! You have reached the future.</p>`
                     : `<p>To win the game, reach the future!</p>`}
                 <fieldset class="field-row">
-                    <legend>
-                        Current Date
-                    </legend>
-                    ${game.DateCurrent > MAX_SECONDS
-                        ? `<div class="field-row" style="justify-content: space-evenly;">
-                            <div style="">Years into the far future:</div>
-                            <div
-                                id="clock-current-year"
-                                style="
-                                    width: 75px;
-                                    text-align: center;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                "></div>
-                        </div>`
-                        : `<div class="field-row" style="justify-content: space-evenly;">
-                            <div id="clock-current-year" style="width: 60px; text-align: center;"></div>
-                            <div id="clock-current-day" style="width: 140px; text-align: center;"></div>
-                            <div id="clock-current-time" style="width: 50px; text-align: center;"></div>
-                        </div>
-                    `}
+                    ${game.DateCurrent <= MAX_SECONDS
+                        ? `
+                            <legend>
+                                Current Date
+                            </legend>
+                            <div class="field-row" style="justify-content: space-evenly;">
+                                <div id="clock-current-year" style="width: 60px; text-align: center;"></div>
+                                <div id="clock-current-day" style="width: 140px; text-align: center;"></div>
+                                <div id="clock-current-time" style="width: 50px; text-align: center;"></div>
+                            </div>
+                        `
+                        : `
+                            <legend>
+                                Years into the Far Future
+                            </legend>
+                            <div class="field-row" id="clock-current-year" style="overflow-wrap: anywhere;"></div>
+                        `}
                 </fieldset>
                 <fieldset class="field-row">
                     <legend>

@@ -7,7 +7,7 @@ export function FirstRun(game: Game) {
     return html`
         <div
             class="window"
-            style="width: 250px; position: absolute; top: calc(50% - 75px); left: calc(50% - 125px);"
+            style="width: 250px; position: absolute; top: calc(50% - 110px); left: calc(50% - 125px);"
         >
             <div class="title-bar">
                 <div class="title-bar-text">

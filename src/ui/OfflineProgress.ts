@@ -8,7 +8,7 @@ export function OfflineProgress(game: Game) {
     return html`
         <div
             class="window"
-            style="width: 250px; position: absolute; top: calc(50% - 50px); left: calc(50% - 125px);"
+            style="width: 250px; position: absolute; top: calc(50% - 60px); left: calc(50% - 135px);"
         >
             <div class="title-bar">
                 <div class="title-bar-text">

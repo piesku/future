@@ -6,7 +6,7 @@ export function BeyondInteger() {
     return html`
         <div
             class="window"
-            style="width: 250px; position: absolute; top: calc(50% - 50px); left: calc(50% - 125px);"
+            style="width: 250px; position: absolute; top: calc(50% - 30px); left: calc(50% - 105px);"
         >
             <div class="title-bar">
                 <div class="title-bar-text">

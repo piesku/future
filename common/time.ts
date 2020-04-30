@@ -1,8 +1,8 @@
 import {integer_f} from "./number.js";
 
-const MINUTE = 60;
-const HOUR = MINUTE * 60;
-const DAY = HOUR * 24;
+export const MINUTE = 60;
+export const HOUR = MINUTE * 60;
+export const DAY = HOUR * 24;
 export const YEAR = DAY * 365;
 
 // Max timestamp (in second) representable by Date.

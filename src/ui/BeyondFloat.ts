@@ -6,7 +6,7 @@ export function BeyondFloat() {
     return html`
         <div
             class="window"
-            style="width: 250px; position: absolute; top: calc(50% - 50px); left: calc(50% - 125px);"
+            style="width: 250px; position: absolute; top: calc(50% - 20px); left: calc(50% - 95px);"
         >
             <div class="title-bar">
                 <div class="title-bar-text">
@@ -14,7 +14,7 @@ export function BeyondFloat() {
                 </div>
             </div>
             <div class="window-body">
-                <p>You have reached beyond the future!</p>
+                <p>You have gone beyond the future!</p>
                 <p style="overflow-wrap: anywhere;">
                     You have now earned more than ${integer_f.format(Number.MAX_VALUE)} seconds,
                     which is the largest number which can be represented in JavaScript.

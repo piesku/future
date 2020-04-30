@@ -33,7 +33,7 @@ export function Idle(game: Game) {
                 ${Score()} ${Statistics(game)}
             </div>
         </div>
-        ${game.TimeEarnedOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
+        ${game.FirstRun && FirstRun(game)} ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
         ${!game.HasWon && game.DateCurrent > game.DateGoal && Victory()}
         ${game.DateCurrent > MAX_SECONDS && BeyondDate()}
         ${game.TimeEarned > Number.MAX_SAFE_INTEGER && BeyondInteger()}

@@ -1,4 +1,5 @@
 import {play_note} from "../../common/audio.js";
+import {MINUTE} from "../../common/time.js";
 import {ERAS, GENERATORS} from "../config.js";
 import {Game} from "../game.js";
 import {income} from "../generator.js";
@@ -35,4 +36,9 @@ export function sys_earn(game: Game, delta: number) {
 
     game.DateGoal = Date.now() / 1000 + 1;
     game.DateCurrent = game.TimeEarned + game.DateStart;
+
+    // Close the first run dialog if the user hasn't done it yet.
+    if (game.FirstRun && game.TimeEarned > MINUTE) {
+        game.FirstRun = false;
+    }
 }

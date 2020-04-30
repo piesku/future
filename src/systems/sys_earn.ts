@@ -33,10 +33,6 @@ export function sys_earn(game: Game, delta: number) {
         }
     }
 
-    if (game.TimeEarned > Number.MAX_SAFE_INTEGER / 1000) {
-        game.TimeEarned = Number.MAX_SAFE_INTEGER / 1000;
-    }
-
-    game.DateCurrent = game.TimeEarned * 1000 + game.DateStart;
-    game.DateGoal = Date.now() + 1000;
+    game.DateGoal = Date.now() / 1000 + 1;
+    game.DateCurrent = game.TimeEarned + game.DateStart;
 }

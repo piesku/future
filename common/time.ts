@@ -1,7 +1,10 @@
 const MINUTE = 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
-const YEAR = DAY * 365;
+export const YEAR = DAY * 365;
+
+// Max timestamp (in second) representable by Date.
+export const MAX_SECONDS = 8.64e12;
 
 export function human_time(time: number) {
     return {
@@ -31,20 +34,32 @@ export function human_time_short(time: number) {
     return `${ht.Minutes}m${ht.Seconds}s`;
 }
 
-export const year_f = new Intl.DateTimeFormat("en-US", {
+const year_f = new Intl.DateTimeFormat("en-US", {
     era: "short",
     year: "numeric",
 });
 
-export const day_f = new Intl.DateTimeFormat("en-US", {
+export function years_from(seconds: number) {
+    return year_f.format(seconds * 1000);
+}
+
+const day_f = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
     weekday: "long",
 });
 
-export const time_f = new Intl.DateTimeFormat("en-US", {
+export function days_from(seconds: number) {
+    return day_f.format(seconds * 1000);
+}
+
+const time_f = new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
     hour12: false,
 });
+
+export function time_from(seconds: number) {
+    return time_f.format(seconds * 1000);
+}

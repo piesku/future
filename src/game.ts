@@ -28,8 +28,8 @@ export class Game {
     Generators: Array<GeneratorState>;
     TimeEarned: number;
 
-    DateStart = Date.UTC(-9999, 0, 1, 0, 0, 0);
-    DateGoal = Date.now() + 1000;
+    DateStart = Date.UTC(-9999, 0, 1, 0, 0, 0) / 1000;
+    DateGoal = Date.now() / 1000 + 1;
     DateCurrent = 0;
     TpsCurrent = 0;
     TimeEarnedOffline = 0;

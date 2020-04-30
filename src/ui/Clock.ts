@@ -1,4 +1,5 @@
 import {html} from "../../common/html.js";
+import {MAX_SECONDS} from "../../common/time.js";
 import {Action} from "../actions.js";
 import {Game} from "../game.js";
 
@@ -18,11 +19,17 @@ export function Clock(game: Game) {
                     <legend>
                         Current Date
                     </legend>
-                    <div class="field-row" style="justify-content: space-evenly;">
-                        <div id="clock-current-year" style="width: 60px; text-align: center;"></div>
-                        <div id="clock-current-day" style="width: 140px; text-align: center;"></div>
-                        <div id="clock-current-time" style="width: 50px; text-align: center;"></div>
-                    </div>
+                    ${game.DateCurrent > MAX_SECONDS
+                        ? `<div class="field-row" style="justify-content: space-evenly;">
+                            <div style="">Years into the far future:</div>
+                            <div id="clock-current-year" style="width: 75px; text-align: center;"></div>
+                        </div>`
+                        : `<div class="field-row" style="justify-content: space-evenly;">
+                            <div id="clock-current-year" style="width: 60px; text-align: center;"></div>
+                            <div id="clock-current-day" style="width: 140px; text-align: center;"></div>
+                            <div id="clock-current-time" style="width: 50px; text-align: center;"></div>
+                        </div>
+                    `}
                 </fieldset>
                 <fieldset class="field-row">
                     <legend>

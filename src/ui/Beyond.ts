@@ -1,4 +1,5 @@
 import {html} from "../../common/html.js";
+import {MAX_SECONDS, years_from} from "../../common/time.js";
 import {Action} from "../actions.js";
 
 export function Beyond() {
@@ -9,11 +10,15 @@ export function Beyond() {
         >
             <div class="title-bar">
                 <div class="title-bar-text">
-                    🌌 Beyond Future
+                    🌌 The Far Future
                 </div>
             </div>
             <div class="window-body">
-                <p>You have reached beyond future!</p>
+                <p>You have reached the far future!</p>
+                <p>
+                    JavaScript cannot properly format dates larger than ${years_from(MAX_SECONDS)}.
+                    From now on the clock will only show years into the future.
+                </p>
                 <div class="field-row" style="justify-content: center">
                     <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">
                         Start a New Game

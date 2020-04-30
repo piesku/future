@@ -1,4 +1,5 @@
 import {html} from "../../common/html.js";
+import {MAX_SECONDS} from "../../common/time.js";
 import {Game} from "../game.js";
 import {Beyond} from "./Beyond.js";
 import {Clock} from "./Clock.js";
@@ -32,6 +33,6 @@ export function Idle(game: Game) {
         </div>
         ${game.TimeEarnedOffline > 0 && OfflineProgress(game)} ${game.FirstRun && FirstRun(game)}
         ${!game.HasWon && game.DateCurrent > game.DateGoal && Victory()}
-        ${game.TimeEarned === Number.MAX_SAFE_INTEGER / 1000 && Beyond()}
+        ${game.DateCurrent > MAX_SECONDS && Beyond()}
     `;
 }

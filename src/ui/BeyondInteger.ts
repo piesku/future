@@ -1,6 +1,6 @@
 import {html} from "../../common/html.js";
 import {integer_f} from "../../common/number.js";
-import {Action} from "../actions.js";
+import {Action, Dialog} from "../actions.js";
 
 export function BeyondInteger() {
     return html`
@@ -11,6 +11,12 @@ export function BeyondInteger() {
             <div class="title-bar">
                 <div class="title-bar-text">
                     🌌 The Really Far Future
+                </div>
+                <div class="title-bar-controls">
+                    <button
+                        aria-label="Close"
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.BeyondInteger})"
+                    ></button>
                 </div>
             </div>
             <div class="window-body">

@@ -1,6 +1,6 @@
 import {html} from "../../common/html.js";
 import {years_from} from "../../common/time.js";
-import {Action} from "../actions.js";
+import {Action, Dialog} from "../actions.js";
 import {Game} from "../game.js";
 
 export function FirstRun(game: Game) {
@@ -12,6 +12,12 @@ export function FirstRun(game: Game) {
             <div class="title-bar">
                 <div class="title-bar-text">
                     ⏰ Time Is Money™ 1.0
+                </div>
+                <div class="title-bar-controls">
+                    <button
+                        aria-label="Close"
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.FirstRun})"
+                    ></button>
                 </div>
             </div>
             <div class="window-body">
@@ -27,7 +33,9 @@ export function FirstRun(game: Game) {
                 </p>
                 <p>To ${years_from(game.DateGoal)}, and beyond!</p>
                 <div class="field-row" style="justify-content: center">
-                    <button onmouseup="event.stopPropagation(); $(${Action.AcceptFirstRun});">
+                    <button
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.FirstRun});"
+                    >
                         OK
                     </button>
                 </div>

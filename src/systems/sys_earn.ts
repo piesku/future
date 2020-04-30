@@ -1,5 +1,6 @@
 import {play_note} from "../../common/audio.js";
 import {MINUTE} from "../../common/time.js";
+import {Dialog} from "../actions.js";
 import {ERAS, GENERATORS} from "../config.js";
 import {Game} from "../game.js";
 import {income} from "../generator.js";
@@ -38,7 +39,7 @@ export function sys_earn(game: Game, delta: number) {
     game.DateCurrent = game.TimeEarned + game.DateStart;
 
     // Close the first run dialog if the user hasn't done it yet.
-    if (game.FirstRun && game.TimeEarned > MINUTE) {
-        game.FirstRun = false;
+    if (!(game.DialogState & Dialog.FirstRun) && game.TimeEarned > MINUTE) {
+        game.DialogState |= Dialog.FirstRun;
     }
 }

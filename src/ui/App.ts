@@ -1,5 +1,6 @@
 import {html} from "../../common/html.js";
 import {MAX_SECONDS} from "../../common/time.js";
+import {Dialog} from "../actions.js";
 import {Game} from "../game.js";
 import {BeyondDate} from "./BeyondDate.js";
 import {BeyondFloat} from "./BeyondFloat.js";
@@ -33,10 +34,15 @@ export function App(game: Game) {
                 ${Score()} ${Statistics(game)}
             </div>
         </div>
-        ${game.FirstRun && FirstRun(game)} ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
-        ${!game.HasWon && game.DateCurrent > game.DateGoal && Victory()}
-        ${game.DateCurrent > MAX_SECONDS && BeyondDate()}
-        ${game.TimeEarned > Number.MAX_SAFE_INTEGER && BeyondInteger()}
-        ${game.TimeEarned >= Number.MAX_VALUE && BeyondFloat()}
+        ${!(game.DialogState & Dialog.FirstRun) && FirstRun(game)}
+        ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
+        ${!(game.DialogState & Dialog.Victory) && game.DateCurrent > game.DateGoal && Victory()}
+        ${!(game.DialogState & Dialog.BeyondDate) && game.DateCurrent > MAX_SECONDS && BeyondDate()}
+        ${!(game.DialogState & Dialog.BeyondInteger) &&
+        game.TimeEarned > Number.MAX_SAFE_INTEGER &&
+        BeyondInteger()}
+        ${!(game.DialogState & Dialog.BeyondFloat) &&
+        game.TimeEarned >= Number.MAX_VALUE &&
+        BeyondFloat()}
     `;
 }

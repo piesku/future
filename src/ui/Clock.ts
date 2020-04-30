@@ -12,7 +12,7 @@ export function Clock(game: Game) {
                 </div>
             </div>
             <div class="window-body">
-                ${game.HasWon
+                ${game.DateCurrent > game.DateGoal
                     ? `<p>Congratulations! You have reached the future.</p>`
                     : `<p>To win the game, reach the future!</p>`}
                 <fieldset class="field-row">
@@ -44,7 +44,7 @@ export function Clock(game: Game) {
                         <div id="clock-future-time" style="width: 50px; text-align: center;"></div>
                     </div>
                 </fieldset>
-                ${game.HasWon &&
+                ${game.DateCurrent > game.DateGoal &&
                 `
                     <div class="field-row" style="justify-content: center;">
                         <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">

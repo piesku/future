@@ -1,6 +1,6 @@
 import {html} from "../../common/html.js";
 import {MAX_SECONDS, years_from} from "../../common/time.js";
-import {Action} from "../actions.js";
+import {Action, Dialog} from "../actions.js";
 
 export function BeyondDate() {
     return html`
@@ -11,6 +11,12 @@ export function BeyondDate() {
             <div class="title-bar">
                 <div class="title-bar-text">
                     🚀 The Far Future
+                </div>
+                <div class="title-bar-controls">
+                    <button
+                        aria-label="Close"
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.BeyondDate})"
+                    ></button>
                 </div>
             </div>
             <div class="window-body">

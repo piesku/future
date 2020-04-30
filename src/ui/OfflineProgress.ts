@@ -14,6 +14,12 @@ export function OfflineProgress(game: Game) {
                 <div class="title-bar-text">
                     💡 Offline Progress
                 </div>
+                <div class="title-bar-controls">
+                    <button
+                        aria-label="Close"
+                        onmouseup="event.stopPropagation(); $(${Action.AcceptOfflineProgress})"
+                    ></button>
+                </div>
             </div>
             <div class="window-body">
                 <p>Welcome back!</p>

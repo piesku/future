@@ -1,5 +1,5 @@
 import {html} from "../../common/html.js";
-import {Action} from "../actions.js";
+import {Action, Dialog} from "../actions.js";
 
 export function Victory() {
     return html`
@@ -11,6 +11,12 @@ export function Victory() {
                 <div class="title-bar-text">
                     ✨ Victory
                 </div>
+                <div class="title-bar-controls">
+                    <button
+                        aria-label="Close"
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.Victory})"
+                    ></button>
+                </div>
             </div>
             <div class="window-body">
                 <p>You won!</p>
@@ -18,7 +24,9 @@ export function Victory() {
                     Congratulations, you have reached the future!
                 </p>
                 <div class="field-row" style="justify-content: center">
-                    <button onmouseup="event.stopPropagation(); $(${Action.AcceptVictory});">
+                    <button
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.Victory});"
+                    >
                         Continue Playing
                     </button>
                     <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">

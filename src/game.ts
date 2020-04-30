@@ -22,8 +22,7 @@ export type Entity = number;
 
 export class Game {
     // Serializable state for saving progress.
-    FirstRun: boolean;
-    HasWon: boolean;
+    DialogState = 0;
     EraCurrent: number;
     Generators: Array<GeneratorState>;
     TimeEarned: number;
@@ -74,8 +73,7 @@ export class Game {
         let saved = localStorage.getItem(SAVE_KEY);
         if (saved) {
             let payload: SavedProgress = JSON.parse(saved);
-            this.FirstRun = payload.firstRun;
-            this.HasWon = payload.hasWon;
+            this.DialogState = payload.dialogState;
             this.EraCurrent = payload.eraCurrent;
             this.Generators = payload.generators;
 
@@ -91,8 +89,7 @@ export class Game {
             sys_earn(this, delta_offline ** 0.75);
             this.TimeEarnedOffline = this.TimeEarned - payload.timeEarned;
         } else {
-            this.FirstRun = true;
-            this.HasWon = false;
+            this.DialogState = 0;
             this.EraCurrent = 0;
             this.TimeEarned = 0;
             this.TimeEarnedOffline = 0;
@@ -130,8 +127,7 @@ export class Game {
 interface SavedProgress {
     // Timestamp when the game was saved.
     timeSaved: number;
-    firstRun: boolean;
-    hasWon: boolean;
+    dialogState: number;
     eraCurrent: number;
     timeEarned: number;
     generators: Array<GeneratorState>;
@@ -140,8 +136,7 @@ interface SavedProgress {
 export function game_save(game: Game) {
     let payload: SavedProgress = {
         timeSaved: Date.now(),
-        firstRun: game.FirstRun,
-        hasWon: game.HasWon,
+        dialogState: game.DialogState,
         eraCurrent: game.EraCurrent,
         timeEarned: game.TimeEarned,
         generators: game.Generators,

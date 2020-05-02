@@ -1,4 +1,6 @@
 import {play_note} from "../../common/audio.js";
+import {MINUTE} from "../../common/time.js";
+import {Dialog} from "../actions.js";
 import {ERAS, GENERATORS} from "../config.js";
 import {Game} from "../game.js";
 import {income} from "../generator.js";
@@ -25,14 +27,19 @@ export function sys_earn(game: Game, delta: number) {
         }
     }
 
-    game.DateCurrent = game.TimeEarned * 1000 + game.DateStart;
-    game.DateGoal = Date.now() + 1000;
-
     game.TpsCurrent = 0;
     for (let own of game.Generators) {
         let gen = GENERATORS[own.id];
         if (gen.Kind === "auto") {
             game.TpsCurrent += income(era, gen, own.count);
         }
+    }
+
+    game.DateGoal = Date.now() / 1000 + 1;
+    game.DateCurrent = game.TimeEarned + game.DateStart;
+
+    // Close the first run dialog if the user hasn't done it yet.
+    if (!(game.DialogState & Dialog.FirstRun) && game.TimeEarned > MINUTE) {
+        game.DialogState |= Dialog.FirstRun;
     }
 }

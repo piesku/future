@@ -1,4 +1,12 @@
-import {day_f, human_time_long, time_f, year_f} from "../../common/time.js";
+import {integer_f} from "../../common/number.js";
+import {
+    days_from,
+    human_time,
+    MAX_SECONDS,
+    time_from,
+    YEAR,
+    years_from,
+} from "../../common/time.js";
 import {Game} from "../game.js";
 import {App} from "../ui/App.js";
 
@@ -15,36 +23,47 @@ export function sys_ui(game: Game, delta: number) {
     // it impossible to click any buttons.
     let clock = document.getElementById("time");
     if (clock) {
-        clock.innerHTML = human_time_long(game.TimeEarned);
+        let ht = human_time(game.TimeEarned);
+        clock.innerHTML = `
+            years:&nbsp;${integer_f.format(ht.Years)}<br>
+            days:&nbsp;${ht.Days}<br>
+            hours:&nbsp;${ht.Hours}<br>
+            minutes:&nbsp;${ht.Minutes}<br>
+            seconds:&nbsp;${ht.Seconds}`;
     }
 
-    {
+    if (game.DateCurrent <= MAX_SECONDS) {
         let year = document.getElementById("clock-current-year");
         if (year) {
-            year.textContent = year_f.format(game.DateCurrent);
+            year.textContent = years_from(game.DateCurrent);
         }
         let day = document.getElementById("clock-current-day");
         if (day) {
-            day.textContent = day_f.format(game.DateCurrent);
+            day.textContent = days_from(game.DateCurrent);
         }
         let time = document.getElementById("clock-current-time");
         if (time) {
-            time.textContent = time_f.format(game.DateCurrent);
+            time.textContent = time_from(game.DateCurrent);
+        }
+    } else {
+        let year = document.getElementById("clock-current-year");
+        if (year) {
+            year.textContent = integer_f.format(game.DateCurrent / YEAR);
         }
     }
 
     {
         let year = document.getElementById("clock-future-year");
         if (year) {
-            year.textContent = year_f.format(game.DateGoal);
+            year.textContent = years_from(game.DateGoal);
         }
         let day = document.getElementById("clock-future-day");
         if (day) {
-            day.textContent = day_f.format(game.DateGoal);
+            day.textContent = days_from(game.DateGoal);
         }
         let time = document.getElementById("clock-future-time");
         if (time) {
-            time.textContent = time_f.format(game.DateGoal);
+            time.textContent = time_from(game.DateGoal);
         }
     }
 }

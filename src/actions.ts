@@ -13,6 +13,15 @@ export const enum Action {
     AcceptVictory,
     AdvanceEra,
     StartNewGame,
+    DismissDialog,
+}
+
+export const enum Dialog {
+    FirstRun = 1 << 0,
+    Victory = 1 << 1,
+    BeyondDate = 1 << 2,
+    BeyondInteger = 1 << 3,
+    BeyondFloat = 1 << 4,
 }
 
 let rewind_keyframes = 10;
@@ -58,17 +67,8 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             }
             break;
         }
-        case Action.AcceptFirstRun: {
-            game.FirstRun = false;
-            game_save(game);
-            break;
-        }
         case Action.AcceptOfflineProgress: {
             game.TimeEarnedOffline = 0;
-            break;
-        }
-        case Action.AcceptVictory: {
-            game.HasWon = true;
             break;
         }
         case Action.AdvanceEra: {
@@ -90,8 +90,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.StartNewGame: {
             requestAnimationFrame(() => {
-                game.FirstRun = true;
-                game.HasWon = false;
+                game.DialogState = 0;
                 game.EraCurrent = 0;
                 game.Rewinding = false;
                 game.TpsCurrent = 0;
@@ -102,6 +101,12 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                 game_save(game);
                 scene_stage(game);
             });
+            break;
+        }
+        case Action.DismissDialog: {
+            let dialog = payload as number;
+            game.DialogState |= dialog;
+            game_save(game);
             break;
         }
     }

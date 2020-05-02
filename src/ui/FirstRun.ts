@@ -1,17 +1,23 @@
 import {html} from "../../common/html.js";
-import {year_f} from "../../common/time.js";
-import {Action} from "../actions.js";
+import {years_from} from "../../common/time.js";
+import {Action, Dialog} from "../actions.js";
 import {Game} from "../game.js";
 
 export function FirstRun(game: Game) {
     return html`
         <div
             class="window"
-            style="width: 250px; position: absolute; top: calc(50% - 75px); left: calc(50% - 125px);"
+            style="width: 250px; position: absolute; top: calc(50% - 110px); left: calc(50% - 125px);"
         >
             <div class="title-bar">
                 <div class="title-bar-text">
                     ⏰ Time Is Money™ 1.0
+                </div>
+                <div class="title-bar-controls">
+                    <button
+                        aria-label="Close"
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.FirstRun})"
+                    ></button>
                 </div>
             </div>
             <div class="window-body">
@@ -25,9 +31,11 @@ export function FirstRun(game: Game) {
                     of time. Careful though, as each purchase will rewind the world's clock by the
                     duration equal to its cost.
                 </p>
-                <p>To ${year_f.format(game.DateGoal)}, and beyond!</p>
+                <p>To ${years_from(game.DateGoal)}, and beyond!</p>
                 <div class="field-row" style="justify-content: center">
-                    <button onmouseup="event.stopPropagation(); $(${Action.AcceptFirstRun});">
+                    <button
+                        onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.FirstRun});"
+                    >
                         OK
                     </button>
                 </div>

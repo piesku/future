@@ -8,9 +8,7 @@ import {init_generators} from "./state.js";
 
 export const enum Action {
     PurchaseGenerator,
-    AcceptFirstRun,
     AcceptOfflineProgress,
-    AcceptVictory,
     AdvanceEra,
     StartNewGame,
     DismissDialog,

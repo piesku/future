@@ -31,5 +31,17 @@
             "url": "http://localhost:1234",
             "webRoot": "${workspaceFolder}"
         },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Chrome (Profile)",
+            "runtimeArgs": [
+                "--incognito",
+                "--disable-gpu-vsync",
+                "--disable-frame-rate-limit"
+            ],
+            "url": "http://localhost:1234",
+            "webRoot": "${workspaceFolder}"
+        },
     ]
 }

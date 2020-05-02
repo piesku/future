@@ -49,6 +49,7 @@ export class Game {
 
     Canvas = document.querySelector("canvas")!;
     GL = this.Canvas.getContext("webgl")!;
+    ExtVao = this.GL.getExtension("OES_vertex_array_object")!;
 
     MaterialTextured = mat_textured(this.GL);
     MaterialDiffuseGouraud = mat_diffuse_gouraud(this.GL);

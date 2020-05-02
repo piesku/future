@@ -94,22 +94,13 @@ function use_textured(game: Game, material: Material<TexturedLayout>) {
 }
 
 function draw_textured(game: Game, transform: Transform, render: RenderTextured) {
-    game.GL.bindBuffer(GL_ARRAY_BUFFER, render.Mesh.VertexBuffer);
-    game.GL.enableVertexAttribArray(render.Material.Locations.VertexPosition);
-    game.GL.vertexAttribPointer(render.Material.Locations.VertexPosition, 3, GL_FLOAT, false, 0, 0);
-
-    game.GL.bindBuffer(GL_ARRAY_BUFFER, render.Mesh.TexCoordBuffer);
-    game.GL.enableVertexAttribArray(render.Material.Locations.VertexTexCoord);
-    game.GL.vertexAttribPointer(render.Material.Locations.VertexTexCoord, 2, GL_FLOAT, false, 0, 0);
-
-    game.GL.bindBuffer(GL_ELEMENT_ARRAY_BUFFER, render.Mesh.IndexBuffer);
-
     game.GL.uniformMatrix4fv(render.Material.Locations.World, false, transform.World);
-    game.GL.uniformMatrix4fv(render.Material.Locations.Self, false, transform.Self);
 
     game.GL.activeTexture(GL_TEXTURE0);
     game.GL.bindTexture(GL_TEXTURE_2D, render.Texture);
     game.GL.uniform1i(render.Material.Locations.Sampler, 0);
 
+    game.ExtVao.bindVertexArrayOES(render.VAO);
     game.GL.drawElements(render.Material.Mode, render.Mesh.IndexCount, GL_UNSIGNED_SHORT, 0);
+    game.ExtVao.bindVertexArrayOES(null);
 }

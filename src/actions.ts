@@ -70,7 +70,8 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.AcceptOfflineProgress: {
             game.TimeEarnedOffline = 0;
-            game.WindowLayout["💡 Offline Progress"] = [0, 0, 0];
+            delete game.WindowLayout["💡 Offline Progress"];
+            game_save(game);
             break;
         }
         case Action.AdvanceEra: {
@@ -115,7 +116,9 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.DraggingStart: {
             let name = payload as string;
             game.Dragging = name;
-            dispatch(game, Action.BringToTop, name);
+            // Increase the z-index.
+            game.WindowLayout[name][2] = max_z_index(game.WindowLayout) + 1;
+            game_save(game);
             break;
         }
         case Action.DraggingStop: {
@@ -126,14 +129,19 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.BringToTop: {
             let name = payload as string;
             // Increase the z-index.
-            let max = 0;
-            for (let window in game.WindowLayout) {
-                if (game.WindowLayout[window][2] > max) {
-                    max = game.WindowLayout[window][2];
-                }
-            }
-            game.WindowLayout[name][2] = max + 1;
+            game.WindowLayout[name][2] = max_z_index(game.WindowLayout) + 1;
+            game_save(game);
             break;
         }
     }
+}
+
+export function max_z_index(windows: Record<string, [number, number, number]>) {
+    let max = 0;
+    for (let window in windows) {
+        if (windows[window][2] > max) {
+            max = windows[window][2];
+        }
+    }
+    return max;
 }

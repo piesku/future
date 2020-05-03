@@ -40,13 +40,13 @@ export function App(game: Game) {
 
                 <!-- Dialogs -->
                 ${!(game.DialogState & Dialog.FirstRun) && FirstRun(game)}
-                ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
                 ${is_victory && !(game.DialogState & Dialog.Victory) && Victory(game)}
                 ${is_beyond_date && !(game.DialogState & Dialog.BeyondDate) && BeyondDate(game)}
                 ${is_beyond_integer &&
                 !(game.DialogState & Dialog.BeyondInteger) &&
                 BeyondInteger(game)}
                 ${is_beyond_float && !(game.DialogState & Dialog.BeyondFloat) && BeyondFloat(game)}
+                ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
             </div>
             <div>
                 ${Score(game)} ${Statistics(game)}

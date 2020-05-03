@@ -1,10 +1,11 @@
 import {html} from "../../common/html.js";
-import {Action} from "../actions.js";
+import {Action, max_z_index} from "../actions.js";
 import {Game} from "../game.js";
 
 export function Window(game: Game, title: string, content: string, width = 250) {
     if (!game.WindowLayout[title]) {
-        game.WindowLayout[title] = [0, 0, 0];
+        game.WindowLayout[title] = [0, 0, max_z_index(game.WindowLayout) + 1];
+        game.Dragging = undefined;
     }
 
     return html`

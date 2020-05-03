@@ -92,7 +92,7 @@ export class Game {
                 this.TimeEarned = payload.timeEarned;
             }
 
-            // Old saves might now have dialogState nor windowLayout.
+            // Old saves might not have dialogState nor windowLayout.
             this.DialogState = payload.dialogState || 0;
             this.WindowLayout = payload.windowLayout || {};
 

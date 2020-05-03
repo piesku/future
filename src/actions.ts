@@ -113,18 +113,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.DraggingStart: {
             let name = payload as string;
             game.Dragging = name;
-            if (!game.WindowPositions[name]) {
-                game.WindowPositions[name] = [0, 0, 0];
-            } else {
-                // Increase the z-index.
-                let max = 0;
-                for (let window in game.WindowPositions) {
-                    if (game.WindowPositions[window][2] > max) {
-                        max = game.WindowPositions[window][2];
-                    }
-                }
-                game.WindowPositions[name][2] = max + 1;
-            }
+            dispatch(game, Action.BringToTop, name);
             break;
         }
         case Action.DraggingStop: {
@@ -133,18 +122,14 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.BringToTop: {
             let name = payload as string;
-            if (!game.WindowPositions[name]) {
-                game.WindowPositions[name] = [0, 0, 0];
-            } else {
-                // Increase the z-index.
-                let max = 0;
-                for (let window in game.WindowPositions) {
-                    if (game.WindowPositions[window][2] > max) {
-                        max = game.WindowPositions[window][2];
-                    }
+            // Increase the z-index.
+            let max = 0;
+            for (let window in game.WindowPositions) {
+                if (game.WindowPositions[window][2] > max) {
+                    max = game.WindowPositions[window][2];
                 }
-                game.WindowPositions[name][2] = max + 1;
             }
+            game.WindowPositions[name][2] = max + 1;
             break;
         }
     }

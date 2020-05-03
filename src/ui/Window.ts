@@ -5,12 +5,33 @@ import {Game} from "../game.js";
 
 export function Window(game: Game, title: string, content: string, width = 250) {
     if (!game.WindowLayout[title]) {
-        game.WindowLayout[title] = [
-            integer(16, game.ViewportHeight / 2),
-            integer(16, game.ViewportWidth - 316),
-            max_z_index(game.WindowLayout) + 1,
-        ];
         game.Dragging = undefined;
+        switch (title) {
+            case "Clock":
+                game.WindowLayout[title] = [16, 16, 0];
+                break;
+            case "Era Progress":
+                game.WindowLayout[title] = [16, game.ViewportWidth / 2 - 125, 0];
+                break;
+            case "Time Elapsed":
+                game.WindowLayout[title] = [16, game.ViewportWidth - 266, 0];
+                break;
+            case "Income Statistics":
+                game.WindowLayout[title] = [245, game.ViewportWidth - 266, 0];
+                break;
+            case "👉 Tick":
+                game.WindowLayout[title] = [245, 16, 0];
+                break;
+            case "🌤️ Sundial":
+                game.WindowLayout[title] = [337, 16, 0];
+                break;
+            default:
+                game.WindowLayout[title] = [
+                    game.ViewportHeight / 2 + integer(-100, 0),
+                    game.ViewportWidth / 2 + integer(-250, 0),
+                    max_z_index(game.WindowLayout) + 1,
+                ];
+        }
     }
 
     return html`
@@ -18,7 +39,6 @@ export function Window(game: Game, title: string, content: string, width = 250) 
             class="window"
             style="
                 width: ${width}px;
-                margin: 16px;
                 position: absolute;
                 top: ${game.WindowLayout[title][0]}px;
                 left: ${game.WindowLayout[title][1]}px;

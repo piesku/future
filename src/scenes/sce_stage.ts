@@ -1,5 +1,5 @@
 import {Vec3, Vec4} from "../../common/math.js";
-import {float, integer} from "../../common/random.js";
+import {float, integer, set_seed} from "../../common/random.js";
 import {human_time_short} from "../../common/time.js";
 import {blueprint_camera, levels_space} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
@@ -42,6 +42,7 @@ export function scene_stage(game: Game) {
     game.Camera = undefined;
     game.ViewportResized = true;
     game.GL.clearColor(0, 0.5, 0.8, 1);
+    set_seed(game.DateGoal);
 
     // Light.
     instantiate(game, {

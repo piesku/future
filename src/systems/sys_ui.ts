@@ -66,4 +66,9 @@ export function sys_ui(game: Game, delta: number) {
             time.textContent = time_from(game.DateGoal);
         }
     }
+
+    if (game.Dragging) {
+        game.WindowLayout[game.Dragging][0] += game.InputDelta.MouseY;
+        game.WindowLayout[game.Dragging][1] += game.InputDelta.MouseX;
+    }
 }

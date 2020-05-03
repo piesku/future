@@ -12,6 +12,9 @@ export const enum Action {
     AdvanceEra,
     StartNewGame,
     DismissDialog,
+    DraggingStart,
+    DraggingStop,
+    BringToTop,
 }
 
 export const enum Dialog {
@@ -67,6 +70,8 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.AcceptOfflineProgress: {
             game.TimeEarnedOffline = 0;
+            delete game.WindowLayout["💡 Offline Progress"];
+            game_save(game);
             break;
         }
         case Action.AdvanceEra: {
@@ -89,6 +94,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.StartNewGame: {
             requestAnimationFrame(() => {
                 game.DialogState = 0;
+                game.WindowLayout = {};
                 game.EraCurrent = 0;
                 game.Rewinding = false;
                 game.TpsCurrent = 0;
@@ -107,5 +113,35 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             game_save(game);
             break;
         }
+        case Action.DraggingStart: {
+            let name = payload as string;
+            game.Dragging = name;
+            // Increase the z-index.
+            game.WindowLayout[name][2] = max_z_index(game.WindowLayout) + 1;
+            game_save(game);
+            break;
+        }
+        case Action.DraggingStop: {
+            game.Dragging = undefined;
+            game_save(game);
+            break;
+        }
+        case Action.BringToTop: {
+            let name = payload as string;
+            // Increase the z-index.
+            game.WindowLayout[name][2] = max_z_index(game.WindowLayout) + 1;
+            game_save(game);
+            break;
+        }
     }
+}
+
+export function max_z_index(windows: Record<string, [number, number, number]>) {
+    let max = 0;
+    for (let window in windows) {
+        if (windows[window][2] > max) {
+            max = windows[window][2];
+        }
+    }
+    return max;
 }

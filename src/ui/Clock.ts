@@ -5,8 +5,26 @@ import {Game} from "../game.js";
 
 export function Clock(game: Game) {
     return html`
-        <div class="window" style="margin: 16px; width: 300px">
-            <div class="title-bar">
+        <div
+            class="window"
+            data-name="clock"
+            style="
+                width: 300px;
+                margin: 16px;
+                ${game.WindowPositions["clock"] &&
+            `
+                    position: relative;
+                    top: ${game.WindowPositions["clock"][0]}px;
+                    left: ${game.WindowPositions["clock"][1]}px;
+                    z-index: ${game.WindowPositions["clock"][2]};
+                `}
+            "
+        >
+            <div
+                class="title-bar"
+                onmousedown="event.stopPropagation(); $(${Action.DraggingStart}, 'clock');"
+                onmouseup="event.stopPropagation(); $(${Action.DraggingStop});"
+            >
                 <div class="title-bar-text">
                     Clock
                 </div>

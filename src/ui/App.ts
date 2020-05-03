@@ -1,6 +1,6 @@
 import {html} from "../../common/html.js";
 import {MAX_SECONDS} from "../../common/time.js";
-import {Dialog} from "../actions.js";
+import {Action, Dialog} from "../actions.js";
 import {Game} from "../game.js";
 import {BeyondDate} from "./BeyondDate.js";
 import {BeyondFloat} from "./BeyondFloat.js";
@@ -21,7 +21,10 @@ export function App(game: Game) {
     let is_beyond_float = game.TimeEarned >= Number.MAX_VALUE;
 
     return html`
-        <div style="display: flex; justify-content: space-between;">
+        <div
+            style="height: 100vh; display: flex; justify-content: space-between;"
+            onmouseup="$(${Action.DraggingStop})"
+        >
             <div>
                 ${Clock(game)}
                 ${game.Generators.map((gen, idx) => {

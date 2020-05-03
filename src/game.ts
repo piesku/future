@@ -27,6 +27,9 @@ export class Game {
     Generators: Array<GeneratorState>;
     TimeEarned: number;
 
+    Dragging?: string;
+    WindowPositions: Record<string, [number, number, number]> = {};
+
     DateStart = Date.UTC(-9999, 0, 1, 0, 0, 0) / 1000;
     DateGoal = Date.now() / 1000 + 1;
     DateCurrent = 0;
@@ -69,6 +72,12 @@ export class Game {
         this.UI.addEventListener("mouseup", (evt) => {
             this.InputState[`Mouse${evt.button}`] = 0;
             this.InputDelta[`Mouse${evt.button}`] = -1;
+        });
+        this.UI.addEventListener("mousemove", (evt) => {
+            this.InputState.MouseX = evt.offsetX;
+            this.InputState.MouseY = evt.offsetY;
+            this.InputDelta.MouseX = evt.movementX;
+            this.InputDelta.MouseY = evt.movementY;
         });
 
         let saved = localStorage.getItem(SAVE_KEY);

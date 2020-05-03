@@ -12,6 +12,8 @@ export const enum Action {
     AdvanceEra,
     StartNewGame,
     DismissDialog,
+    DraggingStart,
+    DraggingStop,
 }
 
 export const enum Dialog {
@@ -105,6 +107,21 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
             let dialog = payload as number;
             game.DialogState |= dialog;
             game_save(game);
+            break;
+        }
+        case Action.DraggingStart: {
+            let name = payload as string;
+            game.Dragging = name;
+            if (!game.WindowPositions[name]) {
+                game.WindowPositions[name] = [0, 0, 0];
+            } else {
+                // Increase the z-index.
+                game.WindowPositions[name][2] += 1;
+            }
+            break;
+        }
+        case Action.DraggingStop: {
+            game.Dragging = undefined;
             break;
         }
     }

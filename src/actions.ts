@@ -92,6 +92,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         case Action.StartNewGame: {
             requestAnimationFrame(() => {
                 game.DialogState = 0;
+                game.WindowLayout = {};
                 game.EraCurrent = 0;
                 game.Rewinding = false;
                 game.TpsCurrent = 0;
@@ -118,18 +119,19 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.DraggingStop: {
             game.Dragging = undefined;
+            game_save(game);
             break;
         }
         case Action.BringToTop: {
             let name = payload as string;
             // Increase the z-index.
             let max = 0;
-            for (let window in game.WindowPositions) {
-                if (game.WindowPositions[window][2] > max) {
-                    max = game.WindowPositions[window][2];
+            for (let window in game.WindowLayout) {
+                if (game.WindowLayout[window][2] > max) {
+                    max = game.WindowLayout[window][2];
                 }
             }
-            game.WindowPositions[name][2] = max + 1;
+            game.WindowLayout[name][2] = max + 1;
             break;
         }
     }

@@ -22,13 +22,11 @@ export type Entity = number;
 
 export class Game {
     // Serializable state for saving progress.
-    DialogState = 0;
+    DialogState: number;
+    WindowLayout: Record<string, [number, number, number]>; // top, left, z-index
     EraCurrent: number;
     Generators: Array<GeneratorState>;
     TimeEarned: number;
-
-    Dragging?: string;
-    WindowPositions: Record<string, [number, number, number]> = {};
 
     DateStart = Date.UTC(-9999, 0, 1, 0, 0, 0) / 1000;
     DateGoal = Date.now() / 1000 + 1;
@@ -36,6 +34,7 @@ export class Game {
     TpsCurrent = 0;
     TimeEarnedOffline = 0;
     Rewinding = false;
+    Dragging?: string;
 
     World = new World();
 
@@ -83,7 +82,6 @@ export class Game {
         let saved = localStorage.getItem(SAVE_KEY);
         if (saved) {
             let payload: SavedProgress = JSON.parse(saved);
-            this.DialogState = payload.dialogState;
             this.EraCurrent = payload.eraCurrent;
             this.Generators = payload.generators;
 
@@ -94,12 +92,17 @@ export class Game {
                 this.TimeEarned = payload.timeEarned;
             }
 
+            // Old saves might now have dialogState nor windowLayout.
+            this.DialogState = payload.dialogState || 0;
+            this.WindowLayout = payload.windowLayout || {};
+
             // Scale the delta down with a sqrt.
             let delta_offline = (Date.now() - payload.timeSaved) / 1000;
             sys_earn(this, delta_offline ** 0.75);
             this.TimeEarnedOffline = this.TimeEarned - payload.timeEarned;
         } else {
             this.DialogState = 0;
+            this.WindowLayout = {};
             this.EraCurrent = 0;
             this.TimeEarned = 0;
             this.TimeEarnedOffline = 0;
@@ -141,6 +144,7 @@ interface SavedProgress {
     eraCurrent: number;
     timeEarned: number;
     generators: Array<GeneratorState>;
+    windowLayout: Record<string, [number, number, number]>;
 }
 
 export function game_save(game: Game) {
@@ -150,6 +154,7 @@ export function game_save(game: Game) {
         eraCurrent: game.EraCurrent,
         timeEarned: game.TimeEarned,
         generators: game.Generators,
+        windowLayout: game.WindowLayout,
     };
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
 }

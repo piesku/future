@@ -3,8 +3,8 @@ import {Action} from "../actions.js";
 import {Game} from "../game.js";
 
 export function Window(game: Game, title: string, content: string, width = 250) {
-    if (!game.WindowPositions[title]) {
-        game.WindowPositions[title] = [0, 0, 0];
+    if (!game.WindowLayout[title]) {
+        game.WindowLayout[title] = [0, 0, 0];
     }
 
     return html`
@@ -14,9 +14,9 @@ export function Window(game: Game, title: string, content: string, width = 250) 
                 width: ${width}px;
                 margin: 16px;
                 position: relative;
-                top: ${game.WindowPositions[title][0]}px;
-                left: ${game.WindowPositions[title][1]}px;
-                z-index: ${game.WindowPositions[title][2]};
+                top: ${game.WindowLayout[title][0]}px;
+                left: ${game.WindowLayout[title][1]}px;
+                z-index: ${game.WindowLayout[title][2]};
             "
             onmousedown="event.stopPropagation(); $(${Action.BringToTop}, '${title}');"
             onmouseup="event.stopPropagation();"

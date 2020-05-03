@@ -68,7 +68,7 @@ export function sys_ui(game: Game, delta: number) {
     }
 
     if (game.Dragging) {
-        game.WindowPositions[game.Dragging][0] += game.InputDelta.MouseY;
-        game.WindowPositions[game.Dragging][1] += game.InputDelta.MouseX;
+        game.WindowLayout[game.Dragging][0] += game.InputDelta.MouseY;
+        game.WindowLayout[game.Dragging][1] += game.InputDelta.MouseX;
     }
 }

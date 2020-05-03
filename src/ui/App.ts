@@ -25,32 +25,24 @@ export function App(game: Game) {
             style="height: 100vh; display: flex; justify-content: space-between;"
             onmouseup="$(${Action.DraggingStop});"
         >
-            <div>
-                ${Clock(game)}
-                ${game.Generators.map((gen, idx) => {
-                    if (gen.unlocked) {
-                        return Generator(game, gen, idx);
-                    } else {
-                        return null;
-                    }
-                })}
-            </div>
-            <div style="position: relative;">
-                ${EraProgress(game)}
-
-                <!-- Dialogs -->
-                ${!(game.DialogState & Dialog.FirstRun) && FirstRun(game)}
-                ${is_victory && !(game.DialogState & Dialog.Victory) && Victory(game)}
-                ${is_beyond_date && !(game.DialogState & Dialog.BeyondDate) && BeyondDate(game)}
-                ${is_beyond_integer &&
-                !(game.DialogState & Dialog.BeyondInteger) &&
-                BeyondInteger(game)}
-                ${is_beyond_float && !(game.DialogState & Dialog.BeyondFloat) && BeyondFloat(game)}
-                ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
-            </div>
-            <div>
-                ${Score(game)} ${Statistics(game)}
-            </div>
+            ${Clock(game)}
+            ${game.Generators.map((gen, idx) => {
+                if (gen.unlocked) {
+                    return Generator(game, gen, idx);
+                } else {
+                    return null;
+                }
+            })}
+            ${EraProgress(game)} ${Score(game)} ${Statistics(game)}
+            <!-- Dialogs -->
+            ${!(game.DialogState & Dialog.FirstRun) && FirstRun(game)}
+            ${is_victory && !(game.DialogState & Dialog.Victory) && Victory(game)}
+            ${is_beyond_date && !(game.DialogState & Dialog.BeyondDate) && BeyondDate(game)}
+            ${is_beyond_integer &&
+            !(game.DialogState & Dialog.BeyondInteger) &&
+            BeyondInteger(game)}
+            ${is_beyond_float && !(game.DialogState & Dialog.BeyondFloat) && BeyondFloat(game)}
+            ${game.TimeEarnedOffline > 0 && OfflineProgress(game)}
         </div>
     `;
 }

@@ -23,7 +23,7 @@ export function App(game: Game) {
     return html`
         <div
             style="height: 100vh; display: flex; justify-content: space-between;"
-            onmouseup="$(${Action.DraggingStop})"
+            onmouseup="$(${Action.DraggingStop});"
         >
             <div>
                 ${Clock(game)}

@@ -14,6 +14,7 @@ export const enum Action {
     DismissDialog,
     DraggingStart,
     DraggingStop,
+    BringToTop,
 }
 
 export const enum Dialog {
@@ -116,12 +117,34 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
                 game.WindowPositions[name] = [0, 0, 0];
             } else {
                 // Increase the z-index.
-                game.WindowPositions[name][2] += 1;
+                let max = 0;
+                for (let window in game.WindowPositions) {
+                    if (game.WindowPositions[window][2] > max) {
+                        max = game.WindowPositions[window][2];
+                    }
+                }
+                game.WindowPositions[name][2] = max + 1;
             }
             break;
         }
         case Action.DraggingStop: {
             game.Dragging = undefined;
+            break;
+        }
+        case Action.BringToTop: {
+            let name = payload as string;
+            if (!game.WindowPositions[name]) {
+                game.WindowPositions[name] = [0, 0, 0];
+            } else {
+                // Increase the z-index.
+                let max = 0;
+                for (let window in game.WindowPositions) {
+                    if (game.WindowPositions[window][2] > max) {
+                        max = game.WindowPositions[window][2];
+                    }
+                }
+                game.WindowPositions[name][2] = max + 1;
+            }
             break;
         }
     }

@@ -43,7 +43,7 @@ export function Statistics(game: Game) {
                                           )}</li>
                                             `}
                                     <li>
-                                        Multiplier:
+                                        Bonus multiplier:
                                         ${decimal_f.format(mult_current(gen, own.count))}x
                                     </li>
                                     <!-- <li>Income +1: ${human_time_short(

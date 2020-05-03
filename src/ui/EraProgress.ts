@@ -30,6 +30,7 @@ export function EraProgress(game: Game) {
                 <button
                     onmouseup="event.stopPropagation(); $(${Action.AdvanceEra});"
                     ${game.TpsCurrent < next_era.TpsRequired ? "disabled" : ""}
+                    title="You'll start from scratch, but you'll earn time faster."
                 >
                     Advance to the ${next_era.Name}
                 </button>

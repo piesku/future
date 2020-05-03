@@ -2,7 +2,7 @@ import {html} from "../../common/html.js";
 import {Action} from "../actions.js";
 import {Game} from "../game.js";
 
-export function Window(game: Game, title: string, content: string, width = 250) {
+export function PopUp(game: Game, title: string, content: string, onclose: string) {
     if (!game.WindowLayout[title]) {
         game.WindowLayout[title] = [0, 0, 0];
     }
@@ -11,9 +11,9 @@ export function Window(game: Game, title: string, content: string, width = 250) 
         <div
             class="window"
             style="
-                width: ${width}px;
-                margin: 16px;
-                position: relative;
+                width: 250px;
+                margin: 40vh 16px 16px;
+                position: absolute;
                 top: ${game.WindowLayout[title][0]}px;
                 left: ${game.WindowLayout[title][1]}px;
                 z-index: ${game.WindowLayout[title][2]};
@@ -28,6 +28,9 @@ export function Window(game: Game, title: string, content: string, width = 250) 
             >
                 <div class="title-bar-text">
                     ${title}
+                </div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onmouseup="${onclose}"></button>
                 </div>
             </div>
             <div class="window-body">

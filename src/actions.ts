@@ -70,6 +70,7 @@ export function dispatch(game: Game, action: Action, payload: unknown) {
         }
         case Action.AcceptOfflineProgress: {
             game.TimeEarnedOffline = 0;
+            game.WindowLayout["💡 Offline Progress"] = [0, 0, 0];
             break;
         }
         case Action.AdvanceEra: {

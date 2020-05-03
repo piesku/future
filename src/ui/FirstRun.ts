@@ -7,7 +7,7 @@ import {PopUp} from "./PopUp.js";
 export function FirstRun(game: Game) {
     return PopUp(
         game,
-        "⏰ Time Is Money™ 1.0",
+        "⏰ Time Is Money™ 1.1",
         html`
             <p>Welcome to <em>Time Is Money</em>™!</p>
             <p>

@@ -19,13 +19,9 @@ export function PopUp(game: Game, title: string, content: string, onclose: strin
                 z-index: ${game.WindowLayout[title][2]};
             "
             onmousedown="event.stopPropagation(); $(${Action.BringToTop}, '${title}');"
-            onmouseup="event.stopPropagation();"
+            onmouseup="event.stopPropagation(); $(${Action.DraggingStop})"
         >
-            <div
-                class="title-bar"
-                onmousedown="$(${Action.DraggingStart}, '${title}');"
-                onmouseup="$(${Action.DraggingStop});"
-            >
+            <div class="title-bar" onmousedown="$(${Action.DraggingStart}, '${title}');">
                 <div class="title-bar-text">
                     ${title}
                 </div>

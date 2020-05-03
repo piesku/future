@@ -36,8 +36,9 @@ export function mult_progress(gen: GeneratorConfig, count: number) {
     for (let [threshold, mult] of gen.Multipliers) {
         if (count < threshold) {
             return {
-                Value: count - current,
-                Target: threshold - current,
+                CountRelative: count - current,
+                TargetRelative: threshold - current,
+                TargetAbsolute: threshold,
                 Multiplier: mult,
             };
         } else {

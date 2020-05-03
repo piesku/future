@@ -43,15 +43,18 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
             html`
                 <fieldset
                     class="field-row"
-                    title="Reach the count of ${progress.Target} to get the bonus."
+                    title="Reach the count of ${progress.TargetAbsolute} to get the bonus."
                 >
                     <legend>
                         Next Bonus: +${percent.format(progress.Multiplier - 1)}
                     </legend>
 
                     <div class="field-row">
-                        <progress value="${progress.Value}" max="${progress.Target}">
-                            ${progress.Value / progress.Target}
+                        <progress
+                            value="${progress.CountRelative}"
+                            max="${progress.TargetRelative}"
+                        >
+                            ${progress.CountRelative / progress.TargetRelative}
                         </progress>
                     </div>
                 </fieldset>

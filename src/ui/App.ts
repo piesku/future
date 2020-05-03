@@ -39,7 +39,7 @@ export function App(game: Game) {
                 ${EraProgress(game)}
             </div>
             <div>
-                ${Score()} ${Statistics(game)}
+                ${Score(game)} ${Statistics(game)}
             </div>
         </div>
 

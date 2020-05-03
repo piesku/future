@@ -22,7 +22,7 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
             <div class="field-row" style="justify-content: space-between;">
                 <h4 style="margin: 0;">${own.count}</h4>
                 <button
-                    onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, [${index}, 1]);"
+                    onmouseup="$(${Action.PurchaseGenerator}, [${index}, 1]);"
                     ${game.Rewinding || game.TimeEarned < cost_1 ? "disabled" : ""}
                     style="height: 33px;"
                 >
@@ -30,7 +30,7 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
                     ${human_time_short(cost_1)}
                 </button>
                 <button
-                    onmouseup="event.stopPropagation(); $(${Action.PurchaseGenerator}, [${index}, 10]);"
+                    onmouseup="$(${Action.PurchaseGenerator}, [${index}, 10]);"
                     ${game.Rewinding || game.TimeEarned < cost_10 ? "disabled" : ""}
                     style="height: 35px;"
                 >

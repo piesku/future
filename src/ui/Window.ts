@@ -19,6 +19,7 @@ export function Window(game: Game, title: string, content: string, width = 250) 
                 z-index: ${game.WindowPositions[title][2]};
             "
             onmousedown="event.stopPropagation(); $(${Action.BringToTop}, '${title}');"
+            onmouseup="event.stopPropagation();"
         >
             <div
                 class="title-bar"

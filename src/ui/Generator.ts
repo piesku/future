@@ -13,6 +13,8 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
     let gen = GENERATORS[own.id];
     let cost_1 = total_cost(gen, own.count, 1);
     let cost_10 = total_cost(gen, own.count, 10);
+    let human_cost_1 = human_time_short(cost_1);
+    let human_cost_10 = human_time_short(cost_10);
     let progress = mult_progress(gen, own.count);
 
     return Window(
@@ -24,18 +26,20 @@ export function Generator(game: Game, own: GeneratorState, index: number) {
                 <button
                     onmouseup="$(${Action.PurchaseGenerator}, [${index}, 1]);"
                     ${game.Rewinding || game.TimeEarned < cost_1 ? "disabled" : ""}
-                    style="height: 33px;"
+                    style="height: 35px; overflow: hidden; text-overflow: ellipsis;"
+                    title="${human_cost_1}"
                 >
                     Buy 1 <br />
-                    ${human_time_short(cost_1)}
+                    ${human_cost_1}
                 </button>
                 <button
                     onmouseup="$(${Action.PurchaseGenerator}, [${index}, 10]);"
                     ${game.Rewinding || game.TimeEarned < cost_10 ? "disabled" : ""}
-                    style="height: 35px;"
+                    style="height: 35px; overflow: hidden; text-overflow: ellipsis;"
+                    title="${human_cost_10}"
                 >
                     Buy 10 <br />
-                    ${human_time_short(cost_10)}
+                    ${human_cost_10}
                 </button>
             </div>
 

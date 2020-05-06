@@ -20,7 +20,7 @@ export function BeyondFloat(game: Game) {
                 <a href="https://en.wikipedia.org/wiki/Timeline_of_the_far_future">
                     nucleons in the observable universe decayed</a
                 >
-                eons ago. How about starting a new game?
+                eons ago. It's time for a new Big Bang.
             </p>
             <div class="field-row" style="justify-content: center">
                 <button onmouseup="event.stopPropagation(); $(${Action.StartNewGame});">

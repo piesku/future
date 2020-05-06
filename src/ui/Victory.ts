@@ -12,6 +12,10 @@ export function Victory(game: Game) {
             <p>
                 Congratulations, you have reached the future!
             </p>
+            <p>
+                Building the civilization's future requires hard work and lots of time. Your people
+                are grateful to you, their sage leader. Well done!
+            </p>
             <div class="field-row" style="justify-content: center">
                 <button
                     onmouseup="event.stopPropagation(); $(${Action.DismissDialog}, ${Dialog.Victory});"

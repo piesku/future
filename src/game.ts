@@ -6,7 +6,6 @@ import {GeneratorState, init_generators} from "./state.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
 import {sys_framerate} from "./systems/sys_framerate.js";
-import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
 import {sys_save} from "./systems/sys_save.js";
 import {sys_switch_time_control} from "./systems/sys_switch_time_control.js";
@@ -57,9 +56,6 @@ export class Game {
     Textures: {[key: string]: WebGLTexture} = {};
 
     Camera?: Camera;
-    // The rendering pipeline supports 8 lights.
-    LightPositions = new Float32Array(4 * 8);
-    LightDetails = new Float32Array(4 * 8);
 
     constructor() {
         this.UI.addEventListener("mousedown", (evt) => {
@@ -125,7 +121,6 @@ export class Game {
         sys_time_control(this, delta);
         sys_transform(this, delta);
         sys_camera(this, delta);
-        sys_light(this, delta);
         sys_render(this, delta);
         sys_earn(this, delta);
         sys_save(this, delta);

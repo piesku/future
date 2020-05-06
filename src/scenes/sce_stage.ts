@@ -4,7 +4,6 @@ import {human_time_short} from "../../common/time.js";
 import {blueprint_camera, levels_space} from "../blueprints/blu_camera.js";
 import {blueprint_ground} from "../blueprints/blu_ground.js";
 import {blueprint_structure} from "../blueprints/blu_structure.js";
-import {light_directional} from "../components/com_light.js";
 import {time_control} from "../components/com_time_control.js";
 import {instantiate} from "../core.js";
 import {Game} from "../game.js";
@@ -43,12 +42,6 @@ export function scene_stage(game: Game) {
     game.ViewportResized = true;
     game.GL.clearColor(0, 0.5, 0.8, 1);
     set_seed(game.DateGoal);
-
-    // Light.
-    instantiate(game, {
-        Translation: [2, 3, 5],
-        Using: [light_directional([1, 1, 1], 1)],
-    });
 
     let eras_count = 6;
     let worlds_per_era = 20;

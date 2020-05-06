@@ -1,5 +1,4 @@
 import {GL_CULL_FACE, GL_DEPTH_TEST} from "../common/webgl.js";
-import {mat_diffuse_gouraud} from "../materials/mat_diffuse_gouraud.js";
 import {mat_textured} from "../materials/mat_textured.js";
 import {mesh_cube} from "../meshes/cube.js";
 import {Camera} from "./components/com_camera.js";
@@ -54,7 +53,6 @@ export class Game {
     ExtVao = this.GL.getExtension("OES_vertex_array_object")!;
 
     MaterialTextured = mat_textured(this.GL);
-    MaterialDiffuseGouraud = mat_diffuse_gouraud(this.GL);
     MeshCube = mesh_cube(this.GL);
     Textures: {[key: string]: WebGLTexture} = {};
 

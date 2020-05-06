@@ -6,7 +6,6 @@ import {Camera} from "./components/com_camera.js";
 import {GeneratorState, init_generators} from "./state.js";
 import {sys_camera} from "./systems/sys_camera.js";
 import {sys_earn} from "./systems/sys_earn.js";
-import {sys_framerate} from "./systems/sys_framerate.js";
 import {sys_light} from "./systems/sys_light.js";
 import {sys_render} from "./systems/sys_render.js";
 import {sys_save} from "./systems/sys_save.js";
@@ -122,7 +121,6 @@ export class Game {
     }
 
     FrameUpdate(delta: number) {
-        let now = performance.now();
         sys_switch_time_control(this, delta);
         sys_time_control(this, delta);
         sys_transform(this, delta);
@@ -132,8 +130,6 @@ export class Game {
         sys_earn(this, delta);
         sys_save(this, delta);
         sys_ui(this, delta);
-
-        sys_framerate(this, delta, performance.now() - now);
     }
 }
 

@@ -27,9 +27,6 @@ let game = new Game();
 // @ts-ignore
 window.$ = dispatch.bind(null, game);
 
-// @ts-ignore
-window.game = game;
-
 let texture_promises = textures.map(
     async (file: string) =>
         new Promise((resolve, reject) => {
